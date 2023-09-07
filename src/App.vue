@@ -22,7 +22,9 @@ html, body {
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the content covers the entire viewport height */
+  min-height: 100vh;
+
+  align-items: center;/* Ensure the content covers the entire viewport height */
 }
 
 nav {
