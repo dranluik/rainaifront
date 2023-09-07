@@ -3,6 +3,7 @@
     <tbody>
     <tr>
       <th scope="row">
+        <h1>Tutvustus</h1>
         <font-awesome-icon :icon="['fas', 'location-dot']" size="xs" class="icon"/>
         Estonia
       </th>

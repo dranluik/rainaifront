@@ -3,13 +3,9 @@
     <div class="container text-center">
       <div class="row">
         <div class="col">
-          <h3>Tutvustus</h3>
           <div class="icon-table">
             <RainContact/>
           </div>
-        </div>
-        <div class="col">
-          Column
         </div>
       </div>
     </div>
