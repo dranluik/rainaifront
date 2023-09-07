@@ -23,6 +23,7 @@
       <td></td>
     </tr>
     </tbody>
+
   </table>
 </template>
 <script>
@@ -51,13 +52,6 @@ a {
 
 </style>
 <style scoped>
-
-.table {
-  border-collapse: collapse; /* Remove spacing between table cells */
-  width: 100%;
-  background-color: #ebebef; /* Set the background color of the table to black */
-  color: white; /* Set the text color to white */
-}
 
 .table th,
 .table td {
