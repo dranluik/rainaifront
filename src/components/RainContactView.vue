@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-dark">
+  <table class="table table-dark black-table">
     <tbody>
     <tr>
       <th scope="row">
@@ -64,5 +64,9 @@ a {
   border: none; /* Remove cell borders */
   padding: 8px; /* Add padding for cell content */
   text-align: left;
+}
+.black-table {
+  background-color: #000000;
+  color: #000000; /* Set text color to white for better readability on a black background */
 }
 </style>
