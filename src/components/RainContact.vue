@@ -55,7 +55,7 @@ a {
 .table {
   border-collapse: collapse; /* Remove spacing between table cells */
   width: 100%;
-  background-color: #ebebef; /* Set the background color of the table to black */
+  background-color: black; /* Set the background color of the table to black */
   color: white; /* Set the text color to white */
 }
 
@@ -64,9 +64,11 @@ a {
   border: none; /* Remove cell borders */
   padding: 8px; /* Add padding for cell content */
   text-align: left;
+  background-color: black;
+  color: #ebebef;
 }
 .black-table {
-  background-color: #000000;
-  color: #000000; /* Set text color to white for better readability on a black background */
+  background-color: black;
+  color: black; /* Set text color to white for better readability on a black background */
 }
 </style>

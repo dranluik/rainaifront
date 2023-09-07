@@ -53,7 +53,7 @@ h3 {
   color: white;
 }
 .icon-table {
-  text-align: center;
+  text-align: left;
 }
 
 .table th,
