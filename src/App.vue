@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/">Kodu</router-link> |
-    <router-link to="/about">Registreeru kasutajaks</router-link> |
+    <router-link to="/signup">Registreeru kasutajaks</router-link> |
     <router-link to="/login">Logi Sisse</router-link>
   </nav>
   <router-view />
