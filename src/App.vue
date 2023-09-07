@@ -6,7 +6,6 @@
     <router-link to="/about">Registreeru kasutajaks</router-link> |
     <router-link to="/about">Logi Sisse</router-link>
   </nav>
-
   <router-view/>
   </div>
   </body>
