@@ -1,0 +1,68 @@
+<template>
+  <table class="table table-dark">
+    <tbody>
+    <tr>
+      <th scope="row">
+        <font-awesome-icon :icon="['fas', 'location-dot']" size="xs" class="icon"/>
+        Estonia
+      </th>
+    </tr>
+    <tr>
+      <th scope="row">
+        <font-awesome-icon :icon="['far', 'envelope']" size="xs" class="icon"/>
+        rainaigmail.com
+      </th>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <font-awesome-icon :icon="['fas', 'mobile-screen']" size="xs" class="icon"/>
+        +372 5555555
+      </th>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</template>
+<script>
+export default {
+  name: 'RainContactView'
+}
+</script>
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
+
+</style>
+<style scoped>
+
+.table {
+  border-collapse: collapse; /* Remove spacing between table cells */
+  width: 100%;
+  background-color: #ebebef; /* Set the background color of the table to black */
+  color: white; /* Set the text color to white */
+}
+
+.table th,
+.table td {
+  border: none; /* Remove cell borders */
+  padding: 8px; /* Add padding for cell content */
+  text-align: left;
+}
+</style>

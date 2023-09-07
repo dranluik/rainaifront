@@ -1,13 +1,10 @@
 <template>
-
+  <img src="../assets/Rainlogo.gif" height="300" width="300" alt=""/>
+  <div>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <div class="row">
-      text siin
-    <div>
-    </div>
-    </div>
+  </div>
   </div>
 </template>
 
