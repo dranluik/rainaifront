@@ -34,6 +34,7 @@
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import router from "@/router";
 import {FILL_MANDATORY_FIELDS} from "@/assets/script/AlertMessage";
+import {INCORRECT_CREDENTIALS} from "@/assets/script/ErrorCode";
 
 export default {
   name: "LoginView",
@@ -87,10 +88,13 @@ export default {
         sessionStorage.setItem('roleName', this.loginResponse.roleName)
         sessionStorage.setItem('packageTypeName', this.loginResponse.packageTypeName)
         this.$emit('event-update-nav-menu')
-        router.push({name: 'home'})
+        router.push({name: 'homeRoute'})
 
       }).catch(error => {
         this.errorResponse = error.response.data
+        if (this.errorResponse.errorCode !== INCORRECT_CREDENTIALS){
+          router.push({name: 'errorRoute'})
+        }
       })
     },
   }

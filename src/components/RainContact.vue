@@ -58,6 +58,8 @@ a {
   border: none; /* Remove cell borders */
   padding: 8px; /* Add padding for cell content */
   text-align: left;
+  background-color: black;
+  color: #ebebef;
 }
 .black-table {
   background-color: #000000;
