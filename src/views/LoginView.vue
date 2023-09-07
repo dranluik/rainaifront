@@ -7,16 +7,16 @@
       </div>
     </div>
 
-    <div class="row justify-content-center" @keydown.enter="login">
+    <div class="row justify-content-center">
       <div class="col col-3 form-floating mb-3">
-        <input type="text" class="form-control" placeholder="name@example.com">
+        <input v-model="username" type="text" class="form-control" placeholder="name@example.com">
         <label for="floatingInput" class="custom-label">Kasutajanimi</label>
       </div>
     </div>
 
     <div class="row justify-content-center">
       <div class="col col-3 form-floating">
-        <input type="password" class="form-control" placeholder="Password">
+        <input @keydown.enter="login" v-model="password" type="password" class="form-control" placeholder="Password">
         <label for="floatingPassword" class="custom-label">Parool</label>
       </div>
 
@@ -64,6 +64,7 @@ export default {
         this.sendLoginRequest()
       } else {
         this.errorResponse.message = FILL_MANDATORY_FIELDS
+        this.resetAllFields()
       }
     },
 
@@ -73,6 +74,11 @@ export default {
 
     mandatoryFieldsAreFilled() {
       return this.username.length > 0 && this.password.length > 0;
+    },
+
+    resetAllFields() {
+      this.username = ''
+      this.password = ''
     },
 
     sendLoginRequest() {
@@ -92,8 +98,10 @@ export default {
 
       }).catch(error => {
         this.errorResponse = error.response.data
-        if (this.errorResponse.errorCode !== INCORRECT_CREDENTIALS){
-          router.push({name: 'errorRoute'})
+        if (this.errorResponse.errorCode !== INCORRECT_CREDENTIALS) {
+          router.push({name: 'errorRoute'});
+          } else {
+          this.resetAllFields()
         }
       })
     },
