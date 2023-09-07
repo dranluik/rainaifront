@@ -1,7 +1,8 @@
 <template>
-  <img src="../assets/Rainlogo.gif" height="300" width="300" alt=""/>
   <div>
-  <div class="home">
+    <img src="../assets/Rainlogo.gif" height="300" width="300" alt="" class="centered"/>
+
+    <div class="home">
 
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
