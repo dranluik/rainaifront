@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" @keydown.enter="login">
       <div class="col col-3 form-floating mb-3">
         <input type="text" class="form-control" placeholder="name@example.com">
         <label for="floatingInput" class="custom-label">Kasutajanimi</label>
@@ -22,7 +22,7 @@
 
       <div class="row justify-content-center">
         <div class="col col-3">
-          <button type="button" class="mt-5 btn btn-outline-success">Logi sisse</button>
+          <button @click="login" type="submit" class="mt-5 btn btn-outline-success">Logi sisse</button>
         </div>
       </div>
 
@@ -32,6 +32,8 @@
 
 <script>
 import AlertDanger from "@/components/alert/AlertDanger.vue";
+import router from "@/router";
+import {FILL_MANDATORY_FIELDS} from "@/assets/script/AlertMessage";
 
 export default {
   name: "LoginView",
@@ -54,6 +56,16 @@ export default {
 
   methods: {
 
+    login() {
+      this.resetErrorMessage()
+
+      if (this.mandatoryFieldsAreFilled()) {
+        this.sendLoginRequest()
+      } else {
+        this.errorResponse.message = FILL_MANDATORY_FIELDS
+      }
+    },
+
     resetErrorMessage() {
       this.errorResponse.message = ''
     },
@@ -74,6 +86,9 @@ export default {
         sessionStorage.setItem('userId', this.loginResponse.userId)
         sessionStorage.setItem('roleName', this.loginResponse.roleName)
         sessionStorage.setItem('packageTypeName', this.loginResponse.packageTypeName)
+        this.$emit('event-update-nav-menu')
+        router.push({name: 'home'})
+
       }).catch(error => {
         this.errorResponse = error.response.data
       })
