@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="../assets/Rainlogo.gif" height="300" width="300" alt="" class="centered"/>
+    <img src="../assets/RainAILogo.gif" height="400" width="400" alt="" class="centered"/>
 
     <div class="home">
 
