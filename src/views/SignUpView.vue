@@ -4,21 +4,14 @@
     <div class="row text-center mx-auto justify-content-center">
       <div class="col col-3 text-center">
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" placeholder="name@example.com">
+          <input v-model="userInfo.firstName" type="text" class="form-control" placeholder="">
           <label for="floatingInput" class="custom-label">Eesnimi</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" placeholder="name@example.com">
+          <input v-model="userInfo.username" type="text" class="form-control" placeholder="">
           <label for="floatingInput" class="custom-label">Kasutajanimi</label>
         </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" placeholder="name@example.com">
-            <label for="floatingInput" class="custom-label">Parool</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" placeholder="name@example.com">
-            <label for="floatingInput" class="custom-label">Korda parooli</label>
-        </div>
+        <passwordInput @event-password-changed="handlePasswordChange"/>
       </div>
 
 
@@ -31,21 +24,11 @@
 
       <div class="form-floating mb-3">
 
-          <input type="email" class="form-control" placeholder="name@example.com">
+          <input v-model="userInfo.lastName" type="text" class="form-control" placeholder="">
           <label for="floatingInput" class="custom-label">Perekonnanimi</label>
 
       </div>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-          Vali pakett
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Kogupakett</a></li>
-          <li><a class="dropdown-item" href="#">Frontend</a></li>
-          <li><a class="dropdown-item" href="#">Backend</a></li>
-        </ul>
-      </div>
+      <PackageTypeDropdown @event-update-selected-package-id="setSelectedPackageId"/>
 
     </div>
 
@@ -59,7 +42,7 @@
       <div class="row align-items-center">
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="termsAndConditionsCheck" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Default checkbox
             </label>
@@ -68,7 +51,7 @@
       </div>
       <div class="row align-items-center">
 
-          <a class="btn btn-primary" href="#" role="button">Registeeru</a>
+          <a @click="validateUserInfo" class="btn btn-primary" href="#" role="button">Registeeru</a>
 
       </div>
     </div>
@@ -81,8 +64,37 @@
 
 
 <script>
+import PackageTypeDropdown from "@/views/PackageTypeDropdown.vue";
+import PasswordInput from "@/views/PasswordInput.vue";
+
 export default {
-  name: "SignUpView"
+  name: "SignUpView",
+  components: {PasswordInput, PackageTypeDropdown},
+  data(){
+    return{
+      passwordMismatch: false,
+      termsAndConditionsCheck: false,
+      userInfo: {
+        packageTypeId: 0,
+        username: '',
+        password: '',
+        firstName: '',
+        lastName: ''
+      }
+    }
+  },
+  methods: {
+    setSelectedPackageId(selectedPackageId){
+      this.userInfo.packageTypeId = selectedPackageId
+
+    },
+    handlePasswordChange({password, passwordMismatch}){
+      this.passwordMismatch = false
+      this.userInfo.password = password
+      this.passwordMismatch = passwordMismatch
+
+    }
+  }
 }
 
 </script>
