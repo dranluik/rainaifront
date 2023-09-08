@@ -4,8 +4,33 @@
     <router-link to="/signup">Registreeru kasutajaks</router-link> |
     <router-link to="/login">Logi Sisse</router-link>
   </nav>
-  <router-view/>
+  <router-view @event-update-nav-menu="updateNavMenu" />
 </template>
+
+<script>
+import {ADMIN} from "@/assets/script/Role";
+
+export default {
+
+  data() {
+    return {
+      isLoggedIn: false,
+      isAdmin: false
+    }
+  },
+
+  methods: {
+    updateNavMenu() {
+      this.isLoggedIn = sessionStorage.getItem('userId') !== null
+      this.isAdmin = sessionStorage.getItem('roleName') === ADMIN
+    },
+  },
+  beforeMount() {
+    this.updateNavMenu()
+  }
+}
+
+</script>
 
 <style>
 html, body {
