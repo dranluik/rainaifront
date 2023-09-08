@@ -22,7 +22,7 @@ export default {
     validatePasswords(){
       this.$emit('event-password-changed',{
         password: this.password,
-        passwordMismatch: this.password !== this.confirmPassword})
+        passwordsMatch: this.password === this.confirmPassword})
 
     }
   }
