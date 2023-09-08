@@ -11,6 +11,11 @@ export default {
   name: 'technologiesDropdown',
   props: {
     technologies: {}
+  },
+  data() {
+    return {
+      selectedTechnology: ''
+    }
   }
 }
 </script>

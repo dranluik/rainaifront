@@ -28,11 +28,33 @@ export default {
               name: '',
               status: ''
             }
-          ]
+          ],
+      lessonsNames: [
+        {
+          packageTypeId: 0,
+          lessonName: '',
+          lessonStatus: ''
+        }
+      ]
+      
     }
   },
 
   methods: {
+
+    getLessonNames() {
+      this.$http.get("/lesson-names", {
+            params: {
+              technologyId: this.technologyId,
+            }
+          }
+      ).then(response => {
+        this.lessonsNames = response.data
+      }).catch(error => {
+      router.push({name:'errorRoute'})
+      })
+    },
+    
     getTechnologies() {
       this.$http.get("/frontend")
           .then(response => {
