@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: 'frontTechnologiesDropdown',
+  name: 'technologiesDropdown',
   props: {
     technologies: {}
   }

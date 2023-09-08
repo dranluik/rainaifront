@@ -24,6 +24,6 @@
 </template>
 <script>
 export default {
-  name: 'frontTopicTable'
+  name: 'lessonsTable'
 }
 </script>
