@@ -2,22 +2,22 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <frontTechnologiesDropdown :technologies="technologies"/>
+        <technologies-dropdown :technologies="technologies"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
-        <frontTopicTable/>
+        <lessonsTable/>
       </div>
     </div>
   </div>
 </template>
 <script>
 import router from "@/router";
-import FrontTechnologiesDropdown from "@/components/FrontTechnologiesDropdown.vue";
-import FrontTopicTable from "@/components/FrontTopicTable.vue";
+import technologiesDropdown from "@/components/TechnologiesDropdown.vue";
+import lessonsTable from "@/components/LessonsTable.vue";
 
 export default {
   name: "FrontendView",
-  components: {FrontTopicTable, FrontTechnologiesDropdown},
+  components: {lessonsTable, technologiesDropdown},
   data(){
     return {
 
