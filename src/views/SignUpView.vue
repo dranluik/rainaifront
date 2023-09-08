@@ -64,8 +64,8 @@
 
 
 <script>
-import PackageTypeDropdown from "@/views/PackageTypeDropdown.vue";
-import PasswordInput from "@/views/PasswordInput.vue";
+import PackageTypeDropdown from "@/components/PackageTypeDropdown.vue";
+import PasswordInput from "@/components/PasswordInput.vue";
 
 export default {
   name: "SignUpView",

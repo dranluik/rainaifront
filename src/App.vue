@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Kodu</router-link> |
+    <router-link to="/home">Kodu</router-link> |
+    <router-link to="/frontend">Frontend</router-link> |
+    <router-link to="/backend">Backend</router-link> |
     <router-link to="/signup">Registreeru kasutajaks</router-link> |
     <router-link to="/login">Logi Sisse</router-link>
   </nav>
@@ -62,6 +64,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #46fff2;
 }
 </style>
