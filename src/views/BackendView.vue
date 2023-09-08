@@ -2,10 +2,10 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <BackTechnologiesDropdown/>
+        <technologies-dropdown :technologies="technologies"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
-        <BackTopicTable/>
+        <lessonsTable/>
       </div>
     </div>
   </div>
@@ -15,10 +15,12 @@
 import BackTechnologiesDropdown from "@/views/BackTechnologiesDropdown.vue";
 import router from "@/router";
 import BackTopicTable from "@/views/BackTopicTable.vue";
+import technologiesDropdown from "@/components/TechnologiesDropdown.vue";
+import LessonsTable from "@/components/LessonsTable.vue";
 
 export default {
   name: "BackendView",
-  components: {BackTopicTable, BackTechnologiesDropdown},
+  components: {LessonsTable, technologiesDropdown,},
   data(){
     return {
     technologies:
