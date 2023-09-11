@@ -2,9 +2,7 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <TechnologiesDropdown
-          @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"
-        />
+        <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
         <lessonsTable/>
@@ -14,12 +12,12 @@
 </template>
 <script>
 import router from "@/router";
-import technologiesDropdown from "@/components/TechnologiesDropdown.vue";
 import lessonsTable from "@/components/LessonsTable.vue";
+import TechnologiesDropdown from "@/components/TechnologiesDropdown.vue";
 
 export default {
   name: "FrontendView",
-  components: {lessonsTable, technologiesDropdown},
+  components: {TechnologiesDropdown, lessonsTable},
   data(){
     return {
       lessonsNames: [
@@ -28,7 +26,8 @@ export default {
           isSelected: true
         }
       ],
-      selectedTechnologyPackageTypeId: 0
+      selectedTechnologyPackageTypeId: 0,
+      packageTypeId: 2
 
     }
   },
