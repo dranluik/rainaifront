@@ -2,7 +2,7 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <technologies-dropdown :technologies="technologies"/>
+        <technologies-dropdown :packageTypeId="packageTypeId" @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
         <lessonsTable/>
@@ -23,30 +23,38 @@ export default {
   components: {LessonsTable, technologiesDropdown,},
   data(){
     return {
-    technologies:
-        [
-          {
-            packageTypeId: 0,
-            name: '',
-            status: ''
-          }
-        ]
+      lessonsNames: [
+        {
+          lessonName: String,
+          isSelected: true
+        }
+      ],
+      selectedTechnologyPackageTypeId: 0,
+      packageTypeId: 3
+
     }
   },
   methods: {
-    getBackTechnologies() {
-      this.$http.get("/backend")
-          .then(response => {
-            this.technologies = response.data
-          })
-          .catch(error => {
-            router.push({name: 'errorRoute'})
-          })
+
+    updateSelectedTechnologyPackageTypeId(selectedPackageTypeId){
+      this.selectedTechnologyPackageTypeId = selectedPackageTypeId
+    },
+
+    getLessonNames() {
+      this.$http.get("/lesson/user", {
+            params: {
+              userId: this.userId,
+              packageTypeId: this.packageTypeId,
+              technologyId: this.technologyId,
+            }
+          }
+      ).then(response => {
+        this.lessonsNames = response.data
+      }).catch(error => {
+        router.push({name:'errorRoute'})
+      })
     },
   },
-  beforeMount() {
-    this.getBackTechnologies()
-  }
 }
 </script>
 <style scoped>

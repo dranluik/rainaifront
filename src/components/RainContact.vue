@@ -11,7 +11,7 @@
     <tr>
       <th scope="row">
         <font-awesome-icon :icon="['far', 'envelope']" size="xs" class="icon"/>
-        rainaigmail.com
+        rainai@gmail.com
       </th>
       <td></td>
       <td></td>

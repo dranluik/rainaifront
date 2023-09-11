@@ -1,19 +1,27 @@
 <template>
+  <LogOutModal @event-update-nav-menu="updateNavMenu" ref="logOutModalRef"/>
   <nav>
     <router-link to="/home">Kodu</router-link> |
-    <router-link v-if="isLoggedIn" to="/frontend">Frontend</router-link> |
-    <router-link v-if="isLoggedIn" to="/backend">Backend</router-link> |
-    <router-link v-if="isLoggedIn" to="/mylessons">Minu teemad</router-link> |
-    <router-link v-if="!isLoggedIn" to="/signup">Registreeru kasutajaks</router-link> |
-    <router-link v-if="!isLoggedIn" to="/login">Logi Sisse</router-link>
+    <template v-if="isLoggedIn">
+    <router-link to="/frontend">Frontend</router-link> |
+    <router-link to="/backend">Backend</router-link> |
+    <router-link to="/mylessons">Minu teemad</router-link> |
+    <router-link to="#" @click="handleLogout">Logi välja</router-link>
+    </template>
+    <template v-if="!isLoggedIn">
+    <router-link to="/signup">Registreeru kasutajaks</router-link> |
+    <router-link to="/login">Logi Sisse</router-link>
+    </template>
   </nav>
   <router-view @event-update-nav-menu="updateNavMenu" />
 </template>
 
 <script>
 import {ADMIN} from "@/assets/script/Role";
+import LogOutModal from "@/components/modal/LogOutModal.vue";
 
 export default {
+  components: {LogOutModal},
 
   data() {
     return {
@@ -27,6 +35,9 @@ export default {
       this.isLoggedIn = sessionStorage.getItem('userId') !== null
       this.isAdmin = sessionStorage.getItem('roleName') === ADMIN
     },
+    handleLogout() {
+      this.$refs.logOutModalRef.$refs.modalRef.openModal()
+    }
   },
   beforeMount() {
     this.updateNavMenu()
