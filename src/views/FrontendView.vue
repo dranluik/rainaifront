@@ -2,7 +2,9 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <technologies-dropdown :technologies="technologies"/>
+        <technologies-dropdown :technologies="technologies"
+          @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"
+        />
       </div>
       <div class="col col-3 d-flex justify-content-center">
         <lessonsTable/>
@@ -24,27 +26,33 @@ export default {
       technologies:
           [
             {
-              packageTypeId: 0,
+              technologyId: 0,
               name: '',
               status: ''
             }
           ],
       lessonsNames: [
         {
-          packageTypeId: 0,
-          lessonName: '',
-          lessonStatus: ''
+          lessonName: String,
+          isSelected: true
         }
-      ]
-      
+      ],
+      selectedTechnologyPackageTypeId: 0
+
     }
   },
 
   methods: {
 
+    updateSelectedTechnologyPackageTypeId(selectedPackageTypeId){
+      this.selectedTechnologyPackageTypeId
+    },
+
     getLessonNames() {
-      this.$http.get("/lesson-names", {
+      this.$http.get("/lesson/user", {
             params: {
+              userId: this.userId,
+              packageTypeId: this.packageTypeId,
               technologyId: this.technologyId,
             }
           }
@@ -54,15 +62,18 @@ export default {
       router.push({name:'errorRoute'})
       })
     },
-    
+
     getTechnologies() {
-      this.$http.get("/frontend")
-          .then(response => {
-            this.technologies = response.data
-          })
-          .catch(error => {
-            router.push({name:'errorRoute'})
-            })
+      this.$http.get("/lesson/technology", {
+            params: {
+              packageTypeId: this.packageTypeId,
+            }
+          }
+      ).then(response => {
+        const responseBody = response.data
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
     },
   },
   beforeMount() {
