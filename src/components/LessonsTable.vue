@@ -21,6 +21,6 @@ export default {
   name: 'lessonsTable',
   props: {
     lessonsNames: {}
-  }
+  },
 }
 </script>
