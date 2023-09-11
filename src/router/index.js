@@ -6,6 +6,7 @@ import ErrorView from "@/views/ErrorView.vue";
 import FrontendView from "@/views/FrontendView.vue";
 import BackendView from "@/views/BackendView.vue";
 import MyLessonsView from "@/views/MyLessonsView.vue";
+import EditorView from "@/views/EditorView.vue";
 
 const routes = [
   {
@@ -42,6 +43,12 @@ const routes = [
     path: '/mylessons',
     name: 'myLessonsRoute',
     component: MyLessonsView
+  },
+  {
+    path: '/editor/:newLessonName?',
+    name: 'editorRoute',
+    component: EditorView,
+    props: true
   },
 ]
 

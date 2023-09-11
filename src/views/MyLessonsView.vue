@@ -29,6 +29,7 @@
 import MyLessonsTable from "@/components/MyLessonsTable.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import {FILL_LESSON_NAME} from "@/assets/script/AlertMessage";
+import router from "@/router";
 
 export default {
   name: "MyLessonsView",
@@ -44,7 +45,7 @@ export default {
     takeLessonNameAndGoEdit(){
       this.errorMessage = ''
       if (this.newLessonName.length > 0){
-        alert('lahe')
+        router.push({name:'editorRoute', params:{newLessonName : this.newLessonName}})
 
 
       } else {
