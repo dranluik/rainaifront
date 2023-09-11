@@ -5,6 +5,7 @@ import SignUpView from "@/views/SignUpView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 import FrontendView from "@/views/FrontendView.vue";
 import BackendView from "@/views/BackendView.vue";
+import MyLessonsView from "@/views/MyLessonsView.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/backend',
     name: 'backendRoute',
     component: BackendView
+  },
+  {
+    path: '/mylessons',
+    name: 'myLessonsRoute',
+    component: MyLessonsView
   },
 ]
 

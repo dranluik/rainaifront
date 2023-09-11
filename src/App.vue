@@ -1,10 +1,11 @@
 <template>
   <nav>
     <router-link to="/home">Kodu</router-link> |
-    <router-link to="/frontend">Frontend</router-link> |
-    <router-link to="/backend">Backend</router-link> |
-    <router-link to="/signup">Registreeru kasutajaks</router-link> |
-    <router-link to="/login">Logi Sisse</router-link>
+    <router-link v-if="isLoggedIn" to="/frontend">Frontend</router-link> |
+    <router-link v-if="isLoggedIn" to="/backend">Backend</router-link> |
+    <router-link v-if="isLoggedIn" to="/mylessons">Minu teemad</router-link> |
+    <router-link v-if="!isLoggedIn" to="/signup">Registreeru kasutajaks</router-link> |
+    <router-link v-if="!isLoggedIn" to="/login">Logi Sisse</router-link>
   </nav>
   <router-view @event-update-nav-menu="updateNavMenu" />
 </template>
