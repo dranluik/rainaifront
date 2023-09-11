@@ -7,7 +7,7 @@
       </template>
 
       <template #body>
-        <h1 class="custom-heading">Kas oled ikka tõesti kindel?</h1>
+        <h1 class="custom-heading">Kas sa ikka soovid välja logida?</h1>
       </template>
 
       <template #footer>
