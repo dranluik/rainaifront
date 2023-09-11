@@ -2,7 +2,7 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <technologies-dropdown :technologies="technologies"
+        <TechnologiesDropdown
           @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"
         />
       </div>
