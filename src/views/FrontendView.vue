@@ -5,7 +5,8 @@
         <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
-       <LessonsTable :packageTypeId="packageTypeId" :selectedTechnologyId="selectedTechnologyId"  @event-update-selected-technology-id="updateSelectedTechnologyId"/>
+       <LessonsTable :packageTypeId="packageTypeId" :selectedTechnologyId="selectedTechnologyId"
+                     @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
     </div>
   </div>

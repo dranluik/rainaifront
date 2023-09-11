@@ -5,16 +5,15 @@
         <technologies-dropdown :packageTypeId="packageTypeId" @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
-        <lessonsTable/>
+        <lessonsTable :packageTypeId="packageTypeId" :selectedTechnologyId="selectedTechnologyPackageTypeId"
+                      @event-update-selected-technology-id="updateSelectedTechnologyPackageTypeId" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import BackTechnologiesDropdown from "@/views/BackTechnologiesDropdown.vue";
 import router from "@/router";
-import BackTopicTable from "@/views/BackTopicTable.vue";
 import technologiesDropdown from "@/components/TechnologiesDropdown.vue";
 import LessonsTable from "@/components/LessonsTable.vue";
 
