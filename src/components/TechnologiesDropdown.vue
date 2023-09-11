@@ -16,6 +16,12 @@ export default {
     return {
       selectedTechnology: ''
     }
+  },
+
+  methods: {
+    emitSelectedTechnology(){
+      this.$emit('')
+    }
   }
 }
 </script>
