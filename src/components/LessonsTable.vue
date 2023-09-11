@@ -7,16 +7,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">Muutujad</th>
+    <tr v-for="lessonsName in lessonsNames" :key="lessonsName.packageTypeId">
+      <th scope="row">{{lessonsName.lessonName}}</th>
       <td>
         <font-awesome-icon :icon="['far', 'square-check']" size="2xl"/>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Muutujad</th>
-      <td>
-        <font-awesome-icon :icon="['fas', 'trash']" size="2xl" />
       </td>
     </tr>
     </tbody>
@@ -24,6 +18,9 @@
 </template>
 <script>
 export default {
-  name: 'lessonsTable'
+  name: 'lessonsTable',
+  props: {
+    lessonsNames: {}
+  }
 }
 </script>
