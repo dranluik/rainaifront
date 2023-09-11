@@ -2,31 +2,24 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"/>
+        <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
-        <lessonsTable/>
+       <LessonsTable :packageTypeId="packageTypeId" :selectedTechnologyId="selectedTechnologyId"  @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
     </div>
   </div>
 </template>
 <script>
-import router from "@/router";
-import lessonsTable from "@/components/LessonsTable.vue";
 import TechnologiesDropdown from "@/components/TechnologiesDropdown.vue";
+import LessonsTable from "@/components/LessonsTable.vue";
 
 export default {
   name: "FrontendView",
-  components: {TechnologiesDropdown, lessonsTable},
+  components: {LessonsTable, TechnologiesDropdown},
   data(){
     return {
-      lessonsNames: [
-        {
-          lessonName: String,
-          isSelected: true
-        }
-      ],
-      selectedTechnologyPackageTypeId: 0,
+      selectedTechnologyId: 0,
       packageTypeId: 2
 
     }
@@ -34,24 +27,10 @@ export default {
 
   methods: {
 
-    updateSelectedTechnologyPackageTypeId(selectedPackageTypeId){
-      this.selectedTechnologyPackageTypeId = selectedPackageTypeId
+    updateSelectedTechnologyId(selectedTechnologyId){
+      this.selectedTechnologyId = selectedTechnologyId
     },
 
-    getLessonNames() {
-      this.$http.get("/lesson/user", {
-            params: {
-              userId: this.userId,
-              packageTypeId: this.packageTypeId,
-              technologyId: this.technologyId,
-            }
-          }
-      ).then(response => {
-        this.lessonsNames = response.data
-      }).catch(error => {
-      router.push({name:'errorRoute'})
-      })
-    },
   },
 }
 </script>

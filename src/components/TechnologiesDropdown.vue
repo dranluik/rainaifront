@@ -1,5 +1,5 @@
 <template>
-  <select v-model="selectedTechnologyPackageTypeId" @change="emitSelectedTechnologyPackageTypeId"
+  <select v-model="selectedTechnologyId" @change="emitSelectedTechnologyId"
           class="custom-label form-select" aria-label="Default select example">
     <option selected :value="0">Tehnoloogiad</option>
     <option v-for="technology in technologies" :value="technology.technologyId" :key="technology.technologyId">
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      selectedTechnologyPackageTypeId: 0,
+      selectedTechnologyId: 0,
 
       technologies:
           [
@@ -32,8 +32,8 @@ export default {
   },
 
   methods: {
-    emitSelectedTechnologyPackageTypeId() {
-      this.$emit('event-update-selected-technology-package-type-id', this.selectedTechnologyPackageTypeId)
+    emitSelectedTechnologyId() {
+      this.$emit('event-update-selected-technology-id', this.selectedTechnologyId)
     },
 
     getTechnologies() {
