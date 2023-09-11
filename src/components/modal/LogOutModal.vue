@@ -2,8 +2,8 @@
   <div>
     <Modal close-button-name="Ei" ref="modalRef">
 
-      <template #header class="heading1">
-        Logi välja?
+      <template #header>
+        <h3 class="custom-heading">Logi välja?</h3>
       </template>
 
       <template #body>
