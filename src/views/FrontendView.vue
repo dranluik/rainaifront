@@ -22,15 +22,6 @@ export default {
   components: {lessonsTable, technologiesDropdown},
   data(){
     return {
-
-      technologies:
-          [
-            {
-              technologyId: 0,
-              name: '',
-              status: ''
-            }
-          ],
       lessonsNames: [
         {
           lessonName: String,
@@ -45,7 +36,7 @@ export default {
   methods: {
 
     updateSelectedTechnologyPackageTypeId(selectedPackageTypeId){
-      this.selectedTechnologyPackageTypeId
+      this.selectedTechnologyPackageTypeId = selectedPackageTypeId
     },
 
     getLessonNames() {
@@ -62,22 +53,6 @@ export default {
       router.push({name:'errorRoute'})
       })
     },
-
-    getTechnologies() {
-      this.$http.get("/lesson/technology", {
-            params: {
-              packageTypeId: this.packageTypeId,
-            }
-          }
-      ).then(response => {
-        const responseBody = response.data
-      }).catch(error => {
-        const errorResponseBody = error.response.data
-      })
-    },
   },
-  beforeMount() {
-    this.getTechnologies()
-  }
 }
 </script>
