@@ -12,6 +12,9 @@ import router from "@/router";
 
 export default {
   name: 'technologiesDropdown',
+  props: {
+    packageTypeId: Number,
+  },
   data() {
     return {
       selectedTechnologyPackageTypeId: 0,
@@ -42,7 +45,6 @@ export default {
       ).then(response => {
         this.technologies = response.data
       }).catch(error => {
-        router.push({name: 'errorRoute'})
       })
     },
   },
