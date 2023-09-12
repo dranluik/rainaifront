@@ -68,8 +68,8 @@
 
 
 <script>
-import PackageTypeDropdown from "@/components/PackageTypeDropdown.vue";
-import PasswordInput from "@/components/PasswordInput.vue";
+import PackageTypeDropdown from "@/components/dropdown/PackageTypeDropdown.vue";
+import PasswordInput from "@/components/input/PasswordInput.vue";
 import {FILL_MANDATORY_FIELDS, PASSWORD_MISMATCH, USER_ADDED} from "@/assets/script/AlertMessage";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import router from "@/router";

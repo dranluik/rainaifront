@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import MyLessonsTable from "@/components/MyLessonsTable.vue";
+import MyLessonsTable from "@/components/table/MyLessonsTable.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import {FILL_LESSON_NAME} from "@/assets/script/AlertMessage";
 import router from "@/router";

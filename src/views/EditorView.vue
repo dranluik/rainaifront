@@ -79,9 +79,9 @@
 
 <script>
 
-import TechnologiesDropdown from "@/components/TechnologiesDropdown.vue";
-import PackageTypeDropdown from "@/components/PackageTypeDropdown.vue";
-import AddImageModal from "@/views/AddImageModal.vue";
+import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
+import PackageTypeDropdown from "@/components/dropdown/PackageTypeDropdown.vue";
+import AddImageModal from "@/components/modal/AddImageModal.vue";
 
 export default {
   name: "EditorView",

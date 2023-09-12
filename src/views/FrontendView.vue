@@ -11,8 +11,8 @@
   </div>
 </template>
 <script>
-import TechnologiesDropdown from "@/components/TechnologiesDropdown.vue";
-import LessonsTable from "@/components/LessonsTable.vue";
+import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
+import LessonsTable from "@/components/table/LessonsTable.vue";
 
 export default {
   name: "FrontendView",

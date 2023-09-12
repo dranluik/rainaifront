@@ -15,8 +15,8 @@
 import BackTechnologiesDropdown from "@/views/BackTechnologiesDropdown.vue";
 import router from "@/router";
 import BackTopicTable from "@/views/BackTopicTable.vue";
-import technologiesDropdown from "@/components/TechnologiesDropdown.vue";
-import LessonsTable from "@/components/LessonsTable.vue";
+import technologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
+import LessonsTable from "@/components/table/LessonsTable.vue";
 
 export default {
   name: "BackendView",

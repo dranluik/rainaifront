@@ -7,10 +7,10 @@
       <template #body>
         <div class="col">
           <div class="row">
-            input kirjeldus
+            <input type="text" class="form-control" placeholder="Pildi kirjeldus">
           </div>
           <div class="row">
-            input pildi valik
+            <ImageInput/>
           </div>
 
         </div>
@@ -24,10 +24,11 @@
 </template>
 <script>
 import Modal from "@/components/modal/Modal.vue";
+import ImageInput from "@/components/input/ImageInput.vue";
 
 export default {
   name: 'AddImageModal',
-  components: {Modal}
+  components: {ImageInput, Modal}
 }
 </script>
 
