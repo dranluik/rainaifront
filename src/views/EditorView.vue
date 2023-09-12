@@ -2,14 +2,15 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
+    <AddVideoModal ref="addVideoModalRef" />
     <div class="row mb-4">
       <div class="col col-6">
         <div class="input-group mb-3">
           <input v-model="lessonName" type="text" class="form-control" placeholder="Teema nimi">
         </div>
       </div>
-      <div class="col">
-        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa pilt</button>
+      <div class="col mb-3">
+        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa Pilt</button>
       </div>
     </div>
     <div class="row mb-4">
@@ -21,7 +22,7 @@
       </div>
 
       <div class="col">
-        <button type="button" class="btn btn-dark">Lisa Video</button>
+        <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa Video</button>
       </div>
     </div>
     <div class="row mb-4">
@@ -82,10 +83,11 @@
 import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
 import PackageTypeDropdown from "@/components/dropdown/PackageTypeDropdown.vue";
 import AddImageModal from "@/components/modal/AddImageModal.vue";
+import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 
 export default {
   name: "EditorView",
-  components: {AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
+  components: {AddVideoModal, AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
   props: {
     newLessonName: String
   },
@@ -102,8 +104,11 @@ export default {
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
     },
     handleImageAdded(selectedImage, descriptionText){
-
       this.imageTable.push({image: selectedImage, description: descriptionText})
+    },
+
+    handleAddVideo(){
+      this.$refs.addVideoModalRef.$refs.modalRef.openModal()
     }
 
   }
