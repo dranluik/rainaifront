@@ -1,16 +1,15 @@
 <template>
 
   <div class="container text-center">
-    <AddImageModal ref="addImageModalRef"/>
-    <AddVideoModal ref="addVideoModalRef" />
+    <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
     <div class="row mb-4">
       <div class="col col-6">
         <div class="input-group mb-3">
           <input v-model="lessonName" type="text" class="form-control" placeholder="Teema nimi">
         </div>
       </div>
-      <div class="col mb-3">
-        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa Pilt</button>
+      <div class="col">
+        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa pilt</button>
       </div>
     </div>
     <div class="row mb-4">
@@ -22,7 +21,7 @@
       </div>
 
       <div class="col">
-        <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa Video</button>
+        <button type="button" class="btn btn-dark">Lisa Video</button>
       </div>
     </div>
     <div class="row mb-4">
@@ -39,9 +38,9 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>pildi thumbnail</td>
-            <td>pildi kirjeldus</td>
+          <tr v-for="(imageObject, index) in imageTable" :key="index">
+            <td><img :src="imageObject.image" alt="Image"></td>
+            <td>{{ imageObject.description }}</td>
             <td><font-awesome-icon :icon="['fas', 'trash']" size="lg" /></td>
           </tr>
           </tbody>
@@ -83,26 +82,28 @@
 import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
 import PackageTypeDropdown from "@/components/dropdown/PackageTypeDropdown.vue";
 import AddImageModal from "@/components/modal/AddImageModal.vue";
-import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 
 export default {
   name: "EditorView",
-  components: {AddVideoModal, AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
+  components: {AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
   props: {
     newLessonName: String
   },
   data(){
     return{
-      lessonName: this.newLessonName || ''
+      lessonName: this.newLessonName || '',
+      selectedImage: '',
+      descriptionText: '',
+      imageTable: []
     }
   },
   methods: {
     handleAddImage(){
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
     },
+    handleImageAdded(selectedImage, descriptionText){
 
-    handleAddVideo(){
-      this.$refs.addVideoModalRef.$refs.modalRef.openModal()
+      this.imageTable.push({image: selectedImage, description: descriptionText})
     }
 
   }
