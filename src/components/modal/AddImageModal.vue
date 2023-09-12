@@ -18,7 +18,7 @@
       </template>
       <template #footer>
 
-        <button @click="emitSelectedImageAndDescription" type="button" class="btn btn-outline-success">Lisa pilt</button>
+        <button @click="emitSelectedImageAndDescription" :disabled="selectedImage === ''" type="button" class="btn btn-outline-success">Lisa pilt</button>
       </template>
       <template #footer-left>
         <AlertSuccess :alert-message="successMessage"/>
@@ -32,7 +32,7 @@ import Modal from "@/components/modal/Modal.vue";
 import ImageInput from "@/components/input/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import {IMAGE_ADDED} from "@/assets/script/AlertMessage";
-import DescriptionInput from "@/components/modal/DescriptionInput.vue";
+import DescriptionInput from "@/components/input/DescriptionInput.vue";
 
 export default {
   name: 'AddImageModal',

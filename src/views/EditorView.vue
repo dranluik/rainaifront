@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="col">
-        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa Pilt</button>
+        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa pilt</button>
       </div>
     </div>
     <div class="row mb-4">
@@ -38,9 +38,9 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>pildi thumbnail</td>
-            <td>pildi kirjeldus</td>
+          <tr v-for="(imageObject, index) in imageTable" :key="index">
+            <td><img :src="imageObject.image" alt="Image"></td>
+            <td>{{ imageObject.description }}</td>
             <td><font-awesome-icon :icon="['fas', 'trash']" size="lg" /></td>
           </tr>
           </tbody>
@@ -93,7 +93,8 @@ export default {
     return{
       lessonName: this.newLessonName || '',
       selectedImage: '',
-      descriptionText: ''
+      descriptionText: '',
+      imageTable: []
     }
   },
   methods: {
@@ -101,8 +102,8 @@ export default {
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
     },
     handleImageAdded(selectedImage, descriptionText){
-      this.selectedImage = selectedImage
-      this.descriptionText = descriptionText
+
+      this.imageTable.push({image: selectedImage, description: descriptionText})
     }
 
   }
