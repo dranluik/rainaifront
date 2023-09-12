@@ -17,8 +17,8 @@
         <MyLessonsTable/>
         </div>
       </div>
-      <div class="col">
-        siia tuleb lessoncontent
+      <div class="left-video">
+        <iframe width="540" height="360" src="https://www.youtube.com/embed/oFBuPWCjbA4" frameborder="0" allowfullscreen></iframe>
       </div>
 
 
@@ -56,4 +56,17 @@ export default {
   }
 
 </script>
+
+<style>
+.left-video {
+  float: right;
+  margin-left: 40px; /* Add margin to move it to the left */
+}
+</style>
+
+
+
+
+
+
 

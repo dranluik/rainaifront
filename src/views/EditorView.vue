@@ -2,13 +2,14 @@
 
   <div class="container text-center">
     <AddImageModal ref="addImageModalRef"/>
+    <AddVideoModal ref="addVideoModalRef" />
     <div class="row mb-4">
       <div class="col col-6">
         <div class="input-group mb-3">
           <input v-model="lessonName" type="text" class="form-control" placeholder="Teema nimi">
         </div>
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa Pilt</button>
       </div>
     </div>
@@ -21,7 +22,7 @@
       </div>
 
       <div class="col">
-        <button type="button" class="btn btn-dark">Lisa Video</button>
+        <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa Video</button>
       </div>
     </div>
     <div class="row mb-4">
@@ -82,10 +83,11 @@
 import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
 import PackageTypeDropdown from "@/components/dropdown/PackageTypeDropdown.vue";
 import AddImageModal from "@/components/modal/AddImageModal.vue";
+import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 
 export default {
   name: "EditorView",
-  components: {AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
+  components: {AddVideoModal, AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
   props: {
     newLessonName: String
   },
@@ -97,6 +99,10 @@ export default {
   methods: {
     handleAddImage(){
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
+    },
+
+    handleAddVideo(){
+      this.$refs.addVideoModalRef.$refs.modalRef.openModal()
     }
 
   }
