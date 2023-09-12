@@ -2,7 +2,7 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal ref="addVideoModalRef" />
+    <AddVideoModal @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
     <div class="row mb-4">
       <div class="col col-6">
         <div class="input-group mb-3">
@@ -96,7 +96,8 @@ export default {
       lessonName: this.newLessonName || '',
       selectedImage: '',
       descriptionText: '',
-      imageTable: []
+      imageTable: [],
+      videoTable: [],
     }
   },
   methods: {
@@ -109,6 +110,11 @@ export default {
 
     handleAddVideo(){
       this.$refs.addVideoModalRef.$refs.modalRef.openModal()
+    },
+
+    handleVideoAdded(videoLink, description){
+      this.videoTable.push({video: videoLink, description: description})
+
     }
 
   }
