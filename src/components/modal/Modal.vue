@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../assets/css/my-style.css">
 <template>
   <div v-if="isOpen" class="modal fade show d-block" tabindex="-1" @click="closeModal">
     <div class="modal-dialog" @click.stop>
@@ -46,3 +47,7 @@ export default {
   }
 }
 </script>
+
+<style>
+@import url('../../assets/css/my-style.css');
+</style>

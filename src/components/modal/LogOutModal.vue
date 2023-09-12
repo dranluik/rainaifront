@@ -1,7 +1,6 @@
 <template>
   <div>
     <Modal close-button-name="Ei" ref="modalRef">
-
       <template #header>
         <h3 class="custom-heading">Logi välja?</h3>
       </template>
@@ -34,7 +33,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .heading1 {
   color: #42b983;
 }

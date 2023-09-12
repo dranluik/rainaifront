@@ -44,7 +44,7 @@ a {
 }
 
 </style>
-<style>
+<style scoped>
 h3 {
   color: white;
 }

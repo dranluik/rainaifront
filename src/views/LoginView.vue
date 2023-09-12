@@ -111,7 +111,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .custom-label {
   font-size: 16px;
   font-weight: bold;
