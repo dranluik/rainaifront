@@ -17,6 +17,9 @@
           </slot>
         </div>
         <div class="modal-footer">
+          <slot name="footer-left">
+
+          </slot>
           <button type="button" class="btn btn-secondary" @click="closeModal">{{closeButtonName}}</button>
           <slot name="footer">
           </slot>

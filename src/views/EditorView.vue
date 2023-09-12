@@ -1,7 +1,7 @@
 <template>
 
   <div class="container text-center">
-    <AddImageModal ref="addImageModalRef"/>
+    <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
     <div class="row mb-4">
       <div class="col col-6">
         <div class="input-group mb-3">
@@ -91,12 +91,18 @@ export default {
   },
   data(){
     return{
-      lessonName: this.newLessonName || ''
+      lessonName: this.newLessonName || '',
+      selectedImage: '',
+      descriptionText: ''
     }
   },
   methods: {
     handleAddImage(){
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
+    },
+    handleImageAdded(selectedImage, descriptionText){
+      this.selectedImage = selectedImage
+      this.descriptionText = descriptionText
     }
 
   }
