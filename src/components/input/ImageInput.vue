@@ -1,6 +1,6 @@
 <template>
   <div>
-  <input type="file" @change="handleImage" accept="image/x-png,image/jpeg,image/gif">
+  <input type="file" ref="imageInputRef" @change="handleImage" accept="image/x-png,image/jpeg,image/gif">
   </div>
 </template>
 
@@ -27,6 +27,9 @@ export default {
         alert(error);
       }
       reader.readAsDataURL(imageFile)
+    },
+    clearImageInput(){
+      this.$refs.imageInputRef.value = '';
     }
   }
 }

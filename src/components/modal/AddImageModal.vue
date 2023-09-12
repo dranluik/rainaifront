@@ -7,10 +7,10 @@
       <template #body>
         <div class="col">
           <div class="row">
-            <DescriptionInput @event-description-update="handleDescription"/>
+            <DescriptionInput @event-description-update="handleDescription" ref="descriptionRef"/>
           </div>
           <div class="row">
-            <ImageInput @event-emit-base64="handleImageBase64"/>
+            <ImageInput @event-emit-base64="handleImageBase64" ref="imageInputRef"/>
           </div>
 
         </div>
@@ -46,15 +46,24 @@ export default {
   },
   methods: {
     handleImageBase64(imageDataBase64){
+      this.successMessage = ''
       this.selectedImage = imageDataBase64
+    },
+    handleDescription(description){
+      this.descriptionText = description
     },
     emitSelectedImageAndDescription(){
       this.$emit('event-emit-selected-image-and-description', this.selectedImage, this.descriptionText)
       this.successMessage = IMAGE_ADDED
+      this.resetImageAndDescription();
     },
-    handleDescription(description){
-      this.descriptionText = description
+    resetImageAndDescription: function () {
+      this.selectedImage = ''
+      this.descriptionText = ''
+      this.$refs.imageInputRef.clearImageInput()
+      this.$refs.descriptionRef.clearDescriptionInput()
     }
+
   }
 }
 </script>

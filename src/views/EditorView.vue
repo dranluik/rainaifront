@@ -10,19 +10,19 @@
         </div>
       </div>
       <div class="col mb-3">
-        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa Pilt</button>
+        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa pilt</button>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col col-3">
-        <TechnologiesDropdown/>
+        <TechnologiesDropdown :package-type-id="packageTypeIdForTechnologyDropdown"/>
       </div>
       <div class="col col-3">
-        <PackageTypeDropdown/>
+        <EditorPackageTypeDropdown/>
       </div>
 
       <div class="col">
-        <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa Video</button>
+        <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa video</button>
       </div>
     </div>
     <div class="row mb-4">
@@ -40,9 +40,9 @@
           </thead>
           <tbody>
           <tr v-for="(imageObject, index) in imageTable" :key="index">
-            <td><img :src="imageObject.image" alt="Image"></td>
+            <td><img :src="imageObject.image" alt="Image" :style="{width: imageWidth}"></td>
             <td>{{ imageObject.description }}</td>
-            <td><font-awesome-icon :icon="['fas', 'trash']" size="lg" /></td>
+            <td><font-awesome-icon @click="deleteImage(index)" style="cursor: pointer" :icon="['fas', 'trash']" size="lg"/></td>
           </tr>
           </tbody>
         </table>
@@ -84,19 +84,22 @@ import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue
 import PackageTypeDropdown from "@/components/dropdown/PackageTypeDropdown.vue";
 import AddImageModal from "@/components/modal/AddImageModal.vue";
 import AddVideoModal from "@/components/modal/AddVideoModal.vue";
+import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 
 export default {
   name: "EditorView",
-  components: {AddVideoModal, AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
+  components: {EditorPackageTypeDropdown, AddVideoModal, AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
   props: {
     newLessonName: String
   },
   data(){
     return{
       lessonName: this.newLessonName || '',
+      packageTypeIdForTechnologyDropdown: 0,
       selectedImage: '',
       descriptionText: '',
-      imageTable: []
+      imageTable: [],
+      imageWidth: '10%'
     }
   },
   methods: {
@@ -109,6 +112,9 @@ export default {
 
     handleAddVideo(){
       this.$refs.addVideoModalRef.$refs.modalRef.openModal()
+    },
+    deleteImage(index) {
+      this.imageTable.splice(index, 1);
     }
 
   }
