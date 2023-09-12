@@ -2,11 +2,12 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <technologies-dropdown :packageTypeId="packageTypeId" @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"/>
+        <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-package-type-id="updateSelectedTechnologyPackageTypeId"/>
+
       </div>
       <div class="col col-3 d-flex justify-content-center">
-        <lessonsTable :packageTypeId="packageTypeId" :selectedTechnologyId="selectedTechnologyPackageTypeId"
-                      @event-update-selected-technology-id="updateSelectedTechnologyPackageTypeId" />
+        <LessonsTable :packageTypeId="packageTypeId" :selectedTechnologyId="selectedTechnologyPackageTypeId"
+                      @event-update-selected-technology-id="updateSelectedTechnologyPackageTypeId"/>
       </div>
     </div>
   </div>
@@ -14,12 +15,13 @@
 
 <script>
 import router from "@/router";
-import technologiesDropdown from "@/components/TechnologiesDropdown.vue";
-import LessonsTable from "@/components/LessonsTable.vue";
+import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
+import LessonsTable from "@/components/table/LessonsTable.vue";
+
 
 export default {
   name: "BackendView",
-  components: {LessonsTable, technologiesDropdown,},
+  components: {LessonsTable, TechnologiesDropdown,},
   data(){
     return {
       lessonsNames: [

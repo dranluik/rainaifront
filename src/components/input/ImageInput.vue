@@ -6,6 +6,20 @@
 
 <script>
 export default {
-  name: 'ImageInput'
+  name: 'ImageInput',
+  data(){
+    return{
+      imageDataBase64: ''
+    }
+  },
+  methods: {
+    handleImage(eventFile) {
+      const selectedImage = eventFile.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageDataBase64 = reader.result;
+      }
+    }
+  }
 }
 </script>
