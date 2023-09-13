@@ -25,8 +25,10 @@
         <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa video</button>
       </div>
     </div>
-    <div class="row mb-4">
-      <WysiwygEditor/>
+    <div class="row mb-5">
+     <div class="col col-12 border mt-5 editor-column form-control">
+       <WysiwygEditor/>
+     </div>
     </div>
     <div class="row mb-4">
       <div class="col">
@@ -127,3 +129,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.editor-column {
+  background-color: rgba(186, 234, 206, 0.8); /* Replace with your desired background color */
+  /* Add other styling properties as needed */
+}
+</style>
