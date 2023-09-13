@@ -73,7 +73,7 @@
       <span class="tooltip-text">Bullet list</span>
 
     </button>
-    <button class="btn btn-light button-gap" @click="editor.chain().focus().toggleOrderedList().run()"
+    <button class="btn btn-light button-gap custom-button" @click="editor.chain().focus().toggleOrderedList().run()"
             :class="{ 'is-active': editor.isActive('orderedList') }">
       <font-awesome-icon :icon="['fas', 'list-ol']"/>
       <span class="tooltip-text">Ordered list</span>
