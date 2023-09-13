@@ -2,7 +2,7 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal ref="addVideoModalRef" />
+    <AddVideoModal @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
     <div class="row mb-4">
       <div class="col col-6">
         <div class="input-group mb-3">
@@ -99,7 +99,8 @@ export default {
       selectedImage: '',
       descriptionText: '',
       imageTable: [],
-      imageWidth: '10%'
+      imageWidth: '10%',
+      videoTable: [],
     }
   },
   methods: {
@@ -115,6 +116,11 @@ export default {
     },
     deleteImage(index) {
       this.imageTable.splice(index, 1);
+    },
+
+    handleVideoAdded(videoLink, description){
+      this.videoTable.push({video: videoLink, description: description})
+
     }
 
   }
