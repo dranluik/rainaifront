@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="row mb-4">
-      siia tuleb TIPTAP
+      <WysiwygEditor/>
     </div>
     <div class="row mb-4">
       <div class="col">
@@ -81,14 +81,14 @@
 <script>
 
 import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
-import PackageTypeDropdown from "@/components/dropdown/PackageTypeDropdown.vue";
 import AddImageModal from "@/components/modal/AddImageModal.vue";
 import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
+import WysiwygEditor from "@/views/WysiwygEditor.vue";
 
 export default {
   name: "EditorView",
-  components: {EditorPackageTypeDropdown, AddVideoModal, AddImageModal, PackageTypeDropdown, TechnologiesDropdown},
+  components: {WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown},
   props: {
     newLessonName: String
   },
