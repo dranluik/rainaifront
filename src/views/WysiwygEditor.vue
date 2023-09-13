@@ -1,10 +1,10 @@
 <template>
   <EditorButtons :editor="editor"/>
   <EditorButtonsSecondRow :editor="editor"/>
-      <div v-html="contentAsHtml"></div>
-      <editor-content :editor="editor"/>
-      <button @click="displayHtml">Kuva HTML</button>
-      <button @click="swapContent">Asenda HTML</button>
+  <div v-html="contentAsHtml"></div>
+  <editor-content :editor="editor" class="border"/>
+  <button @click="displayHtml">Kuva HTML</button>
+  <button @click="swapContent">Asenda HTML</button>
 </template>
 <script>
 import {Editor, EditorContent} from "@tiptap/vue-3";
@@ -52,7 +52,7 @@ export default {
     this.editor = new Editor({
       content: '<p>I’m running TipTap with Vue.js. 🎉</p>',
       extensions: [
-          StarterKit,
+        StarterKit,
         Document,
         Paragraph,
         Text,
