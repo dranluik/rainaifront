@@ -61,10 +61,10 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>video link</td>
-            <td>video kirjeldus</td>
-            <td><font-awesome-icon :icon="['fas', 'trash']" size="lg" /></td>
+          <tr v-for="(videoObject, index) in videoTable" :key="index">
+            <td> {{videoObject.videoLink}}</td>
+            <td>{{videoObject.description}}</td>
+            <td><font-awesome-icon @click="deleteVideo(index)" style="cursor: pointer" :icon="['fas', 'trash']" size="lg" /></td>
           </tr>
           </tbody>
         </table>
@@ -117,17 +117,22 @@ export default {
       this.imageTable.push({image: selectedImage, description: descriptionText})
     },
 
-    handleAddVideo(){
-      this.$refs.addVideoModalRef.$refs.modalRef.openModal()
-    },
     deleteImage(index) {
       this.imageTable.splice(index, 1);
     },
 
-    handleVideoAdded(videoLink, description){
-      this.videoTable.push({video: videoLink, description: description})
-
+    handleAddVideo(){
+      this.$refs.addVideoModalRef.$refs.modalRef.openModal()
     },
+
+    handleVideoAdded(videoLink, description){
+      this.videoTable.push({videoLink: videoLink, description: description})
+    },
+
+    deleteVideo(index) {
+      this.videoTable.splice(index, 1)
+    },
+
     handleEditorContent(contentAsHtml){
       this.contentAsHtml = contentAsHtml
       const encoder = new TextEncoder();

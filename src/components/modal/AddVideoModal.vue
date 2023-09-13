@@ -7,11 +7,13 @@
       </template>
       <template #body>
         <div class="col">
-          <div class="row">
-          <DescriptionInput @event-description-update="handleDescription"/>
-          </div>
           <div class="row mt-3">
-            <input type="url" class="form-control" placeholder="Video link" @event-handle-video-link="handleVideoLink">
+          <DescriptionInput @event-description-update="handleDescription" ref="descriptionRef"/>
+          </div>
+          <div class="col">
+            <div class="row mt-3">
+              <VideoInput @event-handle-video-link="handleVideoLink" ref="videoInputRef"/>
+            </div>
           </div>
         </div>
       </template>
@@ -26,10 +28,11 @@ import Modal from "@/components/modal/Modal.vue";
 import DescriptionInput from "@/components/input/DescriptionInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import {VIDEO_ADDED} from "@/assets/script/AlertMessage";
+import VideoInput from "@/components/modal/VideoInput.vue";
 
 export default {
   name: "AddVideoModal",
-  components: {AlertSuccess, DescriptionInput, Modal},
+  components: {VideoInput, AlertSuccess, DescriptionInput, Modal},
   data(){
     return{
       descriptionText: '',
@@ -41,18 +44,24 @@ export default {
     handleDescription(description){
       this.descriptionText = description
     },
+
     handleVideoLink(videoLink){
-      this.$emit('event-handle-video-link', this.addedVideoLink)
       this.addedVideoLink = videoLink
     },
+
     emitAddedVideoLinkAndDescription(){
-      this.$emit('event-emit-added-video-link-and-description',this.descriptionText, this.addedVideoLink)
+      this.$emit('event-emit-added-video-link-and-description',this.addedVideoLink, this.descriptionText)
       this.successMessage = VIDEO_ADDED
+      this.resetVideoAndDescription()
       this.$refs.modalRef.closeModal()
+    },
+
+    resetVideoAndDescription() {
+      this.addedVideoLink = ''
+      this.descriptionText = ''
+      this.$refs.videoInputRef.clearVideoLinkInput()
+      this.$refs.descriptionRef.clearDescriptionInput()
     }
   }
 }
 </script>
-<style scoped>
-
-</style>
