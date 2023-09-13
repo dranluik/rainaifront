@@ -3,6 +3,7 @@
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
     <AddVideoModal @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
+    {{contentAsByteArray}}
     <div class="row mb-4">
       <div class="col col-6">
         <div class="input-group mb-3">
@@ -26,9 +27,10 @@
       </div>
     </div>
     <div class="row mb-5">
-     <div class="col col-12 border mt-5 editor-column form-control">
-       <WysiwygEditor/>
-     </div>
+      <div class="col border mt-5">
+        <WysiwygEditor @event-editor-content-changed="handleEditorContent"/>
+      </div>
+
     </div>
     <div class="row mb-4">
       <div class="col">
@@ -103,6 +105,8 @@ export default {
       imageTable: [],
       imageWidth: '10%',
       videoTable: [],
+      contentAsHtml: '',
+      contentAsByteArray: ''
     }
   },
   methods: {
@@ -122,6 +126,12 @@ export default {
 
     handleVideoAdded(videoLink, description){
       this.videoTable.push({video: videoLink, description: description})
+
+    },
+    handleEditorContent(contentAsHtml){
+      this.contentAsHtml = contentAsHtml
+      const encoder = new TextEncoder();
+      this.contentAsByteArray = encoder.encode(contentAsHtml)
 
     }
 

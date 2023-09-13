@@ -1,10 +1,11 @@
 <template>
   <EditorButtons :editor="editor"/>
   <EditorButtonsSecondRow :editor="editor"/>
-      <div v-html="contentAsHtml"></div>
-      <editor-content :editor="editor" class="editor-content"/>
-      <button @click="displayHtml">Kuva HTML</button>
-      <button @click="swapContent">Asenda HTML</button>
+  <div v-html="contentAsHtml"></div>
+  <div>{{contentAsHtml}}</div>
+  <editor-content :editor="editor" @change="displayHtml"/>
+  <button @click="displayHtml">Kuva HTML</button>
+  <button @click="swapContent">Asenda HTML</button>
 </template>
 <script>
 import {Editor, EditorContent} from "@tiptap/vue-3";
@@ -46,13 +47,19 @@ export default {
         this.editor.commands.setContent(dataFromBackend)
       }
     },
+    handleContentChange() {
+      // This method is called when changes occur in the editor's content
+      this.contentAsHtml = this.editor.getHTML()
+      this.$emit('event-editor-content-changed', this.contentAsHtml)
+    },
+
   },
 
   mounted() {
     this.editor = new Editor({
-      content: '<p>Kirjuta õppeinfo siia!</p>',
+      content: '<p>Kirjuta teema siia 🎉</p>',
       extensions: [
-          StarterKit,
+        StarterKit,
         Document,
         Paragraph,
         Text,
@@ -64,7 +71,15 @@ export default {
         TableHeader,
         TableCell,
       ],
-    })
+    });
+    // Watch for changes in the editor's content
+    this.$watch(
+        () => this.editor.getHTML(), // Watch the HTML content of the editor
+        () => {
+          // Execute a method when changes occur
+          this.handleContentChange();
+        }
+    );
   },
 
   beforeUnmount() {
