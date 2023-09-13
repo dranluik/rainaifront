@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="row mb-5">
-      <div class="col border mt-5">
+      <div class="col border mt-5 editor-column">
         <WysiwygEditor @event-editor-content-changed="handleEditorContent"/>
       </div>
 
@@ -142,7 +142,7 @@ export default {
 
 <style scoped>
 .editor-column {
-  background-color: rgba(186, 234, 206, 0.8); /* Replace with your desired background color */
+  background-color: rgba(68, 105, 83, 0.8); /* Replace with your desired background color */
   /* Add other styling properties as needed */
 }
 </style>
