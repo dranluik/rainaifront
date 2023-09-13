@@ -1,5 +1,5 @@
 <template>
-  <div v-if="editor" class="border">
+  <div v-if="editor">
     <button @click="editor.chain().focus().toggleBold().run()"
             :disabled="!editor.can().chain().focus().toggleBold().run()"
             :class="{ 'is-active': editor.isActive('bold') }" class="custom-button">

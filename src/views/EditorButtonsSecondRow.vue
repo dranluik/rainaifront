@@ -1,5 +1,5 @@
 <template>
-  <div v-if="editor" class="border">
+  <div v-if="editor">
     <button @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()"
             class="custom-button">
       <font-awesome-icon :icon="['fas', 'table']"/>

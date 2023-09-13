@@ -2,7 +2,8 @@
   <EditorButtons :editor="editor"/>
   <EditorButtonsSecondRow :editor="editor"/>
   <div v-html="contentAsHtml"></div>
-  <editor-content :editor="editor" class="border"/>
+  <div>{{contentAsHtml}}</div>
+  <editor-content :editor="editor" @change="displayHtml"/>
   <button @click="displayHtml">Kuva HTML</button>
   <button @click="swapContent">Asenda HTML</button>
 </template>
@@ -46,11 +47,17 @@ export default {
         this.editor.commands.setContent(dataFromBackend)
       }
     },
+    handleContentChange() {
+      // This method is called when changes occur in the editor's content
+      this.contentAsHtml = this.editor.getHTML()
+      this.$emit('event-editor-content-changed', this.contentAsHtml)
+    },
+
   },
 
   mounted() {
     this.editor = new Editor({
-      content: '<p>I’m running TipTap with Vue.js. 🎉</p>',
+      content: '<p>Kirjuta teema siia 🎉</p>',
       extensions: [
         StarterKit,
         Document,
@@ -64,12 +71,21 @@ export default {
         TableHeader,
         TableCell,
       ],
-    })
+    });
+    // Watch for changes in the editor's content
+    this.$watch(
+        () => this.editor.getHTML(), // Watch the HTML content of the editor
+        () => {
+          // Execute a method when changes occur
+          this.handleContentChange();
+        }
+    );
   },
 
   beforeUnmount() {
     this.editor.destroy()
   },
+
 
 }
 </script>
