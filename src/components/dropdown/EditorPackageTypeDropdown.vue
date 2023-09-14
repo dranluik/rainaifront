@@ -1,8 +1,8 @@
 <template>
   <select v-model="selectedPackage" @change="emitSelectedPackage"
           class="custom-label form-select" aria-label="Default select example">
-    <option selected :value="0">Paketid</option>
-    <option v-for="packageType in packageTypes" :value="packageType.packageId" :key="packageType.packageId">
+    <option selected disabled :value="0">Paketid</option>
+    <option v-for="packageType in packageTypes" :value="packageType.packageId" :key="packageType.packageId" :disabled="packageType.packageId === 1">
       {{ packageType.packageName }}
     </option>
   </select>

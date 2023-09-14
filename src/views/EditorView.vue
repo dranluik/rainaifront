@@ -16,10 +16,10 @@
     </div>
     <div class="row mb-4">
       <div class="col col-3">
-        <TechnologiesDropdown :package-type-id="packageTypeIdForTechnologyDropdown"/>
+        <EditorPackageTypeDropdown @event-update-selected-package-id="handlePackageTypeIdChange"/>
       </div>
       <div class="col col-3">
-        <EditorPackageTypeDropdown/>
+        <TechnologiesDropdown :package-type-id="packageTypeId"/>
       </div>
 
       <div class="col">
@@ -99,7 +99,7 @@ export default {
   data(){
     return{
       lessonName: this.newLessonName || '',
-      packageTypeIdForTechnologyDropdown: 0,
+      packageTypeId: 0,
       selectedImage: '',
       descriptionText: '',
       imageTable: [],
@@ -137,6 +137,10 @@ export default {
       this.contentAsHtml = contentAsHtml
       const encoder = new TextEncoder();
       this.contentAsByteArray = encoder.encode(contentAsHtml)
+
+    },
+    handlePackageTypeIdChange(packageTypeId){
+      this.packageTypeId = packageTypeId
 
     }
 
