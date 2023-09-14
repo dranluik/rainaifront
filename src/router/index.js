@@ -7,6 +7,7 @@ import FrontendView from "@/views/FrontendView.vue";
 import BackendView from "@/views/BackendView.vue";
 import MyLessonsView from "@/views/MyLessonsView.vue";
 import EditorView from "@/views/EditorView.vue";
+import TicTacToeView from "@/views/TicTacToeView.vue";
 
 const routes = [
   {
@@ -48,6 +49,12 @@ const routes = [
     path: '/editor/:newLessonName?',
     name: 'editorRoute',
     component: EditorView,
+    props: true
+  },
+  {
+    path: '/tictactoe',
+    name: 'ticTacToeRoute',
+    component: TicTacToeView,
     props: true
   },
 ]

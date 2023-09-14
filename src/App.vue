@@ -2,6 +2,7 @@
   <LogOutModal @event-update-nav-menu="updateNavMenu" ref="logOutModalRef"/>
   <nav>
     <router-link to="/home">Kodu</router-link> |
+    <router-link to="/tictactoe">TicTacToe</router-link> |
     <template v-if="isLoggedIn">
     <router-link to="/frontend">Frontend</router-link> |
     <router-link to="/backend">Backend</router-link> |
