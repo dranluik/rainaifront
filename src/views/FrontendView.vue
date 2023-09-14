@@ -5,7 +5,8 @@
         <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
-       <LessonsTable :packageTypeId="packageTypeId" :selectedTechnologyId="selectedTechnologyId"
+       <LessonsTable :packageTypeId="packageTypeId"
+                     :selectedTechnologyId="selectedTechnologyId"
                      @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
     </div>
@@ -21,8 +22,8 @@ export default {
   data(){
     return {
       selectedTechnologyId: 0,
-      packageTypeId: 2
-
+      packageTypeId: 2,
+      selectedLessonNames: []
     }
   },
 

@@ -6,7 +6,6 @@
     <router-link to="/frontend">Frontend</router-link> |
     <router-link to="/backend">Backend</router-link> |
     <router-link to="/mylessons">Minu teemad</router-link> |
-      <router-link to="/editor/themes">Toimetaja Teemad</router-link> |
       <router-link to="/editor">Toimetaja</router-link> |
     <router-link to="#" @click="handleLogout">Logi välja</router-link>
     </template>
