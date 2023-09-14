@@ -7,6 +7,7 @@ import FrontendView from "@/views/FrontendView.vue";
 import BackendView from "@/views/BackendView.vue";
 import MyLessonsView from "@/views/MyLessonsView.vue";
 import EditorView from "@/views/EditorView.vue";
+import EditorThemesView from "@/views/EditorThemesView.vue";
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     name: 'editorRoute',
     component: EditorView,
     props: true
+  },
+  {
+    path: '/editor/themes',
+    name: 'editorThemesRoute',
+    component: EditorThemesView,
   },
 ]
 
