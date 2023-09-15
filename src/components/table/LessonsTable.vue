@@ -11,7 +11,7 @@
       <th scope="row">{{lesson.lessonName}}</th>
       <td>
         <template v-if="lesson.isSelected">
-          <font-awesome-icon :icon="['fas', 'trash']" size="2xl" class="hoverable-link m-2" />
+          <font-awesome-icon @click="deleteLessonFromUser(lesson.lessonId)" :icon="['fas', 'trash']" size="2xl" class="hoverable-link m-2" />
         </template>
         <template v-else>
           <font-awesome-icon @click="addLessonToUser(lesson.lessonId)" :icon="['fas', 'plus']" size="2xl" class="hoverable-link m-2" />
@@ -23,7 +23,7 @@
 </template>
 <script>
 import router from "@/router";
-import {LESSON_NAME_ADDED} from "@/assets/script/AlertMessage";
+import {LESSON_ADDED, LESSON_DELETED} from "@/assets/script/AlertMessage";
 
 export default {
   name: 'lessonsTable',
@@ -41,6 +41,7 @@ export default {
     return {
       userId: sessionStorage.getItem('userId'),
       successMessage: '',
+      lessonId: '',
 
       lessons: [
         {
@@ -92,15 +93,43 @@ export default {
       this.$http.post("/lesson/user", this.userLesson
       ).then(response => {
         this.getUserLessons()
-        this.handleAddLessonNameSuccessMessage()
+        this.handleAddLessonSuccessMessage()
       }).catch(error => {
         // router.push({name:'errorRoute'})
       })
     },
 
-    handleAddLessonNameSuccessMessage() {
-      this.successMessage = LESSON_NAME_ADDED.replace('?', this.userLesson.lessonName)
+    handleAddLessonSuccessMessage() {
+      this.successMessage = LESSON_ADDED.replace('?', this.userLesson.lessonName)
     },
+
+    deleteLessonFromUser(lessonId) {
+      this.resetSuccessMessage()
+      this.userLesson.lessonId = lessonId
+      this.userId = sessionStorage.getItem('userId')
+      this.lessonId = lessonId
+      this.sendDeleteLessonRequest()
+    },
+
+    handleDeleteLessonSuccessMessage() {
+      this.successMessage = LESSON_DELETED.replace('?', this.userLesson.lessonName)
+    },
+
+    sendDeleteLessonRequest() {
+      this.$http.delete("/lesson/user", {
+            params: {
+             userId: this.userId,
+             lessonId: this.lessonId
+            }
+          }
+      ).then(response => {
+        this.getUserLessons()
+        this.handleDeleteLessonSuccessMessage()
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
+
 
   },
   beforeMount() {

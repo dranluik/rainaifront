@@ -36,7 +36,7 @@ import DescriptionInput from "@/components/input/DescriptionInput.vue";
 import Modal from "@/components/modal/Modal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import router from "@/router";
-import {FILL_LESSON_NAME, LESSON_NAME_ADDED} from "@/assets/script/AlertMessage";
+import {FILL_LESSON_NAME, LESSON_ADDED} from "@/assets/script/AlertMessage";
 
 export default {
   name: 'AddLessonModal',
@@ -77,7 +77,7 @@ export default {
       })
     },
     handleLessonSuccessfullyAdded(){
-      this.successMessage = LESSON_NAME_ADDED.replace('?', this.addLessonDTO.lessonName)
+      this.successMessage = LESSON_ADDED.replace('?', this.addLessonDTO.lessonName)
       setTimeout(() => {
         router.push({name:'editorRoute', params:{newLessonName : this.addLessonDTO.lessonName, packageTypeId: this.addLessonDTO.packageTypeId}})
       }, 3000)
