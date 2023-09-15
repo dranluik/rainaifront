@@ -1,9 +1,9 @@
 <template>
   <AlertSuccess :alert-message="successMessage"/>
   <div class="container text-center justify-content-center">
-    <div v-for="(row, rowIndex) in array" :key="rowIndex" class="row justify-content-center">
+    <div v-for="(row, rowIndex) in gridArray" :key="rowIndex" class="row justify-content-center">
       <div v-for="(button, buttonIndex) in row" :key="buttonIndex" class="col col-2 ">
-        <div @click="handlePlayerMove(rowIndex, buttonIndex)" class="square">
+        <div @click="handlePlayerMove(rowIndex, buttonIndex)" class="square" >
           {{ button.toString() }}
         </div>
       </div>
@@ -28,111 +28,113 @@ export default {
     return {
       gameStarted: 0,
       playerId: 0,
-      n: 3,
-      array: [],
-      sameRows: false,
-      sameColumns: false,
-      sameDiagonal: false,
-      successMessage: ''
+      gridSize: 3,
+      gridArray: [],
+      successMessage: '',
+      numberOfPlayers: 3,
+      letterArray: [],
+      currentPlayerIndex: 0,
+
 
 
     }
   },
+  computed: {
+    currentPlayer() {
+      return this.letterArray[this.currentPlayerIndex];
+    }
+  },
   methods: {
-    startNewGame() {
-      this.successMessage = ''
-      this.sameRows = false
-      this.sameColumns = false
-      this.sameDiagonal = false
-      this.gameStarted = 0
-      this.playerId = 0
-      const newArray = []
-      for (let i = 0; i < this.n; i++) {
-        const subArray = new Array(this.n).fill('')
-        newArray.push(subArray)
-      }
-      this.array = newArray
-    },
-    handlePlayerMove(rowIndex, columnIndex) {
-
-      if (this.gameStarted === 0) {
-        this.gameStarted = 1
-        this.playerId = this.playerId + 1
-        this.array[rowIndex][columnIndex] = 'X'
-        this.playerId = this.playerId + 1
+    createPlayers() {
+      if (this.numberOfPlayers === 2) {
+        this.letterArray = ['X', 'O']
 
       } else {
-        if (this.array[rowIndex][columnIndex] === '' && this.playerId === 1) {
-          this.array[rowIndex][columnIndex] = 'X'
-          this.rowValidation(rowIndex, 'X')
-          this.columnValidation(columnIndex, 'X')
-          this.diagonalValidation('X')
+        const letters = ['X', 'O']
+        for (let i = 0; i < this.numberOfPlayers; i++) {
+          letters.push(String.fromCharCode(i))
 
-          this.playerId = this.playerId + 1
-        } else {
-          if (this.array[rowIndex][columnIndex] === '' && this.playerId === 2) {
-            this.array[rowIndex][columnIndex] = 'O'
-            this.rowValidation(rowIndex, 'O')
-            this.columnValidation(columnIndex, 'O')
-            this.diagonalValidation('O')
-            this.playerId = this.playerId - 1
-          }
-        }
+        } this.letterArray = letters
+      }
+    },
+    createGridArray() {
+      const newArray = []
+      for (let i = 0; i < this.gridSize; i++) {
+        const subArray = new Array(this.gridSize).fill('')
+        newArray.push(subArray)
+      }
+      this.gridArray = newArray
+
+    }, startNewGame() {
+      this.successMessage = ''
+      this.currentPlayerIndex = 0
+      this.createPlayers()
+      this.createGridArray();
+    },
+    validateElements: function (rowIndex, columnIndex, element) {
+      if ( this.rowValidation(rowIndex, element) || this.columnValidation(columnIndex, element) || this.diagonalValidation(element)) {
+        this.successMessage = 'Player ' + (this.currentPlayerIndex + 1) + ' won!'
       }
 
+    },
+    handlePlayerMove(rowIndex, columnIndex){
+      if(this.successMessage.length !== 0){
+        return
+      }
+      if (this.gridArray[rowIndex][columnIndex] === ''){
+        this.gridArray[rowIndex][columnIndex] = this.currentPlayer
+        this.validateElements(rowIndex, columnIndex, this.currentPlayer)
+        this.swapPlayers()
+      }
+    },
+    swapPlayers(){
+      this.currentPlayerIndex = (this.currentPlayerIndex +1) % this.numberOfPlayers
     },
     rowValidation(rowIndex, element) {
-      for (let i = 0; i < this.n; i++) {
-        this.sameRows = true
-        if (this.array[rowIndex][i] !== element) {
-          this.sameRows = false;
-          break;
+      for (let i = 0; i < this.gridSize; i++) {
+
+        if (this.gridArray[rowIndex][i] !== element) {
+          return false
         }
       }
-      if (this.sameRows) {
-        this.successMessage = 'Player ' + this.playerId + ' won!'
-      }
+      return true
+
     },
     columnValidation(columnIndex, element) {
-      for (let i = 0; i < this.n; i++) {
-        this.sameColumns = true
-        if (this.array[i][columnIndex] !== element) {
-          this.sameColumns = false;
-          break;
+      for (let i = 0; i < this.gridSize; i++) {
+
+        if (this.gridArray[i][columnIndex] !== element) {
+          return false
         }
       }
-      if (this.sameColumns) {
-        this.successMessage = 'Player ' + this.playerId + ' won!'
-      }
-    },
+      return true
+      },
+
     diagonalValidation(element) {
-      this.sameDiagonal = false
+
       let mainDiagonal = true
-      for (let i = 0; i < this.n; i++) {
-        if (this.array[i][i] !== element ) {
+      for (let i = 0; i < this.gridSize; i++) {
+        if (this.gridArray[i][i] !== element ) {
           mainDiagonal = false
           break
         }
       }
       let oppositeDiagonal = true
-      for (let i = 0; i < this.n; i++) {
-          if(this.array[i][this.n-1-i] !== element){
+      for (let i = 0; i < this.gridSize; i++) {
+          if(this.gridArray[i][this.gridSize-1-i] !== element){
             oppositeDiagonal = false
             break
           }
         }
-      if (mainDiagonal || oppositeDiagonal){
-        this.sameDiagonal = true
-      }
-
-      if (this.sameDiagonal) {
-        this.successMessage = 'Player ' + this.playerId + ' won!'
+      return (mainDiagonal || oppositeDiagonal)
 
 
-      }
-    },
 
-  }, beforeMount() {
+
+
+
+  }, },
+  beforeMount() {
     this.startNewGame()
 
   },
