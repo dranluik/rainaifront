@@ -1,17 +1,14 @@
 <template>
   <div class="container text-center">
-    <AlertDanger :alert-message="errorMessage"/>
+
+    <AddLessonModal ref="addLessonModalRef" :propsLessonName="this.newLessonName"/>
 
       <div class="col col-3">
         <div v-if="roleName === 'admin'" class="row mb-4">
           <div class="col">
-            <div class="input-group mb-3">
-              <input v-model="newLessonName" type="text" class="form-control" placeholder="Teema nimi">
-            </div>
+            <button @click="handleAddLesson" type="button" class="btn btn-dark">Lisa Teema</button>
           </div>
-          <div class="col">
-            <button @click="takeLessonNameAndGoEdit" type="button" class="btn btn-dark">Lisa Teema</button>
-          </div>
+
         </div>
         <div class="row">
         <MyLessonsTable/>
@@ -28,30 +25,30 @@
 <script>
 import MyLessonsTable from "@/components/table/MyLessonsTable.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
-import {FILL_LESSON_NAME} from "@/assets/script/AlertMessage";
-import router from "@/router";
+import LessonAddingModal from "@/components/modal/AddLessonModal.vue";
+import AddLessonModal from "@/components/modal/AddLessonModal.vue";
+import addLessonModal from "@/components/modal/AddLessonModal.vue";
 
 export default {
   name: "MyLessonsView",
-  components: {AlertDanger, MyLessonsTable},
+  computed: {
+    addLessonModal() {
+      return addLessonModal
+    }
+  },
+  components: {AddLessonModal, LessonAddingModal, AlertDanger, MyLessonsTable},
   data(){
     return{
       roleName: sessionStorage.getItem('roleName'),
       newLessonName: '',
-      errorMessage: ''
+
     }
   },
   methods: {
-    takeLessonNameAndGoEdit(){
-      this.errorMessage = ''
-      if (this.newLessonName.length > 0){
-        router.push({name:'editorRoute', params:{newLessonName : this.newLessonName}})
 
-
-      } else {
-        this.errorMessage = FILL_LESSON_NAME
-      }
-      }
+    handleAddLesson(){
+        this.$refs.addLessonModalRef.$refs.modalRef.openModal()
+    }
     }
   }
 
