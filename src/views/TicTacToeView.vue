@@ -1,8 +1,9 @@
 <template>
   <AlertSuccess :alert-message="successMessage"/>
+  <AlertDanger :alert-message="drawMessage"/>
   <div class="container text-center justify-content-center">
-    <div v-for="(row, rowIndex) in gridArray" :key="rowIndex" class="row justify-content-center">
-      <div v-for="(button, buttonIndex) in row" :key="buttonIndex" class="col col-2 ">
+    <div v-for="(row, rowIndex) in gridArray" :key="rowIndex" class="row justify-content-center" style="width: 1200px">
+      <div v-for="(button, buttonIndex) in row" :key="buttonIndex" class="col col-1">
         <div @click="handlePlayerMove(rowIndex, buttonIndex)" class="square" >
           {{ button.toString() }}
         </div>
@@ -20,20 +21,20 @@
 
 <script>
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
+import AlertDanger from "@/components/alert/AlertDanger.vue";
 
 export default {
   name: "TicTacToeView",
-  components: {AlertSuccess},
+  components: {AlertDanger, AlertSuccess},
   data() {
     return {
-      gameStarted: 0,
-      playerId: 0,
-      gridSize: 3,
+      gridSize: 6,
       gridArray: [],
       successMessage: '',
       numberOfPlayers: 3,
       letterArray: [],
       currentPlayerIndex: 0,
+      drawMessage: ''
 
 
 
@@ -65,13 +66,30 @@ export default {
       }
       this.gridArray = newArray
 
-    }, startNewGame() {
+    },
+    validateDraw(){
+      let gridFilled = true
+      for (let i = 0; i < this.gridArray.length; i++) {
+        for (let j = 0; j < this.gridArray[i].length; j++){
+          if (this.gridArray[i][j] === ''){
+            gridFilled = false
+            break
+          }
+          } if (!gridFilled) {break}
+        }
+      if (gridFilled){
+        this.drawMessage = "It's a draw"
+      }
+      },
+
+    startNewGame() {
       this.successMessage = ''
+      this.drawMessage = ''
       this.currentPlayerIndex = 0
       this.createPlayers()
       this.createGridArray();
     },
-    validateElements: function (rowIndex, columnIndex, element) {
+    validateWinner: function (rowIndex, columnIndex, element) {
       if ( this.rowValidation(rowIndex, element) || this.columnValidation(columnIndex, element) || this.diagonalValidation(element)) {
         this.successMessage = 'Player ' + (this.currentPlayerIndex + 1) + ' won!'
       }
@@ -83,7 +101,9 @@ export default {
       }
       if (this.gridArray[rowIndex][columnIndex] === ''){
         this.gridArray[rowIndex][columnIndex] = this.currentPlayer
-        this.validateElements(rowIndex, columnIndex, this.currentPlayer)
+        this.validateWinner(rowIndex, columnIndex, this.currentPlayer)
+        if (this.successMessage.length === 0){
+        this.validateDraw()}
         this.swapPlayers()
       }
     },
@@ -154,6 +174,8 @@ export default {
   display: flex;
   justify-content: center; /* Horizontally center content */
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 </style>
