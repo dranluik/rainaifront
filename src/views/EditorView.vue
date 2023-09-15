@@ -94,11 +94,11 @@ export default {
   name: "EditorView",
   components: {WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown},
   props: {
-    newLessonName: String
+    lessonId: Number
   },
   data(){
     return{
-      lessonName: this.newLessonName || '',
+      lessonName: '',
       packageTypeId: 0,
       selectedImage: '',
       descriptionText: '',

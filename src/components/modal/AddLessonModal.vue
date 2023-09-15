@@ -7,14 +7,14 @@
       <template #body>
         <div class="col">
           <div class="row">
-            <input v-model="addLessonDTO.lessonName" type="text" class="form-control" placeholder="Teema nimi">
+            <input v-model="addLessonDto.lessonName" type="text" class="form-control" placeholder="Teema nimi">
           </div>
           <div class="row">
             <EditorPackageTypeDropdown @event-update-selected-package-id="handlePackageTypeIdChange"/>
 
           </div>
           <div class="row">
-            <input v-model="addLessonDTO.technologyName" type="text" class="form-control" placeholder="Vajadusel lisa uus tehnoloogia">
+            <input v-model="addLessonDto.technologyName" type="text" class="form-control" placeholder="Vajadusel lisa uus tehnoloogia">
 
           </div>
 
@@ -23,7 +23,10 @@
       </template>
       <template #footer>
 
-        <button @click="handleAddLesson" :disabled="addLessonDTO.lessonName === '' || addLessonDTO.packageTypeId < 2" type="button" class="btn btn-outline-success">Lisa teema</button>
+        <button @click="handleAddLesson" :disabled="addLessonDto.lessonName === '' || addLessonDto.packageTypeId < 2" type="button" class="btn btn-outline-success">Lisa teema</button>
+      </template>
+      <template #footer-left>
+        <AlertSuccess :alert-message="this.successMessage"/>
       </template>
 
     </Modal>
@@ -44,22 +47,24 @@ export default {
 
   data(){
     return{
-      addLessonDTO: {
-        lessonName: '',
+      addLessonResponse:
+          {lessonId: 0},
+      addLessonDto: {
+        packageTypeId: 0,
         technologyName: '',
-        packageTypeId: 0
-      }
-
+        lessonName: ''
+      },
+      successMessage: ''
     }
   },
   methods: {
     handlePackageTypeIdChange(packageTypeId){
-      this.addLessonDTO.packageTypeId = packageTypeId
+      this.addLessonDto.packageTypeId = packageTypeId
 
     },
     handleAddLesson(){
       this.errorMessage = ''
-        if (this.addLessonDTO.lessonName.length > 0){
+        if (this.addLessonDto.lessonName.length > 0){
           this.addNewLesson()
 
         } else {
@@ -67,19 +72,20 @@ export default {
         }
     },
     addNewLesson() {
-      this.$http.post("/mylessons", this.addLessonDTO
+      this.$http.post("/mylessons", this.addLessonDto
       ).then(response => {
+        this.addLessonResponse = response.data
 
-       this.handleLessonSuccessfullyAdded()
+        this.handleLessonSuccessfullyAdded()
       }).catch(error => {
 
         router.push({name: 'errorRoute'})
       })
     },
     handleLessonSuccessfullyAdded(){
-      this.successMessage = LESSON_ADDED.replace('?', this.addLessonDTO.lessonName)
+      this.successMessage = LESSON_ADDED.replace('?', this.addLessonDto.lessonName)
       setTimeout(() => {
-        router.push({name:'editorRoute', params:{newLessonName : this.addLessonDTO.lessonName, packageTypeId: this.addLessonDTO.packageTypeId}})
+        router.push({name:'editorRoute', query:{lessonId : this.addLessonResponse.lessonId}})
       }, 3000)
     }
 
