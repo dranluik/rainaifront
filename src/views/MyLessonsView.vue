@@ -1,7 +1,7 @@
 <template>
   <div class="container text-center">
 
-    <AddLessonModal ref="addLessonModalRef" :propsLessonName="this.newLessonName"/>
+    <AddLessonModal ref="addLessonModalRef"/>
 
       <div class="col col-3">
         <div v-if="roleName === 'admin'" class="row mb-4">
