@@ -43,7 +43,8 @@ export default {
       successMessage: '',
       video: {
         lessonId: 0,
-        link: ''
+        link: '',
+        description: ''
       }
     }
   },
@@ -56,12 +57,12 @@ export default {
       this.addedVideoLink = videoLink
     },
 
-    // emitAddedVideoLinkAndDescription(){
-    //   this.$emit('event-emit-added-video-link-and-description',this.addedVideoLink, this.descriptionText)
-    //   this.successMessage = VIDEO_ADDED
-    //   this.resetVideoAndDescription()
-    //   this.$refs.modalRef.closeModal()
-    // },
+    emitAddedVideoLinkAndDescription(){
+      this.$emit('event-emit-added-video-link-and-description',this.addedVideoLink, this.descriptionText)
+      this.successMessage = VIDEO_ADDED
+      this.resetVideoAndDescription()
+      this.$refs.modalRef.closeModal()
+    },
 
     resetVideoAndDescription() {
       this.addedVideoLink = ''
@@ -74,6 +75,7 @@ export default {
       this.resetSuccessMessage();
       this.video.lessonId = this.lessonId;
       this.video.link = this.addedVideoLink
+      this.video.description = this.descriptionText
       this.sendAddVideoRequest()
       this.resetVideoAndDescription()
       this.$refs.modalRef.closeModal()
