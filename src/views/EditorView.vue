@@ -3,6 +3,7 @@
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
     <AddVideoModal :lesson-id="lessonId" @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
+    <ChangeLessonModal ref="changeLessonModalRef"/>
     {{contentAsByteArray}}
     <div class="row mb-2">
       <div class="col col-6">
@@ -24,7 +25,7 @@
               </div>
             </div>
             <div class="col">
-              <button type="button" class="btn btn-outline-success">Muuda</button>
+              <button @click="handleChangeLessonName" type="button" class="btn btn-outline-success">Muuda</button>
             </div>
 
           </div>
@@ -94,16 +95,20 @@ import WysiwygEditor from "@/views/WysiwygEditor.vue";
 import ImageTable from "@/views/ImageTable.vue";
 import MyLessonsTable from "@/components/table/MyLessonsTable.vue";
 import {useRoute} from "vue-router";
+import ChangeLessonModal from "@/components/modal/ChangeLessonModal.vue";
 
 
 export default {
   name: "EditorView",
-  components: {ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown, MyLessonsTable},
+  components: {
+    ChangeLessonModal,
+    ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown, MyLessonsTable},
   data(){
     return{
       lessonId: Number(useRoute().query.lessonId),
       lessonName: '',
       packageTypeId: 0,
+      technologyId: 0,
       selectedImage: '',
       descriptionText: '',
       imageTable: [],
@@ -143,8 +148,12 @@ export default {
       this.contentAsByteArray = encoder.encode(contentAsHtml)
 
     },
-    handlePackageTypeIdChange(packageTypeId){
-      this.packageTypeId = packageTypeId
+    handleChangeLessonName(){
+      this.$refs.changeLessonModalRef.changeLessonDto.lessonName =this.lessonName
+      this.$refs.changeLessonModalRef.changeLessonDto.packageTypeId =this.packageTypeId
+      this.$refs.changeLessonModalRef.changeLessonDto.technologyId =this.technologyId
+      this.$refs.changeLessonModalRef.changeLessonDto.lessonId = this.lessonId
+      this.$refs.changeLessonModalRef.$refs.modalRef.openModal()
 
     }
 
