@@ -2,7 +2,7 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
+    <AddVideoModal :lesson-id="lessonId" @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
     {{contentAsByteArray}}
     <div class="row mb-4">
       <div class="col col-6">
