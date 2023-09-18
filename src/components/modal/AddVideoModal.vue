@@ -57,13 +57,6 @@ export default {
       this.addedVideoLink = videoLink
     },
 
-    emitAddedVideoLinkAndDescription(){
-      this.$emit('event-emit-added-video-link-and-description',this.addedVideoLink, this.descriptionText)
-      this.successMessage = VIDEO_ADDED
-      this.resetVideoAndDescription()
-      this.$refs.modalRef.closeModal()
-    },
-
     resetVideoAndDescription() {
       this.addedVideoLink = ''
       this.descriptionText = ''

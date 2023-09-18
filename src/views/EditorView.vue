@@ -76,7 +76,7 @@ import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 import WysiwygEditor from "@/views/WysiwygEditor.vue";
 import ImageTable from "@/views/ImageTable.vue";
 import {useRoute} from "vue-router";
-import VideoTable from "@/views/VideoTable.vue";
+import VideoTable from "@/components/table/VideoTable.vue";
 
 
 export default {
