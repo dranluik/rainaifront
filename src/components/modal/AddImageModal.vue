@@ -18,7 +18,7 @@
       </template>
       <template #footer>
 
-        <button @click="emitSelectedImageAndDescription" :disabled="selectedImage === ''" type="button" class="btn btn-outline-success">Lisa pilt</button>
+        <button @click="saveSelectedImage" :disabled="imageRequest.imageData === ''" type="button" class="btn btn-outline-success">Lisa pilt</button>
       </template>
       <template #footer-left>
         <AlertSuccess :alert-message="successMessage"/>
@@ -33,33 +33,46 @@ import ImageInput from "@/components/input/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import {IMAGE_ADDED} from "@/assets/script/AlertMessage";
 import DescriptionInput from "@/components/input/DescriptionInput.vue";
+import router from "@/router";
 
 export default {
   name: 'AddImageModal',
   components: {DescriptionInput, AlertSuccess, ImageInput, Modal},
+  props: {currentLessonId: Number},
   data(){
     return{
-      selectedImage: '',
+      imageRequest: {
+        imageData: '',
+        imageDescription: '',
+        lessonId: this.currentLessonId
+      },
       successMessage: '',
-      descriptionText: ''
+
     }
   },
   methods: {
     handleImageBase64(imageDataBase64){
       this.successMessage = ''
-      this.selectedImage = imageDataBase64
+      this.imageRequest.imageData = imageDataBase64
     },
     handleDescription(description){
-      this.descriptionText = description
+      this.imageRequest.imageDescription = description
     },
-    emitSelectedImageAndDescription(){
-      this.$emit('event-emit-selected-image-and-description', this.selectedImage, this.descriptionText)
-      this.successMessage = IMAGE_ADDED
-      this.resetImageAndDescription();
+    saveSelectedImage() {
+      this.$http.post("/image", this.imageRequest
+      ).then(response => {
+
+        this.$emit('event-update-image-table')
+        this.successMessage = IMAGE_ADDED
+        this.resetImageAndDescription();
+      }).catch(error => {
+        router.push({name: 'errorRoute'})
+      })
     },
+
     resetImageAndDescription: function () {
-      this.selectedImage = ''
-      this.descriptionText = ''
+      this.imageRequest.imageData = ''
+      this.imageRequest.imageDescription = ''
       this.$refs.imageInputRef.clearImageInput()
       this.$refs.descriptionRef.clearDescriptionInput()
     }

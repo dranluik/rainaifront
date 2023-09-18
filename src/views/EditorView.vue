@@ -2,7 +2,7 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
+    <AddVideoModal :lesson-id="lessonId" @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
     {{contentAsByteArray}}
     <div class="row mb-2">
       <div class="col col-6">
@@ -51,22 +51,7 @@
     </div>
     <div class="row mb-4">
       <div class="col">
-        <table class="table table-secondary table-hover">
-          <thead>
-          <tr>
-            <th scope="col">Pilt</th>
-            <th scope="col">Kirjeldus</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(imageObject, index) in imageTable" :key="index">
-            <td><img :src="imageObject.image" alt="Image" :style="{width: imageWidth}"></td>
-            <td>{{ imageObject.description }}</td>
-            <td><font-awesome-icon @click="deleteImage(index)" style="cursor: pointer" :icon="['fas', 'trash']" size="lg"/></td>
-          </tr>
-          </tbody>
-        </table>
+        <ImageTable :delete-image="deleteImage(index)" :image-table="imageTable" :image-width="imageWidth"/>
       </div>
       <div class="col">
         <table class="table table-secondary table-hover">
@@ -106,22 +91,17 @@ import AddImageModal from "@/components/modal/AddImageModal.vue";
 import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import WysiwygEditor from "@/views/WysiwygEditor.vue";
-import technologiesDropdown from "../components/dropdown/TechnologiesDropdown.vue";
+import ImageTable from "@/views/ImageTable.vue";
 
 export default {
   name: "EditorView",
-  computed: {
-    technologiesDropdown() {
-      return technologiesDropdown
-    }
-  },
-  components: {WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown},
+  components: {ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown},
   props: {
-    newLessonName: String
+    lessonId: Number
   },
   data(){
     return{
-      lessonName: this.newLessonName || '',
+      lessonName: '',
       packageTypeId: 0,
       selectedImage: '',
       descriptionText: '',
