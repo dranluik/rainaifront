@@ -1,7 +1,10 @@
 <template>
   <div>
+
     <Modal close-button-name="Katkesta" ref="modalRef">
+
       <template #header>
+        <AddTechnologyModal ref="addTechnologyModalRef" @event-update-technology-dropdown="handleRefreshTechnologyDropdown" :package-type-id="addLessonDto.packageTypeId"/>
         <h1>Lisa uus teema</h1>
       </template>
       <template #body>
@@ -9,18 +12,21 @@
           <div class="row">
             <input v-model="addLessonDto.lessonName" type="text" class="form-control" placeholder="Teema nimi">
           </div>
-          <div class="row">
-            <EditorPackageTypeDropdown @event-update-selected-package-id="handlePackageTypeIdChange"/>
+          <div class="row mt-2">
+            <EditorPackageTypeDropdown @event-update-selected-package-id="handleRefreshTechnologyDropdown"/>
 
           </div>
-          <div class="row">
-            <TechnologiesDropdown :package-type-id="addLessonDto.packageTypeId" ref="technologiesDropdownRef"/>
+          <div class="row justify-content-start mt-2">
+            <div class="col">
+              <TechnologiesDropdown @event-update-selected-technology-id="handleSelectedTechnology" ref="technologiesDropdownRef"/>
+            </div>
+            <div class="col d-flex align-items-center justify-content-start">
+              <font-awesome-icon @click="handleAddTechnology" :icon="['fas', 'circle-plus']" size="lg" />
+            </div>
+
 
           </div>
-          <div class="row">
-            <input v-model="addLessonDto.technologyName" type="text" class="form-control" placeholder="Vajadusel lisa uus tehnoloogia">
 
-          </div>
 
         </div>
 
@@ -31,6 +37,7 @@
       </template>
       <template #footer-left>
         <AlertSuccess :alert-message="this.successMessage"/>
+        <AlertDanger :alert-message="this.errorResponse.message"/>
       </template>
 
     </Modal>
@@ -38,17 +45,18 @@
 </template>
 <script>
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
-import ImageInput from "@/components/input/ImageInput.vue";
-import DescriptionInput from "@/components/input/DescriptionInput.vue";
 import Modal from "@/components/modal/Modal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import router from "@/router";
 import {FILL_LESSON_NAME, LESSON_ADDED} from "@/assets/script/AlertMessage";
 import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
+import AddTechnologyModal from "@/components/modal/AddTechnologyModal.vue";
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+import {LESSONNAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
 
 export default {
   name: 'AddLessonModal',
-  components: {TechnologiesDropdown, EditorPackageTypeDropdown, Modal, DescriptionInput, ImageInput, AlertSuccess},
+  components: {AlertDanger, AddTechnologyModal, TechnologiesDropdown, EditorPackageTypeDropdown, Modal, AlertSuccess},
 
   data(){
     return{
@@ -56,27 +64,34 @@ export default {
           {lessonId: 0},
       addLessonDto: {
         packageTypeId: 0,
-        technologyName: '',
+        technologyId: 0,
         lessonName: ''
       },
-      successMessage: ''
+      successMessage: '',
+      errorResponse: {
+        message: '',
+        errorCode: 0
+      }
     }
   },
   methods: {
-    handlePackageTypeIdChange(packageTypeId){
+    handleRefreshTechnologyDropdown(packageTypeId){
       this.addLessonDto.packageTypeId = packageTypeId
       this.$refs.technologiesDropdownRef.selectedTechnologyId = 0
       this.$refs.technologiesDropdownRef.packageTypeId = packageTypeId
       this.$refs.technologiesDropdownRef.getTechnologies()
 
     },
+    handleSelectedTechnology(selectedTechnologyId){
+      this.addLessonDto.technologyId = selectedTechnologyId
+    },
     handleAddLesson(){
-      this.errorMessage = ''
+      this.errorResponse.message = ''
         if (this.addLessonDto.lessonName.length > 0){
           this.addNewLesson()
 
         } else {
-          this.errorMessage = FILL_LESSON_NAME
+          this.errorResponse.message = FILL_LESSON_NAME
         }
     },
     addNewLesson() {
@@ -86,8 +101,10 @@ export default {
 
         this.handleLessonSuccessfullyAdded()
       }).catch(error => {
-
-        router.push({name: 'errorRoute'})
+        this.errorResponse = error.response.data
+        if (this.errorResponse.errorCode !== LESSONNAME_UNAVAILABLE) {
+          router.push({name: 'errorRoute'});
+        }
       })
     },
     handleLessonSuccessfullyAdded(){
@@ -95,6 +112,11 @@ export default {
       setTimeout(() => {
         router.push({name:'editorRoute', query:{lessonId : this.addLessonResponse.lessonId}})
       }, 3000)
+    },
+    handleAddTechnology(){
+      this.$refs.addTechnologyModalRef.addTechnologyRequest.packageTypeId = this.addLessonDto.packageTypeId
+      this.$refs.addTechnologyModalRef.$refs.modalRef.openModal()
+
     }
 
   },
