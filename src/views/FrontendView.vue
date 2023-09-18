@@ -2,7 +2,7 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
+        <TechnologiesDropdown ref="technologiesDropdownRef" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
       <div class="col col-3 d-flex justify-content-center">
        <LessonsTable :packageTypeId="packageTypeId"
@@ -34,5 +34,9 @@ export default {
     },
 
   },
+  mounted() {
+    this.$refs.technologiesDropdownRef.packageTypeId = 2
+    this.$refs.technologiesDropdownRef.getTechnologies()
+  }
 }
 </script>

@@ -2,7 +2,7 @@
   <select v-model="selectedPackage" @change="emitSelectedPackage"
           class="custom-label form-select" aria-label="Default select example">
     <option selected disabled :value="0">Paketid</option>
-    <option v-for="packageType in packageTypes" :value="packageType.packageId" :key="packageType.packageId" :disabled="packageType.packageId === 1">
+    <option v-for="packageType in packageTypes" :value="packageType.packageId" :key="packageType.packageId">
       {{ packageType.packageName }}
     </option>
   </select>
@@ -12,8 +12,8 @@ import router from "@/router";
 
 export default {
   name: 'EditorPackageTypeDropdown',
-  data(){
-    return{
+  data() {
+    return {
       selectedPackage: 0,
       packageTypes: [
         {
@@ -26,16 +26,17 @@ export default {
     }
   },
   methods: {
+
     getPackageTypes() {
       this.$http.get("/signup")
           .then(response => {
-            this.packageTypes = response.data
+            this.packageTypes = response.data.filter(packageType => packageType.packageId !== 1);
           })
           .catch(error => {
             router.push({name: 'errorRoute'})
           })
     },
-    emitSelectedPackage(){
+    emitSelectedPackage() {
       this.$emit('event-update-selected-package-id', this.selectedPackage)
     }
 
