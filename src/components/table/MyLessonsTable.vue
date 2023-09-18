@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-danger table-hover">
+  <table class="table table-light table-hover">
     <thead>
     <tr>
       <th scope="col">Teemad</th>
@@ -9,24 +9,25 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="userLesson in userLessonResponse" :key="userLesson.lessonId">
+    <tr v-for="userLesson in userLessons" :key="userLesson.lessonId">
       <td>{{ userLesson.lessonName }}</td>
-      <td v-if="roleName === 'admin'"><font-awesome-icon :icon="['far', 'pen-to-square']" size="lg" /></td>
-      <td v-if="roleName === 'admin'"><font-awesome-icon :icon="['fas', 'trash']" size="lg" /></td>
-
+      <td @click="navigateToEditor(userLesson.lessonId)" v-if="roleName === 'admin'"><font-awesome-icon :icon="['far', 'pen-to-square']" size="lg" class="hoverable-link m-2"/></td>
+      <td v-if="roleName === 'admin'"><font-awesome-icon :icon="['fas', 'trash']" size="lg" class="hoverable-link m-2"/></td>
 
     </tr>
     </tbody>
   </table>
 </template>
 <script>
+import router from "@/router";
+
 export default {
   name: 'MyLessonsTable',
   data(){
     return{
       userId: sessionStorage.getItem('userId'),
       roleName: sessionStorage.getItem('roleName'),
-      userLessonResponse: [
+      userLessons: [
         {
           lessonName: '',
           lessonId: 0
@@ -36,20 +37,27 @@ export default {
     }
   },
   methods:{
+    router() {
+      return router
+    },
     getUserLessons() {
-      this.$http.get("/lesson/mylessons", {
+      this.$http.get("/lesson/myLessons", {
             params: {
               userId: this.userId
             }
           }
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
-        this.userLessonResponse = response.data
+        this.userLessons = response.data
       }).catch(error => {
         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
         const errorResponseBody = error.response.data
       })
     },
+
+    navigateToEditor(lessonId) {
+      router.push({name: 'editorRoute', query: {lessonId: lessonId}})
+    }
 
   },
   beforeMount() {

@@ -75,15 +75,16 @@ import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import WysiwygEditor from "@/views/WysiwygEditor.vue";
 import ImageTable from "@/views/ImageTable.vue";
+import MyLessonsTable from "@/components/table/MyLessonsTable.vue";
+import {useRoute} from "vue-router";
+
 
 export default {
   name: "EditorView",
-  components: {ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown},
-  props: {
-    lessonId: Number
-  },
+  components: {ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown, MyLessonsTable},
   data(){
     return{
+      lessonId: Number(useRoute().query.lessonId),
       lessonName: '',
       packageTypeId: 0,
       selectedImage: '',
