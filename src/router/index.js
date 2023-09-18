@@ -10,7 +10,7 @@ import EditorView from "@/views/EditorView.vue";
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'homeRoute',
     component: HomeView
   },

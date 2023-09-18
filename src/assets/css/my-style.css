@@ -5,6 +5,11 @@
 .hoverable-link {
     cursor: pointer;
 }
+/* Example: Changing the font style to Arial with a larger font size */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px; /* You can adjust the font size as needed */
+}
 
 /* Kui modaal on nähtav, rakenda järgmised stiilid */
 .modal.fade.show.d-block {

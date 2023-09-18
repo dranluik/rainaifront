@@ -1,13 +1,33 @@
 <template>
 
   <div class="container text-center">
-    <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef" :currentlessonid="lessonId"/>
-    <AddVideoModal @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
+    <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
+    <AddVideoModal :lesson-id="lessonId" @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
     {{contentAsByteArray}}
-    <div class="row mb-4">
+    <div class="row mb-2">
       <div class="col col-6">
-        <div class="input-group mb-3">
-          <input v-model="lessonName" type="text" class="form-control" placeholder="Teema nimi">
+        <div class="container text-center">
+          <div class="row row-cols-1">
+            <div class="col ">
+              <div class="d-flex align-items-end">
+              <h4>Teema nimi: {{ lessonName }}</h4>
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-flex align-items-end">
+              <h4>Pakett: {{ packageType }}</h4>
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-flex align-items-end">
+              <h4>Tehnoloogia: {{ technologies }}</h4>
+              </div>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-outline-success">Muuda</button>
+            </div>
+
+          </div>
         </div>
       </div>
       <div class="col mb-3">
@@ -16,12 +36,9 @@
     </div>
     <div class="row mb-4">
       <div class="col col-3">
-        <EditorPackageTypeDropdown @event-update-selected-package-id="handlePackageTypeIdChange"/>
       </div>
       <div class="col col-3">
-        <TechnologiesDropdown :package-type-id="packageTypeId"/>
       </div>
-
       <div class="col">
         <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa video</button>
       </div>
@@ -75,15 +92,16 @@ import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import WysiwygEditor from "@/views/WysiwygEditor.vue";
 import ImageTable from "@/views/ImageTable.vue";
+import MyLessonsTable from "@/components/table/MyLessonsTable.vue";
+import {useRoute} from "vue-router";
+
 
 export default {
   name: "EditorView",
-  components: {ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown},
-  props: {
-    lessonId: Number
-  },
+  components: {ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown, MyLessonsTable},
   data(){
     return{
+      lessonId: Number(useRoute().query.lessonId),
       lessonName: '',
       packageTypeId: 0,
       selectedImage: '',

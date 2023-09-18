@@ -6,7 +6,7 @@
       <div class="col col-3">
         <div v-if="roleName === 'admin'" class="row mb-4">
           <div class="col">
-            <button @click="handleAddLesson" type="button" class="btn btn-dark">Lisa Teema</button>
+            <button @click="handleAddLesson" type="button" class="btn btn-light">Lisa Teema</button>
           </div>
 
         </div>
