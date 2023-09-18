@@ -2,7 +2,8 @@
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
-        <TechnologiesDropdown :packageTypeId="packageTypeId" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
+        <TechnologiesDropdown ref="technologiesDropdownRef" :packageTypeId="packageTypeId"
+                              @event-update-selected-technology-id="updateSelectedTechnologyId"/>
 
       </div>
       <div class="col col-3 d-flex justify-content-center">
@@ -21,7 +22,7 @@ import LessonsTable from "@/components/table/LessonsTable.vue";
 export default {
   name: "BackendView",
   components: {LessonsTable, TechnologiesDropdown,},
-  data(){
+  data() {
     return {
       selectedTechnologyId: 0,
       packageTypeId: 3
@@ -30,10 +31,14 @@ export default {
   },
   methods: {
 
-    updateSelectedTechnologyId(selectedTechnologyId){
+    updateSelectedTechnologyId(selectedTechnologyId) {
       this.selectedTechnologyId = selectedTechnologyId
     },
   },
+  mounted() {
+    this.$refs.technologiesDropdownRef.packageTypeId = 3
+    this.$refs.technologiesDropdownRef.getTechnologies()
+  }
 }
 </script>
 <style scoped>

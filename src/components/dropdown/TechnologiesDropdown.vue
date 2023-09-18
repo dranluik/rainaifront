@@ -8,17 +8,13 @@
   </select>
 </template>
 <script>
-import router from "@/router";
 
 export default {
   name: 'technologiesDropdown',
-  props: {
-    packageTypeId: Number,
-  },
   data() {
     return {
       selectedTechnologyId: 0,
-
+      packageTypeId: 0,
       technologies:
           [
             {
@@ -47,9 +43,6 @@ export default {
       }).catch(error => {
       })
     },
-  },
-  beforeMount() {
-    this.getTechnologies()
   }
 }
 </script>

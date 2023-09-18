@@ -14,6 +14,10 @@
 
           </div>
           <div class="row">
+            <TechnologiesDropdown :package-type-id="addLessonDto.packageTypeId" ref="technologiesDropdownRef"/>
+
+          </div>
+          <div class="row">
             <input v-model="addLessonDto.technologyName" type="text" class="form-control" placeholder="Vajadusel lisa uus tehnoloogia">
 
           </div>
@@ -40,10 +44,11 @@ import Modal from "@/components/modal/Modal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import router from "@/router";
 import {FILL_LESSON_NAME, LESSON_ADDED} from "@/assets/script/AlertMessage";
+import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
 
 export default {
   name: 'AddLessonModal',
-  components: {EditorPackageTypeDropdown, Modal, DescriptionInput, ImageInput, AlertSuccess},
+  components: {TechnologiesDropdown, EditorPackageTypeDropdown, Modal, DescriptionInput, ImageInput, AlertSuccess},
 
   data(){
     return{
@@ -60,6 +65,9 @@ export default {
   methods: {
     handlePackageTypeIdChange(packageTypeId){
       this.addLessonDto.packageTypeId = packageTypeId
+      this.$refs.technologiesDropdownRef.selectedTechnologyId = 0
+      this.$refs.technologiesDropdownRef.packageTypeId = packageTypeId
+      this.$refs.technologiesDropdownRef.getTechnologies()
 
     },
     handleAddLesson(){
