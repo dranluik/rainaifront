@@ -8,7 +8,7 @@
       <template #body>
         <div class="col">
           <div class="row mt-3">
-          <DescriptionInput @event-description-update="handleDescription" ref="descriptionRef"/>
+            <DescriptionInput @event-description-update="handleDescription" ref="descriptionRef"/>
           </div>
           <div class="col">
             <div class="row mt-3">
@@ -29,6 +29,7 @@ import DescriptionInput from "@/components/input/DescriptionInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import {VIDEO_ADDED} from "@/assets/script/AlertMessage";
 import VideoInput from "@/components/modal/VideoInput.vue";
+import router from "@/router";
 
 export default {
   name: "AddVideoModal",
@@ -36,8 +37,8 @@ export default {
   props: {
     lessonId: Number
   },
-  data(){
-    return{
+  data() {
+    return {
       descriptionText: '',
       addedVideoLink: '',
       successMessage: '',
@@ -49,19 +50,12 @@ export default {
     }
   },
   methods: {
-    handleDescription(description){
+    handleDescription(description) {
       this.descriptionText = description
     },
 
-    handleVideoLink(videoLink){
+    handleVideoLink(videoLink) {
       this.addedVideoLink = videoLink
-    },
-
-    emitAddedVideoLinkAndDescription(){
-      this.$emit('event-emit-added-video-link-and-description',this.addedVideoLink, this.descriptionText)
-      this.successMessage = VIDEO_ADDED
-      this.resetVideoAndDescription()
-      this.$refs.modalRef.closeModal()
     },
 
     resetVideoAndDescription() {
@@ -85,13 +79,21 @@ export default {
       this.successMessage = ''
     },
 
+
     sendAddVideoRequest() {
       this.$http.post("/video", this.video
       ).then(response => {
+        this.$emit('event-update-video-table')
         const responseBody = response.data
       }).catch(error => {
-        const errorResponseBody = error.response.data
+        this.handleStatus500(error);
       })
+    },
+
+    handleStatus500(error) {
+      if (error.response.status === 500) {
+        router.push({name: 'errorRoute'})
+      }
     },
 
   }

@@ -2,7 +2,11 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal :lesson-id="lessonId" @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
+    <AddVideoModal :lesson-id="lessonId"
+
+                   @event-emit-added-video-link-and-description="handleVideoAdded"
+                   @event-update-video-table="updateVideoTable"
+                   ref="addVideoModalRef" />
     {{contentAsByteArray}}
     <div class="row mb-2">
       <div class="col col-6">
@@ -54,22 +58,7 @@
         <ImageTable :delete-image="deleteImage(index)" :image-table="imageTable" :image-width="imageWidth"/>
       </div>
       <div class="col">
-        <table class="table table-secondary table-hover">
-          <thead>
-          <tr>
-            <th scope="col">Video</th>
-            <th scope="col">Kirjeldus</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(videoObject, index) in videoTable" :key="index">
-            <td> {{videoObject.videoLink}}</td>
-            <td>{{videoObject.description}}</td>
-            <td><font-awesome-icon @click="deleteVideo(index)" style="cursor: pointer" :icon="['fas', 'trash']" size="lg" /></td>
-          </tr>
-          </tbody>
-        </table>
+        <VideoTable :lesson-id="lessonId" :delete-video="deleteVideo(index)" :video-table="videoTable" ref="videoTableRef"/>
       </div>
     </div>
     <div class="row mb-4">
@@ -86,19 +75,17 @@
 
 <script>
 
-import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
 import AddImageModal from "@/components/modal/AddImageModal.vue";
 import AddVideoModal from "@/components/modal/AddVideoModal.vue";
-import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import WysiwygEditor from "@/views/WysiwygEditor.vue";
 import ImageTable from "@/views/ImageTable.vue";
-import MyLessonsTable from "@/components/table/MyLessonsTable.vue";
 import {useRoute} from "vue-router";
+import VideoTable from "@/components/table/VideoTable.vue";
 
 
 export default {
   name: "EditorView",
-  components: {ImageTable, WysiwygEditor, EditorPackageTypeDropdown, AddVideoModal, AddImageModal, TechnologiesDropdown, MyLessonsTable},
+  components: {VideoTable, ImageTable, WysiwygEditor, AddVideoModal, AddImageModal},
   data(){
     return{
       lessonId: Number(useRoute().query.lessonId),
@@ -114,6 +101,11 @@ export default {
     }
   },
   methods: {
+
+    updateVideoTable(){
+      this.$refs.videoTableRef.getVideos()
+    },
+
     handleAddImage(){
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
     },
