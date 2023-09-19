@@ -45,9 +45,7 @@ export default {
       }).catch(error => {
       })
     },
-    initializePackageTypeId(packageTypeId){
-      this.packageTypeId = packageTypeId
-    }
+
   }
 }
 </script>
