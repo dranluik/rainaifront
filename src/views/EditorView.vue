@@ -2,11 +2,7 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal :lesson-id="lessonId"
-
-                   @event-emit-added-video-link-and-description="handleVideoAdded"
-                   @event-update-video-table="updateVideoTable"
-                   ref="addVideoModalRef" />
+    <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef" />
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{ contentAsBase64 }}
     <div class="row mb-2">
@@ -50,7 +46,7 @@
     </div>
     <div class="row mb-5">
       <div class="col border mt-5 editor-column">
-        <WysiwygEditor @event-editor-content-changed="handleEditorContent"/>
+        <WysiwygEditor :lesson-id="lessonId"/>
       </div>
 
     </div>
@@ -59,7 +55,7 @@
         <ImageTable :delete-image="deleteImage(index)" :image-table="imageTable" :image-width="imageWidth"/>
       </div>
       <div class="col">
-        <VideoTable :lesson-id="lessonId" :delete-video="deleteVideo(index)" :video-table="videoTable" ref="videoTableRef"/>
+        <VideoTable :lesson-id="lessonId" :video-table="videoTable" ref="videoTableRef"/>
       </div>
     </div>
     <div class="row mb-4">
@@ -104,7 +100,6 @@ export default {
       descriptionText: '',
       imageTable: [],
       imageWidth: '10%',
-      videoTable: [],
       contentAsHtml: '',
       contentAsBase64: ''
     }
@@ -113,6 +108,10 @@ export default {
 
     updateVideoTable(){
       this.$refs.videoTableRef.getVideos()
+    },
+
+    handleAddVideo(){
+      this.$refs.addVideoModalRef.$refs.modalRef.openModal()
     },
 
     handleAddImage(){
@@ -124,26 +123,6 @@ export default {
 
     deleteImage(index) {
       this.imageTable.splice(index, 1);
-    },
-
-    handleAddVideo(){
-      this.$refs.addVideoModalRef.$refs.modalRef.openModal()
-    },
-
-    handleVideoAdded(videoLink, description){
-      this.videoTable.push({videoLink: videoLink, description: description})
-    },
-
-    deleteVideo(index) {
-      this.videoTable.splice(index, 1)
-    },
-
-    handleEditorContent(contentAsHtml){
-      this.contentAsHtml = contentAsHtml
-      const encoder = new TextEncoder();
-      const binaryContent = encoder.encode(contentAsHtml)
-      this.contentAsBase64 = btoa(String.fromCharCode.apply(null, binaryContent))
-
     },
 
     handleChangeLessonName(){
@@ -174,8 +153,6 @@ export default {
         router.push({name: 'errorRoute'})
       })
     },
-
-
 
   },
   beforeMount() {

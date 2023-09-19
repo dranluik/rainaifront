@@ -2,10 +2,9 @@
   <EditorButtons :editor="editor"/>
   <EditorButtonsSecondRow :editor="editor"/>
   <div v-html="contentAsHtml"></div>
-  <div>{{contentAsHtml}}</div>
   <editor-content :editor="editor" @change="displayHtml"/>
-  <button @click="displayHtml">Kuva HTML</button>
-  <button @click="swapContent">Asenda HTML</button>
+  <button @click="updateEditorContentRequest">SALVESTA</button>
+<!--  <button @click="swapContent">Asenda HTML</button>-->
 </template>
 <script>
 import {Editor, EditorContent} from "@tiptap/vue-3";
@@ -24,6 +23,9 @@ import EditorButtonsSecondRow from "@/components/buttons/EditorButtonsSecondRow.
 
 export default {
   name: 'WysiwygEditor',
+  props: {
+    lessonId: Number
+  },
   components: {
     EditorButtonsSecondRow,
     EditorButtons,
@@ -33,6 +35,12 @@ export default {
     return {
       editor: null,
       contentAsHtml: '',
+      contentAsBase64: '',
+
+      editorContent: {
+        lessonId: 0,
+        content: ''
+      },
     }
   },
 
@@ -41,17 +49,42 @@ export default {
       this.contentAsHtml = this.editor.getHTML()
     },
 
-    swapContent() {
-      const dataFromBackend = '<p>New content from backend.</p>' // Replace this with the actual content from your backend
-      if (this.editor) {
-        this.editor.commands.setContent(dataFromBackend)
-      }
+    // swapContent() {
+    //   const dataFromBackend = '<p>New content from backend.</p>' // Replace this with the actual content from your backend
+    //   if (this.editor) {
+    //     this.editor.commands.setContent(dataFromBackend)
+    //   }
+    // },
+
+    handleEditorContent(){
+      const encoder = new TextEncoder();
+      const binaryContent = encoder.encode(this.contentAsHtml)
+      this.editorContent.content = btoa(String.fromCharCode.apply(null, binaryContent))
     },
+
+    updateEditorContentRequest() {
+      this.editorContent.lessonId = this.lessonId
+      this.handleEditorContent()
+      this.sendUpdateEditorContentRequest()
+
+    },
+
     handleContentChange() {
       // This method is called when changes occur in the editor's content
       this.contentAsHtml = this.editor.getHTML()
+      this.handleEditorContent()
       this.$emit('event-editor-content-changed', this.contentAsHtml)
     },
+
+    sendUpdateEditorContentRequest() {
+      this.$http.put("/editor/content", this.editorContent
+      ).then(response => {
+        const responseBody = response.data
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
+
 
   },
 
