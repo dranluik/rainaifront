@@ -8,7 +8,7 @@
                    @event-update-video-table="updateVideoTable"
                    ref="addVideoModalRef" />
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
-    {{contentAsByteArray}}
+    {{ contentAsBase64 }}
     <div class="row mb-2">
       <div class="col col-6">
         <div class="container text-center">
@@ -106,7 +106,7 @@ export default {
       imageWidth: '10%',
       videoTable: [],
       contentAsHtml: '',
-      contentAsByteArray: ''
+      contentAsBase64: ''
     }
   },
   methods: {
@@ -141,7 +141,8 @@ export default {
     handleEditorContent(contentAsHtml){
       this.contentAsHtml = contentAsHtml
       const encoder = new TextEncoder();
-      this.contentAsByteArray = encoder.encode(contentAsHtml)
+      const binaryContent = encoder.encode(contentAsHtml)
+      this.contentAsBase64 = btoa(String.fromCharCode.apply(null, binaryContent))
 
     },
 
