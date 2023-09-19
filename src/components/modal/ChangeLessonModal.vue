@@ -13,8 +13,7 @@
             <input v-model="changeLessonDto.lessonName" type="text" class="form-control" placeholder="Teema nimi">
           </div>
           <div class="row mt-2">
-            <EditorPackageTypeDropdown @event-update-selected-package-id="handleRefreshTechnologyDropdown"/>
-
+            <EditorPackageTypeDropdown  @event-update-selected-package-id="handleRefreshTechnologyDropdown" ref="editorPackageTypeDropdownRef"/>
           </div>
           <div class="row justify-content-start mt-2">
             <div class="col">
@@ -48,7 +47,7 @@ import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import Modal from "@/components/modal/Modal.vue";
 import EditorPackageTypeDropdown from "@/components/dropdown/EditorPackageTypeDropdown.vue";
 import router from "@/router";
-import {FILL_LESSON_NAME, LESSON_ADDED} from "@/assets/script/AlertMessage";
+import {FILL_LESSON_NAME, LESSON_ADDED, LESSON_CHANGED} from "@/assets/script/AlertMessage";
 import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
 import AddTechnologyModal from "@/components/modal/AddTechnologyModal.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
@@ -108,18 +107,24 @@ export default {
     },
 
     handleLessonSuccessfullyAdded(){
-      this.successMessage = LESSON_ADDED.replace('?', this.changeLessonDto.lessonName)
+      this.successMessage = LESSON_CHANGED.replace('?', this.changeLessonDto.lessonName)
+      this.$emit('event-update-lesson-header')
       setTimeout(() => {
-        router.push({name:'editorRoute', query:{lessonId : this.addLessonResponse.lessonId}})
+        this.successMessage = ''
+        this.$refs.modalRef.closeModal()
       }, 3000)
     },
     handleAddTechnology(){
       this.$refs.addTechnologyModalRef.addTechnologyRequest.packageTypeId = this.changeLessonDto.packageTypeId
       this.$refs.addTechnologyModalRef.$refs.modalRef.openModal()
 
-    }
+    },
+
+
 
   },
+
+
 
 }
 </script>

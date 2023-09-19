@@ -11,10 +11,12 @@
 
 export default {
   name: 'technologiesDropdown',
+
   data() {
     return {
-      selectedTechnologyId: 0,
       packageTypeId: 0,
+      selectedTechnologyId: 0,
+
       technologies:
           [
             {
@@ -43,6 +45,9 @@ export default {
       }).catch(error => {
       })
     },
+    initializePackageTypeId(packageTypeId){
+      this.packageTypeId = packageTypeId
+    }
   }
 }
 </script>

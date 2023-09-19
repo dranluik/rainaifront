@@ -7,7 +7,7 @@
                    @event-emit-added-video-link-and-description="handleVideoAdded"
                    @event-update-video-table="updateVideoTable"
                    ref="addVideoModalRef" />
-    <ChangeLessonModal ref="changeLessonModalRef"/>
+    <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{contentAsByteArray}}
     <div class="row mb-2">
       <div class="col col-6">
@@ -15,21 +15,21 @@
           <div class="row row-cols-1">
             <div class="col ">
               <div class="d-flex align-items-end">
-              <h4>Teema nimi: {{ lessonName }}</h4>
+              <h4>Teema nimi: {{this.lessonHeader.lessonName}}</h4>
               </div>
             </div>
             <div class="col">
               <div class="d-flex align-items-end">
-              <h4>Pakett: {{ packageType }}</h4>
+              <h4>Pakett: {{this.lessonHeader.packageTypeName}}</h4>
               </div>
             </div>
             <div class="col">
               <div class="d-flex align-items-end">
-              <h4>Tehnoloogia: {{ technologies }}</h4>
+              <h4>Tehnoloogia: {{this.lessonHeader.technologyName}}</h4>
               </div>
             </div>
             <div class="col">
-              <button @click="handleChangeLessonName" type="button" class="btn btn-outline-success">Muuda</button>
+              <button @click="handleChangeLessonName" type="button" class="btn btn-outline-primary">Muuda</button>
             </div>
 
           </div>
@@ -83,6 +83,7 @@ import ImageTable from "@/views/ImageTable.vue";
 import {useRoute} from "vue-router";
 import VideoTable from "@/components/table/VideoTable.vue";
 import ChangeLessonModal from "@/components/modal/ChangeLessonModal.vue";
+import router from "@/router";
 
 
 export default {
@@ -91,9 +92,14 @@ export default {
   data(){
     return{
       lessonId: Number(useRoute().query.lessonId),
-      lessonName: '',
-      packageTypeId: 0,
-      technologyId: 0,
+      lessonHeader: {
+        packageTypeName: '',
+        packageTypeId: 0,
+        technologyName: '',
+        technologyId: 0,
+        lessonName: ''
+      },
+
       selectedImage: '',
       descriptionText: '',
       imageTable: [],
@@ -138,19 +144,41 @@ export default {
       this.contentAsByteArray = encoder.encode(contentAsHtml)
 
     },
-    handlePackageTypeIdChange(packageTypeId){
-      this.packageTypeId = packageTypeId
 
-    },
     handleChangeLessonName(){
-      this.$refs.changeLessonModalRef.changeLessonDto.lessonName =this.lessonName
-      this.$refs.changeLessonModalRef.changeLessonDto.packageTypeId =this.packageTypeId
-      this.$refs.changeLessonModalRef.changeLessonDto.technologyId =this.technologyId
+      this.$refs.changeLessonModalRef.changeLessonDto.lessonName =this.lessonHeader.lessonName
+      this.$refs.changeLessonModalRef.changeLessonDto.packageTypeId =this.lessonHeader.packageTypeId
+      this.$refs.changeLessonModalRef.changeLessonDto.technologyId =this.lessonHeader.technologyId
       this.$refs.changeLessonModalRef.changeLessonDto.lessonId = this.lessonId
       this.$refs.changeLessonModalRef.$refs.modalRef.openModal()
+      this.$nextTick(() => {
+        this.$refs.changeLessonModalRef.$refs.editorPackageTypeDropdownRef.selectedPackage = this.lessonHeader.packageTypeId
+        this.$refs.changeLessonModalRef.$refs.technologiesDropdownRef.packageTypeId = this.lessonHeader.packageTypeId
+        this.$refs.changeLessonModalRef.$refs.technologiesDropdownRef.getTechnologies()
+        this.$refs.changeLessonModalRef.$refs.technologiesDropdownRef.selectedTechnologyId = this.lessonHeader.technologyId
 
-    }
+      })
 
+    },
+
+    getLessonHeader() {
+      this.$http.get("/editor", {
+            params: {
+              lessonId: this.lessonId
+            }
+          }
+      ).then(response => {
+        this.lessonHeader = response.data
+      }).catch(error => {
+        router.push({name: 'errorRoute'})
+      })
+    },
+
+
+
+  },
+  beforeMount() {
+    this.getLessonHeader()
   }
 }
 

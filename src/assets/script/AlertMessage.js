@@ -5,6 +5,7 @@ export const USER_ADDED = 'Kasutajaks registreeritud'
 export const IMAGE_ADDED = 'Pilt lisatud!'
 export const VIDEO_ADDED ='Video lisatud!'
 export const LESSON_ADDED = 'Teema "?" on lisatud'
+export const LESSON_CHANGED = 'Teema "?" on muudetud'
 export const TECHNOLOGY_ADDED = 'Tehnoloogia "?" on lisatud'
 export const LESSON_DELETED = 'Teema "?" on eemaldatud'
 

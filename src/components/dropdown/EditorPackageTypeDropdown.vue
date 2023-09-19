@@ -12,6 +12,7 @@ import router from "@/router";
 
 export default {
   name: 'EditorPackageTypeDropdown',
+
   data() {
     return {
       selectedPackage: 0,
