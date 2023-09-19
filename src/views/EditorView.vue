@@ -1,7 +1,7 @@
 <template>
 
   <div class="container text-center">
-    <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
+    <AddImageModal :current-lesson-id="lessonId" @event-update-image-table="handleImageAdded" ref="addImageModalRef"/>
     <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef" />
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{ contentAsBase64 }}
@@ -52,7 +52,7 @@
     </div>
     <div class="row mb-4">
       <div class="col">
-        <ImageTable :delete-image="deleteImage(index)" :image-table="imageTable" :image-width="imageWidth"/>
+        <ImageTable :lesson-id="lessonId" ref="imageTableRef"/>
       </div>
       <div class="col">
         <VideoTable :lesson-id="lessonId" :video-table="videoTable" ref="videoTableRef"/>
@@ -75,7 +75,7 @@
 import AddImageModal from "@/components/modal/AddImageModal.vue";
 import AddVideoModal from "@/components/modal/AddVideoModal.vue";
 import WysiwygEditor from "@/views/WysiwygEditor.vue";
-import ImageTable from "@/views/ImageTable.vue";
+import ImageTable from "@/components/table/ImageTable.vue";
 import {useRoute} from "vue-router";
 import VideoTable from "@/components/table/VideoTable.vue";
 import ChangeLessonModal from "@/components/modal/ChangeLessonModal.vue";
@@ -98,8 +98,6 @@ export default {
 
       selectedImage: '',
       descriptionText: '',
-      imageTable: [],
-      imageWidth: '10%',
       contentAsHtml: '',
       contentAsBase64: ''
     }
@@ -116,13 +114,6 @@ export default {
 
     handleAddImage(){
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
-    },
-    handleImageAdded(selectedImage, descriptionText){
-      this.imageTable.push({image: selectedImage, description: descriptionText})
-    },
-
-    deleteImage(index) {
-      this.imageTable.splice(index, 1);
     },
 
     handleChangeLessonName(){

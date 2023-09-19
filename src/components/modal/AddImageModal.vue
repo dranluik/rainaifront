@@ -66,7 +66,7 @@ export default {
         this.successMessage = IMAGE_ADDED
         this.resetImageAndDescription();
       }).catch(error => {
-        router.push({name: 'errorRoute'})
+        //router.push({name: 'errorRoute'})
       })
     },
 
