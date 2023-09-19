@@ -2,7 +2,11 @@
 
   <div class="container text-center">
     <AddImageModal @event-emit-selected-image-and-description="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal :lesson-id="lessonId" @event-emit-added-video-link-and-description="handleVideoAdded" ref="addVideoModalRef" />
+    <AddVideoModal :lesson-id="lessonId"
+
+                   @event-emit-added-video-link-and-description="handleVideoAdded"
+                   @event-update-video-table="updateVideoTable"
+                   ref="addVideoModalRef" />
     {{contentAsByteArray}}
     <div class="row mb-2">
       <div class="col col-6">
@@ -54,7 +58,7 @@
         <ImageTable :delete-image="deleteImage(index)" :image-table="imageTable" :image-width="imageWidth"/>
       </div>
       <div class="col">
-        <VideoTable :lesson-id="lessonId" :delete-video="deleteVideo(index)" :video-table="videoTable"/>
+        <VideoTable :lesson-id="lessonId" :delete-video="deleteVideo(index)" :video-table="videoTable" ref="videoTableRef"/>
       </div>
     </div>
     <div class="row mb-4">
@@ -97,6 +101,11 @@ export default {
     }
   },
   methods: {
+
+    updateVideoTable(){
+      this.$refs.videoTableRef.getVideos()
+    },
+
     handleAddImage(){
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
     },

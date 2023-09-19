@@ -1,6 +1,6 @@
 <template>
   <table class="table table-secondary table-hover">
-    <thead>
+      <thead>
     <tr>
       <th scope="col">Video</th>
       <th scope="col">Kirjeldus</th>
@@ -19,8 +19,11 @@
   </table>
 </template>
 <script>
+import AddVideoModal from "@/components/modal/AddVideoModal.vue";
+
 export default {
   name: 'VideoTable',
+  components: {AddVideoModal},
   props: {
     videoTable: {},
     lessonId: Number
