@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr v-for="userLesson in userLessons" :key="userLesson.lessonId">
-      <td @click="handleLessonChange(userLesson.lessonId)">{{ userLesson.lessonName }}</td>
+      <td @click="handleLessonChange(userLesson.lessonId)" class="hoverable-link">{{ userLesson.lessonName }}</td>
       <td @click="navigateToEditor(userLesson.lessonId)" v-if="roleName === 'admin'"><font-awesome-icon :icon="['far', 'pen-to-square']" size="lg" class="hoverable-link m-2"/></td>
       <td v-if="roleName === 'admin'"><font-awesome-icon :icon="['fas', 'trash']" size="lg" class="hoverable-link m-2"/></td>
     </tr>

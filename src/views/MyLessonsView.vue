@@ -2,7 +2,7 @@
   <div class="container text-center">
     <AddLessonModal ref="addLessonModalRef"/>
     <div class="row">
-      <div class="col-3 ms-5 me-5">
+      <div class="col-3 ms-5">
         <div v-if="roleName === 'admin'" class="row mb-4">
           <div class="col">
             <button @click="handleAddLesson" type="button" class="btn btn-light">Lisa Teema</button>
@@ -12,11 +12,12 @@
           <MyLessonsTable :lessonId="lessonId" @event-lesson-change="updateLessonId"/>
         </div>
       </div>
-      <div class="col ms-5 me-5 border content-column form-control">
-        <p v-html="lessonContentResponse.editorContent"></p>
+      <div class="col border content-column form-control">
+        <div class="lesson-content" v-html="lessonContentResponse.editorContent">
+        </div>
       </div>
-      <div class="col ms-5 me-5 left-video">
-        <iframe width="300" height="200" src="https://www.youtube.com/embed/oFBuPWCjbA4" frameborder="0" allowfullscreen></iframe>
+      <div class="col ms-5 left-video">
+        <iframe v-for="video in videos" :key=video.lessonId width="300" height="200" :src="video.link" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -55,6 +56,15 @@ export default {
         editorContent: '',
       },
 
+      videos: [
+        {
+          videoId: 0,
+          lessonId: 0,
+          link: '',
+          description: ''
+        }
+      ],
+
       lessonId: null
 
     }
@@ -68,6 +78,7 @@ export default {
     updateLessonId(lessonId) {
       this.lessonId = lessonId
       this.getLessonContent()
+      this.getVideoLink()
     },
 
     getLessonContent() {
@@ -83,6 +94,19 @@ export default {
         const errorResponseBody = error.response.data
       })
     },
+
+    getVideoLink() {
+      this.$http.get("/video", {
+            params: {
+              lessonId: this.lessonId,
+            }
+          }
+      ).then(response => {
+        this.videos = response.data
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
     },
   beforeMount() {
     this.getLessonContent()
@@ -92,15 +116,33 @@ export default {
 </script>
 
 <style>
+.lesson-content {
+  white-space: pre-wrap;
+}
+
 .left-video {
   float: right;
   margin-left: 40px; /* Add margin to move it to the left */
 }
 
 .content-column {
-  background-color: rgb(217, 247, 67); /* Replace with your desired background color */
+  background-color: rgb(217, 247, 67);
   color: black;
-  /* Add other styling properties as needed */
+}
+
+.lesson-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.lesson-content th, .lesson-content td {
+  border: 1px solid #1f2023;
+  padding: 8px;
+  text-align: center;
+}
+
+.lesson-content th {
+  background-color: #46fff2;
 }
 </style>
 
