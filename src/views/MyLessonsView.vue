@@ -21,11 +21,14 @@
         <img :src="image.imageData" :alt="image.imageDescription" class="lesson-media" />
           <p class="media-caption">{{ image.imageDescription }}</p>
         </div>
-      <div class="media-container" v-if="videos.length > 0">
+      <div class="media-container" v-if="videos && videos.length > 0">
         <div class="media-wrapper" v-for="video in videos" :key=video.videoId>
-          <iframe :src="video.link" width="300" height="200"  frameborder="0"
+          <div class="video-embed">
+            <p class="media-caption">{{video.description}}</p>
+          <iframe class="lesson-media" :src="getYouTubeEmbedUrl(video.link)"  frameborder="0"
                   allowfullscreen></iframe>
-          <p class="media-caption">{{video.description}}</p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -79,6 +82,9 @@ export default {
           description: ''
         }
       ],
+      translateVideos:[
+        {videoId: ''}
+      ]
 
     }
   },
@@ -128,15 +134,56 @@ export default {
             }
           }
       ).then(response => {
+
         this.videos = response.data
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
     },
+    getYouTubeEmbedUrl(normalLink){
+      if (!normalLink) {
+        return ''
+      }
+      const videoId = this.extractYouTubeVideoId(normalLink)
+      return `https://www.youtube.com/embed/${videoId}`
     },
-  beforeMount() {
-    this.getLessonContent()
-  }
+    extractYouTubeVideoId(normalLink) {
+      if (!normalLink) {
+        return '';
+      }
+
+      try {
+        const url = new URL(normalLink);
+
+        if (url.hostname === 'www.youtube.com' || url.hostname === 'm.youtube.com') {
+          if (url.pathname === '/watch') {
+            // Regular YouTube video URL
+            const videoId = url.searchParams.get('v');
+            if (videoId) {
+              return videoId;
+            }
+          } else if (url.pathname.startsWith('/embed/')) {
+            // Embedded YouTube video URL
+            const videoId = url.pathname.substr('/embed/'.length);
+            if (videoId) {
+              return videoId;
+            }
+          }
+        } else if (url.hostname === 'youtu.be') {
+          // Short YouTube URL (youtu.be)
+          const videoId = url.pathname.substr(1); // Remove leading slash
+          if (videoId) {
+            return videoId;
+          }
+        }
+      } catch (error) {
+        console.error(error); // Handle URL parsing errors
+      }
+
+      return '';
+    }
+    },
+
 }
 
 </script>
@@ -193,6 +240,11 @@ export default {
 
 .media-caption {
   margin-top: 10px; /* Adjust the spacing between the image and caption */
+}
+.video-embed {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.25%; /* Maintain the 16:9 aspect ratio */
 }
 
 </style>
