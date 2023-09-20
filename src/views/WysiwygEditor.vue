@@ -1,10 +1,10 @@
 <template>
   <EditorButtons :editor="editor"/>
   <EditorButtonsSecondRow :editor="editor"/>
-  <div v-html="contentAsHtml"></div>
+<!--  <div v-html="contentAsHtml"></div>-->
   <editor-content :editor="editor" @change="displayHtml"/>
   <button @click="updateEditorContentRequest">SALVESTA</button>
-<!--  <button @click="swapContent">Asenda HTML</button>-->
+  <!--  <button @click="swapContent">Asenda HTML</button>-->
 </template>
 <script>
 import {Editor, EditorContent} from "@tiptap/vue-3";
@@ -49,17 +49,11 @@ export default {
       this.contentAsHtml = this.editor.getHTML()
     },
 
-    // swapContent() {
-    //   const dataFromBackend = '<p>New content from backend.</p>' // Replace this with the actual content from your backend
-    //   if (this.editor) {
-    //     this.editor.commands.setContent(dataFromBackend)
-    //   }
-    // },
 
-    handleEditorContent(){
+    handleEditorContent() {
       const encoder = new TextEncoder();
-      const binaryContent = encoder.encode(this.contentAsHtml)
-      this.editorContent.content = btoa(String.fromCharCode.apply(null, binaryContent))
+      const utf8Content = encoder.encode(this.contentAsHtml)
+      this.editorContent.content = btoa(String.fromCharCode.apply(null, utf8Content))
     },
 
     updateEditorContentRequest() {
@@ -81,6 +75,33 @@ export default {
       ).then(response => {
         const responseBody = response.data
       }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
+    // swapContent() {
+    //   const dataFromBackend = '<p>New content from backend.</p>' // Replace this with the actual content from your backend
+    //   if (this.editor) {
+    //     this.editor.commands.setContent(dataFromBackend)
+    //   }
+    // },
+    getEditorContent() {
+      this.$http.get("/editor/content", {
+            params: {
+              lessonId: this.lessonId,
+            }
+          }
+      ).then(response => {
+        // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
+        const dataFromBackend = response.data
+        const base64Content = dataFromBackend.editorContent
+        const utf8Bytes = new TextDecoder().decode(Uint8Array.from(atob(base64Content), (c) => c.charCodeAt(0)))
+        this.editorContent.content = utf8Bytes
+
+        if (this.editor) {
+          this.editor.commands.setContent(this.editorContent.content)
+        }
+      }).catch(error => {
+        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
         const errorResponseBody = error.response.data
       })
     },
@@ -113,6 +134,7 @@ export default {
           this.handleContentChange();
         }
     );
+    this.getEditorContent()
   },
 
   beforeUnmount() {
@@ -156,7 +178,10 @@ export default {
       z-index: 2;
       position: absolute;
       content: "";
-      left: 0; right: 0; top: 0; bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
       background: rgba(186, 234, 206, 0.8);
       pointer-events: none;
     }
