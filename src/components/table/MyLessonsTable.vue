@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-light table-hover">
+  <table class="table form-control table-light table-borderless table-hover w-auto">
     <thead>
     <tr>
       <th scope="col">Teemad</th>
@@ -10,10 +10,9 @@
     </thead>
     <tbody>
     <tr v-for="userLesson in userLessons" :key="userLesson.lessonId">
-      <td>{{ userLesson.lessonName }}</td>
+      <td @click="handleLessonChange(userLesson.lessonId)">{{ userLesson.lessonName }}</td>
       <td @click="navigateToEditor(userLesson.lessonId)" v-if="roleName === 'admin'"><font-awesome-icon :icon="['far', 'pen-to-square']" size="lg" class="hoverable-link m-2"/></td>
       <td v-if="roleName === 'admin'"><font-awesome-icon :icon="['fas', 'trash']" size="lg" class="hoverable-link m-2"/></td>
-
     </tr>
     </tbody>
   </table>
@@ -57,6 +56,14 @@ export default {
 
     navigateToEditor(lessonId) {
       router.push({name: 'editorRoute', query: {lessonId: lessonId}})
+    },
+
+    // navigateToMyLessonsView(lessonId) {
+    //   router.push({name: 'myLessonsRoute', query: {lessonId: lessonId}})
+    // },
+
+    handleLessonChange(lessonId){
+      this.$emit('event-lesson-change', lessonId)
     }
 
   },

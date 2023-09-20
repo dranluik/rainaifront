@@ -44,12 +44,13 @@
         <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa video</button>
       </div>
     </div>
+
     <div class="row mb-5">
       <div class="col border mt-5 editor-column">
         <WysiwygEditor :lesson-id="lessonId"/>
       </div>
-
     </div>
+
     <div class="row mb-4">
       <div class="col">
         <ImageTable :lesson-id="lessonId" ref="imageTableRef"/>
