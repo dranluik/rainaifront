@@ -24,7 +24,7 @@ export default {
 <style scoped>
 .background-container {
   /* Set the background image using URL */
-  background-image: url('/Users/opilane/IdeaProjects/rainaifront/src/assets/background.png');
+  background-image: url("../assets/background.png"); /* Adjust the path to your image */
   /* Set the background size and other properties as needed */
   background-size: cover; /* or 'contain' or custom values */
   background-repeat: no-repeat;
