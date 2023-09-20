@@ -13,10 +13,18 @@
         </div>
       </div>
       <div class="col ms-5 me-5 border content-column form-control">
+        <div >
         <p v-html="lessonContentResponse.editorContent"></p>
+        </div>
       </div>
       <div class="col ms-5 me-5 left-video">
         <iframe width="300" height="200" src="https://www.youtube.com/embed/oFBuPWCjbA4" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="image-container" v-if="images.length > 0">
+        <div class="image-wrapper" v-for="image in images" :key="image.imageId">
+        <img :src="image.imageData" :alt="image.imageDescription" class="lesson-image" />
+          <p class="image-caption">{{ image.imageDescription }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -40,9 +48,7 @@ export default {
   },
   components: {AddLessonModal, LessonAddingModal, AlertDanger, MyLessonsTable},
 
-  props: {
-    lessonId: Number
-  },
+
 
   data(){
     return{
@@ -55,7 +61,13 @@ export default {
         editorContent: '',
       },
 
-      lessonId: null
+      lessonId: null,
+      images: [
+        {
+          imageId: 0,
+          imageData: '',
+          imageDescription: ''
+        }],
 
     }
   },
@@ -68,6 +80,7 @@ export default {
     updateLessonId(lessonId) {
       this.lessonId = lessonId
       this.getLessonContent()
+      this.getImages()
     },
 
     getLessonContent() {
@@ -79,6 +92,18 @@ export default {
       ).then(response => {
         this.contentAsBase64 = response.data.editorContent;
        this.lessonContentResponse.editorContent = new TextDecoder().decode(Uint8Array.from(atob(this.contentAsBase64), (c) => c.charCodeAt(0)))
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
+    getImages() {
+      this.$http.get("/image", {
+            params: {
+              lessonId: this.lessonId,
+            }
+          }
+      ).then(response => {
+        this.images = response.data
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
@@ -104,7 +129,29 @@ export default {
 }
 </style>
 
+<style scoped>
+/* CSS for responsive images and captions */
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the gap between images as needed */
+  justify-content: center;
+}
 
+.image-wrapper {
+  text-align: center;
+  max-width: 30%; /* Make images responsive to screen width */
+}
+
+.lesson-image {
+  max-width: 100%; /* Ensure images fit within their containers */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.image-caption {
+  margin-top: 10px; /* Adjust the spacing between the image and caption */
+}
+</style>
 
 
 
