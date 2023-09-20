@@ -1,8 +1,7 @@
 <template>
 <div class="background-container">
   <div>
-    <img src="../assets/RainAiUus.gif" height="300" width="300" alt="" class="centered"/>
-
+    <img src="../assets/RainAIII.png" height="300" width="300" alt=""/>
     <div class="home">
       <WelcomeInfo/>
   </div>
@@ -25,7 +24,7 @@ export default {
 <style scoped>
 .background-container {
   /* Set the background image using URL */
-  background-image: url('/Users/opilane/IdeaProjects/rainaifront/src/assets/Untitled design (1).png');
+  background-image: url('/Users/opilane/IdeaProjects/rainaifront/src/assets/background.png');
   /* Set the background size and other properties as needed */
   background-size: cover; /* or 'contain' or custom values */
   background-repeat: no-repeat;
