@@ -19,8 +19,8 @@
       </div>
 
 
-      <div class="col col-1 text-center">
-        empty col
+      <div class="col col-2 text-center">
+        <img src="../assets/RainAILogo.gif" height="200" width="200" alt="" class="centered"/>
       </div>
 
       <div class="col col-3 text-center">
