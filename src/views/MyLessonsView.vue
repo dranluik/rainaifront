@@ -16,18 +16,20 @@
         <div class="lesson-content" v-html="lessonContentResponse.editorContent">
         </div>
       </div>
-      <div class="col ms-5 me-5 left-video">
-        <iframe width="300" height="200" src="https://www.youtube.com/embed/oFBuPWCjbA4" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="image-container" v-if="images.length > 0">
-        <div class="image-wrapper" v-for="image in images" :key="image.imageId">
-        <img :src="image.imageData" :alt="image.imageDescription" class="lesson-image" />
-          <p class="image-caption">{{ image.imageDescription }}</p>
+      <div class="media-container" v-if="images.length > 0">
+        <div class="media-wrapper" v-for="image in images" :key="image.imageId">
+        <img :src="image.imageData" :alt="image.imageDescription" class="lesson-media" />
+          <p class="media-caption">{{ image.imageDescription }}</p>
         </div>
-      <div class="col ms-5 left-video">
-        <iframe v-for="video in videos" :key=video.lessonId width="300" height="200" :src="video.link" frameborder="0" allowfullscreen></iframe>
+      <div class="media-container" v-if="videos.length > 0">
+        <div class="media-wrapper" v-for="video in videos" :key=video.videoId>
+          <iframe :src="video.link" width="300" height="200"  frameborder="0"
+                  allowfullscreen></iframe>
+          <p class="media-caption">{{video.description}}</p>
+        </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -172,26 +174,27 @@ export default {
 
 <style scoped>
 /* CSS for responsive images and captions */
-.image-container {
+.media-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px; /* Adjust the gap between images as needed */
   justify-content: center;
 }
 
-.image-wrapper {
+.media-wrapper {
   text-align: center;
   max-width: 30%; /* Make images responsive to screen width */
 }
 
-.lesson-image {
+.lesson-media {
   max-width: 100%; /* Ensure images fit within their containers */
   height: auto; /* Maintain aspect ratio */
 }
 
-.image-caption {
+.media-caption {
   margin-top: 10px; /* Adjust the spacing between the image and caption */
 }
+
 </style>
 
 
