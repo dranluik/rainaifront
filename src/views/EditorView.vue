@@ -144,6 +144,9 @@ export default {
         router.push({name: 'errorRoute'})
       })
     },
+    handleImageAdded(){
+      this.$refs.imageTableRef.getImages()
+    }
 
   },
   beforeMount() {
