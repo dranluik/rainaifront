@@ -2,22 +2,20 @@
   <LogOutModal @event-update-nav-menu="updateNavMenu" ref="logOutModalRef"/>
   <div class="nav-container">
     <img src="@/assets/RainAiUus.gif" height="100" width="100" alt="" class="left-aligned"/>
-    <nav>
-      <router-link to="/">Kodu</router-link> |
-      <template v-if="isLoggedIn">
-        <router-link to="/frontend">Frontend</router-link> |
-        <router-link to="/backend">Backend</router-link> |
-        <router-link to="/mylessons">Minu teemad</router-link> |
-        <template  v-if="isAdmin" >
-          <router-link to="/editor">Toimetaja</router-link> |
-        </template>
-        <router-link to="#" @click="handleLogout">Logi välja</router-link>
-      </template>
-      <template v-if="!isLoggedIn">
-        <router-link to="/signup">Registreeru kasutajaks</router-link> |
-        <router-link to="/login">Logi Sisse</router-link>
-      </template>
-    </nav>
+  <nav>
+    <router-link to="/">Kodu</router-link> |
+    <template v-if="isLoggedIn">
+    <router-link :to="{name: 'frontendRoute'}">Frontend</router-link> |
+    <router-link :to="{name: 'backendRoute'}">Backend</router-link> |
+    <router-link :to="{name: 'myLessonsRoute'}">Minu teemad</router-link> |
+      <router-link v-if="this.$route.path === '/editor'" :to="{name: 'editorRoute'}">Toimetaja</router-link> |
+    <router-link to="#" @click="handleLogout">Logi välja</router-link>
+    </template>
+    <template v-if="!isLoggedIn">
+    <router-link :to="{name: 'signupRoute'}">Registreeru kasutajaks</router-link> |
+    <router-link :to="{name: 'loginRoute'}">Logi Sisse</router-link>
+    </template>
+  </nav>
   </div>
   <router-view @event-update-nav-menu="updateNavMenu" />
 </template>
@@ -62,7 +60,6 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ebebef;
-
 }
 
 #app {

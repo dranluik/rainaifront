@@ -45,7 +45,7 @@ const routes = [
     component: MyLessonsView
   },
   {
-    path: '/editor/:newLessonName?',
+    path: '/editor',
     name: 'editorRoute',
     component: EditorView,
     props: true
