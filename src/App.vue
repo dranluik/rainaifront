@@ -1,5 +1,7 @@
 <template>
   <LogOutModal @event-update-nav-menu="updateNavMenu" ref="logOutModalRef"/>
+  <div class="nav-container">
+    <img src="@/assets/RainAiUus.gif" height="100" width="100" alt="" class="left-aligned"/>
   <nav>
     <router-link to="/">Kodu</router-link> |
     <template v-if="isLoggedIn">
@@ -14,6 +16,7 @@
     <router-link :to="{name: 'loginRoute'}">Logi Sisse</router-link>
     </template>
   </nav>
+  </div>
   <router-view @event-update-nav-menu="updateNavMenu" />
 </template>
 
@@ -68,15 +71,32 @@ html, body {
 }
 
 nav {
+  width: 100%;
   padding: 30px;
+  background-color: black;
+  align-items: center;
 }
 
 nav a {
+  margin-left: 10px;
   font-weight: bold;
   color: #ebebef;
 }
 
 nav a.router-link-exact-active {
   color: #46fff2;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  background-color: black; /* Set the background color of the container */
+  padding: 0px; /* Add padding for spacing */
+}
+
+.left-aligned {
+  display: flex;
+  /* Use CSS styles to align the image to the left */ /* Float the image to the left */
+  margin-right: 0px; /* Add some margin to the right (adjust as needed) */
 }
 </style>
