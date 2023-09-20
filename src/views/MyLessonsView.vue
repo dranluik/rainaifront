@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col ms-5 me-5 border content-column form-control">
-        <p v-if="contentAsBase64">{{lessonContentResponse.editorContent}}</p>
+        <p v-html="lessonContentResponse.editorContent"></p>
       </div>
       <div class="col ms-5 me-5 left-video">
         <iframe width="300" height="200" src="https://www.youtube.com/embed/oFBuPWCjbA4" frameborder="0" allowfullscreen></iframe>
@@ -78,7 +78,7 @@ export default {
           }
       ).then(response => {
         this.contentAsBase64 = response.data.editorContent;
-       this.lessonContentResponse.editorContent = atob(this.contentAsBase64)
+       this.lessonContentResponse.editorContent = new TextDecoder().decode(Uint8Array.from(atob(this.contentAsBase64), (c) => c.charCodeAt(0)))
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
