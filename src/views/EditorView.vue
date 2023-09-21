@@ -49,7 +49,7 @@
 
 import AddImageModal from "@/components/modal/AddImageModal.vue";
 import AddVideoModal from "@/components/modal/AddVideoModal.vue";
-import WysiwygEditor from "@/views/WysiwygEditor.vue";
+import WysiwygEditor from "@/components/WysiwygEditor.vue";
 import ImageTable from "@/components/table/ImageTable.vue";
 import {useRoute} from "vue-router";
 import VideoTable from "@/components/table/VideoTable.vue";
