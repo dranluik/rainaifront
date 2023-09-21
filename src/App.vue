@@ -135,7 +135,8 @@ nav a.router-link-exact-active {
   margin: 10px;
   color: #ffffff; /* Text color */
   text-decoration: none; /* Remove underline */
-  background-color: hsla(0, 52%, 44%, 0.5); /* Background color */
+
+  background-color: hsl(150, 2%, 16%); /* Background color */
 }
 .active-link {
 //border: 2px solid #ffffff; /* Border color */ border-radius: 5px; /* Rounded corners */
@@ -143,7 +144,8 @@ nav a.router-link-exact-active {
   margin: 10px;
   color: #ffffff; /* Text color */
   text-decoration: none; /* Remove underline */
-  background-color: hsla(0, 52%, 44%, 1); /* Background color */
+  background-color: hsl(60, 31%, 24%); /* Background color */
   font-weight: bold
 }
+
 </style>

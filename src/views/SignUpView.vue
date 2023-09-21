@@ -21,7 +21,7 @@
 
       <div class="col col-2 text-center">
 
-        <img src="../../../../Downloads/RainSignUp.gif" height="200" width="200"/></div>
+        <img src="../assets/RainSignUp.gif" height="200" width="200"/></div>
 
       <div class="col col-3 text-center">
 
