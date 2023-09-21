@@ -79,7 +79,7 @@ export default {
 
 <style scoped>
 .selected-lesson {
-  color: #ff0000;
+  color: #1f2023;
   font-weight: bold/* Change this to the desired color */
   /* Add any other styling as needed */
 }
