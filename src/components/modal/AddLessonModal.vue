@@ -95,7 +95,7 @@ export default {
         }
     },
     addNewLesson() {
-      this.$http.post("/mylessons", this.addLessonDto
+      this.$http.post("/myLessons", this.addLessonDto
       ).then(response => {
         this.addLessonResponse = response.data
 

@@ -9,8 +9,8 @@
     </thead>
     <tbody>
     <tr v-for="video in videos" :key="video.videoId">
-      <td> {{video.link}}</td>
-      <td>{{video.description}}</td>
+      <td> {{ video.videoLink }}</td>
+      <td>{{ video.videoDescription }}</td>
       <td>
         <font-awesome-icon @click="deleteVideo(video.videoId)" style="cursor: pointer" :icon="['fas', 'trash']" size="lg"/>
       </td>
@@ -34,8 +34,8 @@ export default {
         {
           videoId: 0,
           lessonId: 0,
-          link: '',
-          description: ''
+          videoLink: '',
+          videoDescription: ''
         }
       ],
       videoId: 0,
