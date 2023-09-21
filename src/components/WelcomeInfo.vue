@@ -3,11 +3,11 @@
 
 
     <div class="row text-center mx-auto justify-content-center">
-      <div class="col col-2 text-center">
+      <div class="col col-1 text-center">
 
       </div>
-      <div class="col col-6 text-center">
-        <h1>
+      <div class="col col-5 text-center ">
+        <h1 style="text-align: left;">
           Kes meie kursustele sobivad?
         </h1>
         <p class="aligned-paragraph">
@@ -15,13 +15,27 @@
           Olgu teie eesmärk karjääri alustamine <br>veebiarenduses või oma projektide loomine,
           meie kursused aitavad teil saavutada oma eesmärke.
           <br>
-          Liitu [Ettevõtte nimi] kursustega ja avasta veebiarenduse maailm oma käe järgi.<br>
+          Liitu RainAI kursustega ja avasta veebiarenduse maailm oma käe järgi.<br>
           Oleme siin, et aidata teid oma teekonnal saada edukaks veebiarendajaks.<br>
         </p>
       </div>
 
-      <div class="col col-3 text-center">
-        empty colllll
+      <div class="col col-6 text-center">
+
+      </div>
+      <div class="col col-12 text-center">
+        <!-- Contact information (centered at the bottom) -->
+        <div class="mb-4">
+          <h4>Kontakt</h4>
+          <ul class="list-unstyled contact-info">
+            <li>
+              <font-awesome-icon :icon="['fasr', 'envelope']" size="sm" class="icon"/>
+              <a class="text">rainAI@gmail.com</a>
+              <font-awesome-icon :icon="['fasl', 'phone']" size="sm" class="icon"/>
+              <a class="text">+372 55 44 565</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 </template>
@@ -41,5 +55,13 @@ export default {
   /* Change the text alignment to center */
   text-align: left;
   /* You can also use other values like 'left', 'right', or 'justify' */
+}
+.contact-info .icon {
+  margin-right: 8px; /* Adjust the margin as needed */
+}
+.contact-info .text {
+  color: inherit;
+  text-decoration: none;
+  margin-right: 10px; /* Adjust the margin as needed */
 }
 </style>

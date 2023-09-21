@@ -31,7 +31,7 @@ export default {
   background-attachment: fixed; /* Optional: To make the background fixed */
   /* Add more styles for your container */
   width: 100%;
-  height: 88vh; /* Make it cover the entire viewport */
+  height: 86vh; /* Make it cover the entire viewport */
   /* Add other styles as needed */
 }
 </style>
