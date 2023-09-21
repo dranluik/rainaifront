@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr v-for="userLesson in userLessons" :key="userLesson.lessonId">
-      <td @click="handleLessonChange(userLesson.lessonId)"
+      <td @click="handleLessonChange(userLesson.lessonId, userLesson.lessonName)"
           :class="{'selected-lesson': userLesson.lessonId === selectedLessonId}"
           class="hoverable-link">{{ userLesson.lessonName }}</td>
       <td @click="navigateToEditor(userLesson.lessonId)" v-if="roleName === 'admin'"><font-awesome-icon :icon="['far', 'pen-to-square']" size="lg" class="hoverable-link m-2"/></td>
@@ -27,6 +27,7 @@ export default {
   data(){
     return{
       selectedLessonId: null,
+      selectedLessonName: '',
       userId: sessionStorage.getItem('userId'),
       roleName: sessionStorage.getItem('roleName'),
       userLessons: [
@@ -65,9 +66,10 @@ export default {
     //   router.push({name: 'myLessonsRoute', query: {lessonId: lessonId}})
     // },
 
-    handleLessonChange(lessonId){
+    handleLessonChange(lessonId, lessonName){
       this.selectedLessonId = lessonId
-      this.$emit('event-lesson-change', lessonId)
+      this.selectedLessonName = lessonName
+      this.$emit('event-lesson-change', lessonId, lessonName)
     }
 
   },

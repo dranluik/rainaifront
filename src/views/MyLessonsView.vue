@@ -12,9 +12,9 @@
           <MyLessonsTable :lessonId="lessonId" @event-lesson-change="updateLessonId"/>
         </div>
       </div>
-      <div class="card bg-light" style="max-width: 35rem;">
+      <div  v-if="lessonContentResponse.editorContent !== ''" class="card bg-light" style="max-width: 35rem;">
         <div class="card-header">Lesson</div>
-        <div v-if="lessonContentResponse.editorContent !== ''" class="card-body">
+        <div class="card-body">
           <p class="card-text lesson-content" v-html="lessonContentResponse.editorContent"></p>
         </div>
       <div class="media-container" v-if="images.length > 0">
