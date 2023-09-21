@@ -22,6 +22,7 @@
         <img :src="image.imageData" :alt="image.imageDescription" class="lesson-media" />
           <p class="media-caption">{{ image.imageDescription }}</p>
         </div>
+      </div>
       <div class="media-container" v-if="videos && videos.length > 0">
         <div class="media-wrapper" v-for="video in videos" :key=video.videoId>
           <div class="video-embed">
@@ -33,7 +34,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
   </div>
 </template>
