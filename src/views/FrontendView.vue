@@ -1,13 +1,15 @@
 <template>
-  <div class="container text-center justify-content-center">
-    <div class="row justify-content-center">
-      <div class="col col-3">
-        <TechnologiesDropdown ref="technologiesDropdownRef" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
-      </div>
-      <div class="col col-3 d-flex justify-content-center">
-       <LessonsTable :packageTypeId="packageTypeId"
-                     :selectedTechnologyId="selectedTechnologyId"
-                     @event-update-selected-technology-id="updateSelectedTechnologyId"/>
+  <div class="background-container">
+    <div class="container text-center justify-content-center">
+      <div class="row justify-content-center">
+        <div class="col col-3">
+          <TechnologiesDropdown ref="technologiesDropdownRef" @event-update-selected-technology-id="updateSelectedTechnologyId"/>
+        </div>
+        <div class="col col-3 d-flex justify-content-center">
+          <LessonsTable :packageTypeId="packageTypeId"
+                        :selectedTechnologyId="selectedTechnologyId"
+                        @event-update-selected-technology-id="updateSelectedTechnologyId"/>
+        </div>
       </div>
     </div>
   </div>
@@ -15,10 +17,11 @@
 <script>
 import TechnologiesDropdown from "@/components/dropdown/TechnologiesDropdown.vue";
 import LessonsTable from "@/components/table/LessonsTable.vue";
+import WelcomeInfo from "@/components/WelcomeInfo.vue";
 
 export default {
   name: "FrontendView",
-  components: {LessonsTable, TechnologiesDropdown},
+  components: {WelcomeInfo, LessonsTable, TechnologiesDropdown},
   data(){
     return {
       selectedTechnologyId: 0,
@@ -40,3 +43,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.background-container {
+  /* Set the background image using URL */
+  background-image: url("../assets/test.jpeg"); /* Adjust the path to your image */
+  /* Set the background size and other properties as needed */
+  background-size: cover; /* or 'contain' or custom values */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: To make the background fixed */
+  /* Add more styles for your container */
+  width: 100%;
+  height: 88vh; /* Make it cover the entire viewport */
+  /* Add other styles as needed */
+}
+</style>

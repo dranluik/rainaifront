@@ -12,10 +12,11 @@
           <MyLessonsTable :lessonId="lessonId" @event-lesson-change="updateLessonId"/>
         </div>
       </div>
-      <div class="col border content-column form-control">
-        <div class="lesson-content" v-html="lessonContentResponse.editorContent">
+      <div class="card bg-light" style="max-width: 35rem;">
+        <div class="card-header">Lesson</div>
+        <div class="card-body">
+          <p class="card-text lesson-content" v-html="lessonContentResponse.editorContent"></p>
         </div>
-      </div>
       <div class="media-container" v-if="images.length > 0">
         <div class="media-wrapper" v-for="image in images" :key="image.imageId">
         <img :src="image.imageData" :alt="image.imageDescription" class="lesson-media" />
@@ -32,6 +33,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   </div>
 </template>
