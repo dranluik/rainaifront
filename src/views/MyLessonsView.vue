@@ -1,4 +1,5 @@
 <template>
+  <div class="background-container">
   <div class="container text-center">
     <AddLessonModal ref="addLessonModalRef"/>
     <div class="row">
@@ -32,6 +33,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   </div>
 </template>
@@ -246,7 +248,18 @@ export default {
   overflow: hidden;
   padding-bottom: 56.25%; /* Maintain the 16:9 aspect ratio */
 }
-
+.background-container {
+  /* Set the background image using URL */
+  background-image: url("../assets/StudyBackground.png"); /* Adjust the path to your image */
+  /* Set the background size and other properties as needed */
+  background-size: cover; /* or 'contain' or custom values */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: To make the background fixed */
+  /* Add more styles for your container */
+  width: 100%;
+  height: 86vh; /* Make it cover the entire viewport */
+  /* Add other styles as needed */
+}
 </style>
 
 

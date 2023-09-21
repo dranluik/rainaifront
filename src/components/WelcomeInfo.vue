@@ -6,8 +6,8 @@
       <div class="col col-1 text-center">
 
       </div>
-      <div class="col col-5 text-center">
-        <h1>
+      <div class="col col-5 text-center ">
+        <h1 style="text-align: left;">
           Kes meie kursustele sobivad?
         </h1>
         <p class="aligned-paragraph">
@@ -15,12 +15,12 @@
           Olgu teie eesmärk karjääri alustamine <br>veebiarenduses või oma projektide loomine,
           meie kursused aitavad teil saavutada oma eesmärke.
           <br>
-          Liitu [Ettevõtte nimi] kursustega ja avasta veebiarenduse maailm oma käe järgi.<br>
+          Liitu RainAI kursustega ja avasta veebiarenduse maailm oma käe järgi.<br>
           Oleme siin, et aidata teid oma teekonnal saada edukaks veebiarendajaks.<br>
         </p>
       </div>
 
-      <div class="col col-4 text-center">
+      <div class="col col-6 text-center">
 
       </div>
       <div class="col col-12 text-center">

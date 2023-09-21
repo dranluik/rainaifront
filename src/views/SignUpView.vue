@@ -1,5 +1,5 @@
 <template>
-
+  <div class="background-container">
   <div class="container-xxl text-center mx-auto">
     <div>
       <AlertDanger :alert-message="errorResponse.message"/>
@@ -20,7 +20,6 @@
 
 
       <div class="col col-2 text-center">
-        <img src="../assets/RainAILogo.gif" height="200" width="200" alt="" class="centered"/>
       </div>
 
       <div class="col col-3 text-center">
@@ -63,7 +62,7 @@
     </div>
   </div>
 
-
+  </div>
 </template>
 
 
@@ -168,6 +167,17 @@ export default {
   font-weight: bold;
   color: rgb(31, 32, 35);
 }
-
+.background-container {
+  /* Set the background image using URL */
+  background-image: url("../assets/StudyBackground.png"); /* Adjust the path to your image */
+  /* Set the background size and other properties as needed */
+  background-size: cover; /* or 'contain' or custom values */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: To make the background fixed */
+  /* Add more styles for your container */
+  width: 100%;
+  height: 86vh; /* Make it cover the entire viewport */
+  /* Add other styles as needed */
+}
 
 </style>
