@@ -5,7 +5,7 @@
     <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef"/>
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{ contentAsBase64 }}
-    <div class="row mb-5 justify-content-center">
+    <div class="row mt-5 justify-content-center">
 
       <div class="col col-6">
         <div class="card text-black bg-light mb-3" style="max-width: 35rem; height: 330px">
