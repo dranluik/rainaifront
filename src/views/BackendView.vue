@@ -1,4 +1,5 @@
 <template>
+  <div class="background-container">
   <div class="container text-center justify-content-center">
     <div class="row justify-content-center">
       <div class="col col-3">
@@ -11,6 +12,7 @@
                       @event-update-selected-technology-id="updateSelectedTechnologyId"/>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -47,7 +49,22 @@ export default {
   font-weight: bold;
   color: rgb(31, 32, 35);
   background-color: white;
-
 }
+ .background-container {
+   /* Set the background image using URL */
+   background-image: url("../assets/StudyBackground.png"); /* Adjust the path to your image */
+   /* Set the background size and other properties as needed */
+   background-size: cover; /* or 'contain' or custom values */
+   background-repeat: no-repeat;
+   background-attachment: fixed; /* Optional: To make the background fixed */
+   /* Add more styles for your container */
+   width: 100%;
+   height: 86vh; /* Make it cover the entire viewport */
+   /* Add other styles as needed */
+ }
+
+
+
+
 
 </style>

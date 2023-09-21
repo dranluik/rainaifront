@@ -1,7 +1,7 @@
 <template>
   <LogOutModal @event-update-nav-menu="updateNavMenu" ref="logOutModalRef"/>
     <nav class="nav nav-pills nav-fill">
-      <a class="navbar-brand mr-auto" style="padding-left:50px" href="#">
+      <a class="navbar-brand mr-auto" style="padding-left:50px" href="#" @click="openLink">
         <img src="@/assets/RainAiUus.gif" width="100" height="100"  alt=""/>
       </a>
       <ul class="nav-links">
@@ -43,6 +43,10 @@ export default {
   },
 
   methods: {
+    openLink() {
+      // Replace 'your-link-here' with the actual URL you want to open
+      window.open('https://chat.openai.com/', '_blank');
+    },
     updateNavMenu() {
       this.isLoggedIn = sessionStorage.getItem('userId') !== null
       this.isAdmin = sessionStorage.getItem('roleName') === ADMIN
