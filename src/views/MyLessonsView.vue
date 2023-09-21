@@ -12,7 +12,7 @@
           <MyLessonsTable :lessonId="lessonId" @event-lesson-change="updateLessonId"/>
         </div>
       </div>
-      <div class="col border content-column form-control">
+      <div v-if="lessonContentResponse.editorContent !== ''" class="col border content-column form-control">
         <div class="lesson-content" v-html="lessonContentResponse.editorContent">
         </div>
       </div>

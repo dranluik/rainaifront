@@ -10,7 +10,9 @@
     </thead>
     <tbody>
     <tr v-for="userLesson in userLessons" :key="userLesson.lessonId">
-      <td @click="handleLessonChange(userLesson.lessonId)" class="hoverable-link">{{ userLesson.lessonName }}</td>
+      <td @click="handleLessonChange(userLesson.lessonId)"
+          :class="{'selected-lesson': userLesson.lessonId === selectedLessonId}"
+          class="hoverable-link">{{ userLesson.lessonName }}</td>
       <td @click="navigateToEditor(userLesson.lessonId)" v-if="roleName === 'admin'"><font-awesome-icon :icon="['far', 'pen-to-square']" size="lg" class="hoverable-link m-2"/></td>
       <td v-if="roleName === 'admin'"><font-awesome-icon :icon="['fas', 'trash']" size="lg" class="hoverable-link m-2"/></td>
     </tr>
@@ -24,6 +26,7 @@ export default {
   name: 'MyLessonsTable',
   data(){
     return{
+      selectedLessonId: null,
       userId: sessionStorage.getItem('userId'),
       roleName: sessionStorage.getItem('roleName'),
       userLessons: [
@@ -63,6 +66,7 @@ export default {
     // },
 
     handleLessonChange(lessonId){
+      this.selectedLessonId = lessonId
       this.$emit('event-lesson-change', lessonId)
     }
 
@@ -72,3 +76,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.selected-lesson {
+  color: #ff0000;
+  font-weight: bold/* Change this to the desired color */
+  /* Add any other styling as needed */
+}
+</style>
