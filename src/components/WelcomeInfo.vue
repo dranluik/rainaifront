@@ -3,10 +3,10 @@
 
 
     <div class="row text-center mx-auto justify-content-center">
-      <div class="col col-2 text-center">
+      <div class="col col-1 text-center">
 
       </div>
-      <div class="col col-6 text-center">
+      <div class="col col-5 text-center">
         <h1>
           Kes meie kursustele sobivad?
         </h1>
@@ -20,8 +20,24 @@
         </p>
       </div>
 
-      <div class="col col-3 text-center">
+      <div class="col col-4 text-center">
         empty colllll
+      </div>
+      <div class="col col-12 text-center">
+        <!-- Contact information (centered at the bottom) -->
+        <div class="mb-4">
+          <h4>Kontakt</h4>
+          <ul class="list-unstyled contact-info">
+            <li>
+              <font-awesome-icon :icon="['fasr', 'envelope']" size="sm" class="icon"/>
+              <a class="text">rainAI@gmail.com</a>
+              <font-awesome-icon :icon="['fasl', 'phone']" size="sm" class="icon"/>
+              <a class="text">+372 55 44 565</a>
+              <font-awesome-icon :icon="['fab', 'square-facebook']" size="sm" class="icon" />
+              <a class="text">Facebook</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 </template>
@@ -41,5 +57,11 @@ export default {
   /* Change the text alignment to center */
   text-align: left;
   /* You can also use other values like 'left', 'right', or 'justify' */
+}
+.contact-info .icon {
+  margin-right: 8px; /* Adjust the margin as needed */
+}
+.contact-info .text {
+  margin-right: 10px; /* Adjust the margin as needed */
 }
 </style>
