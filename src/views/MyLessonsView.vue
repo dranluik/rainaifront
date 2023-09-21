@@ -9,11 +9,11 @@
           </div>
         </div>
         <div class="row">
-          <MyLessonsTable :lessonId="lessonId" @event-lesson-change="updateLessonId"/>
+          <MyLessonsTable :lessonId="lessonId" :lessonName="lessonName" @event-lesson-change="updateLessonId"/>
         </div>
       </div>
       <div  v-if="lessonContentResponse.editorContent !== ''" class="card bg-light" style="max-width: 35rem;">
-        <div class="card-header">Lesson</div>
+        <div class="card-header">{{lessonName}}</div>
         <div class="card-body">
           <p class="card-text lesson-content" v-html="lessonContentResponse.editorContent"></p>
         </div>
@@ -61,7 +61,7 @@ export default {
   data(){
     return{
       roleName: sessionStorage.getItem('roleName'),
-      newLessonName: '',
+      lessonName: '',
       // lessonId: Number(useRoute().query.lessonId),
       contentAsBase64: '',
       
@@ -96,8 +96,9 @@ export default {
         this.$refs.addLessonModalRef.$refs.modalRef.openModal()
     },
 
-    updateLessonId(lessonId) {
+    updateLessonId(lessonId, lessonName) {
       this.lessonId = lessonId
+      this.lessonName = lessonName
       this.getLessonContent()
       this.getImages()
       this.getVideoLink()
