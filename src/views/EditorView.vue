@@ -2,17 +2,18 @@
 
   <div class="container text-center">
     <AddImageModal :current-lesson-id="lessonId" @event-update-image-table="handleImageAdded" ref="addImageModalRef"/>
-    <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef" />
+    <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef"/>
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{ contentAsBase64 }}
-    <div class="row mb-5">
+    <div class="row mb-5 justify-content-center">
 
-      <div class="col col-10 ms-5">
-        <div class="card text-black bg-light mb-3" style="max-width: 120rem;">
+      <div class="col col-6">
+        <div class="card text-black bg-light mb-3" style="max-width: 35rem; height: 325px">
+          <img src="../assets/teema3.png" class="card-img-top" width="300" height="200" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Teema nimi: {{this.lessonHeader.lessonName}}</h5>
-            <h5 class="card-title">Pakett: {{this.lessonHeader.packageTypeName}}</h5>
-            <h5 class="card-title">Tehnoloogia: {{this.lessonHeader.technologyName}}</h5>
+            <h5 class="card-title">Teema nimi: {{ this.lessonHeader.lessonName }}</h5>
+            <h5 class="card-title">Pakett: {{ this.lessonHeader.packageTypeName }}</h5>
+            <h5 class="card-title">Tehnoloogia: {{ this.lessonHeader.technologyName }}</h5>
             <div class="col">
               <button @click="handleChangeLessonName" type="button" class="btn btn-outline-primary">Muuda</button>
             </div>
@@ -20,18 +21,34 @@
         </div>
       </div>
 
-      <div class="col mb-3">
-        <button @click="handleAddImage" type="button" class="btn btn-outline-light mt-3">Lisa pilt</button>
-        <button @click="handleAddVideo" type="button" class="btn btn-outline-light mt-3">Lisa video</button>
+      <div class="col col-6">
+        <div class="card text-black bg-light mb-3" style="max-width: 35rem; height: 325px">
+          <img src="../assets/meedia.png" class="card-img-top" width="300" height="200" alt="...">
+          <div class="card-body">
+            <div>
+              <button @click="handleAddImage" type="button" class="btn btn-outline-dark mt-3 ">Lisa pilt</button>
+            </div>
+            <div class="col">
+              <button @click="handleAddVideo" type="button" class="btn btn-outline-dark mt-3 ">Lisa video</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
 
     <div class="row mb-5">
-      <div class="col border mt-5 editor-column">
+      <div class="col mt-5">
+        <div class="card text-black bg-light mb-3" style="max-width: 120rem">
+          <img src="../assets/meedia.png" class="card-img-top" width="2000" height="200" alt="...">
+          <div class="card-body">
         <WysiwygEditor :lesson-id="lessonId"/>
       </div>
+      </div>
+      </div>
     </div>
+
+
     <div class="row mb-4">
       <div class="col">
         <ImageTable :lesson-id="lessonId" ref="imageTableRef"/>
@@ -60,8 +77,8 @@ import router from "@/router";
 export default {
   name: "EditorView",
   components: {VideoTable, ImageTable, WysiwygEditor, AddVideoModal, AddImageModal, ChangeLessonModal},
-  data(){
-    return{
+  data() {
+    return {
       lessonId: Number(useRoute().query.lessonId),
       lessonHeader: {
         packageTypeName: '',
@@ -79,22 +96,22 @@ export default {
   },
   methods: {
 
-    updateVideoTable(){
+    updateVideoTable() {
       this.$refs.videoTableRef.getVideos()
     },
 
-    handleAddVideo(){
+    handleAddVideo() {
       this.$refs.addVideoModalRef.$refs.modalRef.openModal()
     },
 
-    handleAddImage(){
+    handleAddImage() {
       this.$refs.addImageModalRef.$refs.modalRef.openModal()
     },
 
-    handleChangeLessonName(){
-      this.$refs.changeLessonModalRef.changeLessonDto.lessonName =this.lessonHeader.lessonName
-      this.$refs.changeLessonModalRef.changeLessonDto.packageTypeId =this.lessonHeader.packageTypeId
-      this.$refs.changeLessonModalRef.changeLessonDto.technologyId =this.lessonHeader.technologyId
+    handleChangeLessonName() {
+      this.$refs.changeLessonModalRef.changeLessonDto.lessonName = this.lessonHeader.lessonName
+      this.$refs.changeLessonModalRef.changeLessonDto.packageTypeId = this.lessonHeader.packageTypeId
+      this.$refs.changeLessonModalRef.changeLessonDto.technologyId = this.lessonHeader.technologyId
       this.$refs.changeLessonModalRef.changeLessonDto.lessonId = this.lessonId
       this.$refs.changeLessonModalRef.$refs.modalRef.openModal()
       this.$nextTick(() => {
@@ -119,7 +136,7 @@ export default {
         router.push({name: 'errorRoute'})
       })
     },
-    handleImageAdded(){
+    handleImageAdded() {
       this.$refs.imageTableRef.getImages()
     }
 
