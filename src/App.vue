@@ -8,9 +8,9 @@
           <router-link class="nav-item active" to="/">Kodu</router-link>
           |
         <template v-if="isLoggedIn">
-          <router-link class="nav-item" :to="{name: 'frontendRoute'}">Frontend</router-link>
+          <router-link v-if="isAdmin || isFull || isFrontend" class="nav-item" :to="{name: 'frontendRoute'}">Frontend</router-link>
           |
-          <router-link class="nav-item" :to="{name: 'backendRoute'}">Backend</router-link>
+          <router-link v-if="isAdmin || isFull || isBackend" class="nav-item" :to="{name: 'backendRoute'}">Backend</router-link>
           |
           <router-link class="nav-item" :to="{name: 'myLessonsRoute'}">Minu teemad</router-link>
           |
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {ADMIN} from "@/assets/script/Role";
+import {ADMIN, BACKEND, FRONTEND, FULL} from "@/assets/script/Role";
 import LogOutModal from "@/components/modal/LogOutModal.vue";
 
 export default {
@@ -38,7 +38,10 @@ export default {
   data() {
     return {
       isLoggedIn: false,
-      isAdmin: false
+      isAdmin: false,
+      isFull: false,
+      isFrontend: false,
+      isBackend: false
     }
   },
 
@@ -50,6 +53,9 @@ export default {
     updateNavMenu() {
       this.isLoggedIn = sessionStorage.getItem('userId') !== null
       this.isAdmin = sessionStorage.getItem('roleName') === ADMIN
+      this.isFull = sessionStorage.getItem('packageTypeName') === FULL
+      this.isFrontend = sessionStorage.getItem('packageTypeName') === FRONTEND
+      this.isBackend = sessionStorage.getItem('packageTypeName') === BACKEND
     },
     handleLogout() {
       this.$refs.logOutModalRef.$refs.modalRef.openModal()
