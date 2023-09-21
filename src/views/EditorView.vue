@@ -5,68 +5,42 @@
     <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef" />
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{ contentAsBase64 }}
-    <div class="row mb-2">
-      <div class="col col-6">
-        <div class="container text-center">
-          <div class="row row-cols-1">
-            <div class="col ">
-              <div class="d-flex align-items-end">
-              <h4>Teema nimi: {{this.lessonHeader.lessonName}}</h4>
-              </div>
-            </div>
-            <div class="col">
-              <div class="d-flex align-items-end">
-              <h4>Pakett: {{this.lessonHeader.packageTypeName}}</h4>
-              </div>
-            </div>
-            <div class="col">
-              <div class="d-flex align-items-end">
-              <h4>Tehnoloogia: {{this.lessonHeader.technologyName}}</h4>
-              </div>
-            </div>
+    <div class="row mb-5">
+
+      <div class="col col-10 ms-5">
+        <div class="card text-black bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Teema nimi: {{this.lessonHeader.lessonName}}</h5>
+            <h5 class="card-title">Pakett: {{this.lessonHeader.packageTypeName}}</h5>
+            <h5 class="card-title">Tehnoloogia: {{this.lessonHeader.technologyName}}</h5>
             <div class="col">
               <button @click="handleChangeLessonName" type="button" class="btn btn-outline-primary">Muuda</button>
             </div>
-
           </div>
         </div>
       </div>
+
       <div class="col mb-3">
-        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa pilt</button>
+        <button @click="handleAddImage" type="button" class="btn btn-dark mt-3">Lisa pilt</button>
+        <button @click="handleAddVideo" type="button" class="btn btn-dark mt-3">Lisa video</button>
       </div>
     </div>
-    <div class="row mb-4">
-      <div class="col col-3">
-      </div>
-      <div class="col col-3">
-      </div>
-      <div class="col">
-        <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa video</button>
-      </div>
-    </div>
+
 
     <div class="row mb-5">
       <div class="col border mt-5 editor-column">
         <WysiwygEditor :lesson-id="lessonId"/>
       </div>
     </div>
-
     <div class="row mb-4">
       <div class="col">
         <ImageTable :lesson-id="lessonId" ref="imageTableRef"/>
       </div>
       <div class="col">
-        <VideoTable :lesson-id="lessonId" :video-table="videoTable" ref="videoTableRef"/>
+        <VideoTable :lesson-id="lessonId" ref="videoTableRef"/>
       </div>
     </div>
-    <div class="row mb-4">
-      <div class="col">
-        <button type="button" class="btn btn-outline-danger">Katkesta</button>
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-outline-success">Salvesta</button>
-      </div>
-    </div>
+
   </div>
 </div>
 </template>
@@ -76,7 +50,7 @@
 
 import AddImageModal from "@/components/modal/AddImageModal.vue";
 import AddVideoModal from "@/components/modal/AddVideoModal.vue";
-import WysiwygEditor from "@/views/WysiwygEditor.vue";
+import WysiwygEditor from "@/components/WysiwygEditor.vue";
 import ImageTable from "@/components/table/ImageTable.vue";
 import {useRoute} from "vue-router";
 import VideoTable from "@/components/table/VideoTable.vue";

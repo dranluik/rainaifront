@@ -10,23 +10,25 @@
           </div>
         </div>
         <div class="row">
-          <MyLessonsTable :lessonId="lessonId" @event-lesson-change="updateLessonId"/>
+          <MyLessonsTable :lessonId="lessonId" :lessonName="lessonName" @event-lesson-change="updateLessonId"/>
         </div>
       </div>
-      <div v-if="lessonContentResponse.editorContent !== ''" class="col border content-column form-control">
-        <div class="lesson-content" v-html="lessonContentResponse.editorContent">
+      <div v-if="lessonContentResponse.editorContent !== ''" class="card bg-light ms-5" style="max-width: 50rem;">
+        <div class="card-header">{{lessonName}}</div>
+        <div class="card-body text-dark">
+          <p class="card-text lesson-content" v-html="lessonContentResponse.editorContent"></p>
         </div>
-      </div>
       <div class="media-container" v-if="images.length > 0">
         <div class="media-wrapper" v-for="image in images" :key="image.imageId">
         <img :src="image.imageData" :alt="image.imageDescription" class="lesson-media" />
           <p class="media-caption">{{ image.imageDescription }}</p>
         </div>
+      </div>
       <div class="media-container" v-if="videos && videos.length > 0">
         <div class="media-wrapper" v-for="video in videos" :key=video.videoId>
           <div class="video-embed">
-            <p class="media-caption">{{video.description}}</p>
-          <iframe class="lesson-media" :src="getYouTubeEmbedUrl(video.link)"  frameborder="0"
+            <p class="media-caption">{{ video.videoDescription }}</p>
+          <iframe class="lesson-media" :src="getYouTubeEmbedUrl(video.videoLink)" frameborder="0"
                   allowfullscreen></iframe>
           </div>
 
@@ -61,7 +63,7 @@ export default {
   data(){
     return{
       roleName: sessionStorage.getItem('roleName'),
-      newLessonName: '',
+      lessonName: '',
       // lessonId: Number(useRoute().query.lessonId),
       contentAsBase64: '',
       
@@ -80,8 +82,8 @@ export default {
         {
           videoId: 0,
           lessonId: 0,
-          link: '',
-          description: ''
+          videoLink: '',
+          videoDescription: ''
         }
       ],
       translateVideos:[
@@ -96,8 +98,9 @@ export default {
         this.$refs.addLessonModalRef.$refs.modalRef.openModal()
     },
 
-    updateLessonId(lessonId) {
+    updateLessonId(lessonId, lessonName) {
       this.lessonId = lessonId
+      this.lessonName = lessonName
       this.getLessonContent()
       this.getImages()
       this.getVideoLink()

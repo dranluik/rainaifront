@@ -44,8 +44,8 @@ export default {
       successMessage: '',
       video: {
         lessonId: 0,
-        link: '',
-        description: ''
+        videoLink: '',
+        videoDescription: ''
       }
     }
   },
@@ -68,8 +68,8 @@ export default {
     addVideo() {
       this.resetSuccessMessage();
       this.video.lessonId = this.lessonId;
-      this.video.link = this.addedVideoLink
-      this.video.description = this.descriptionText
+      this.video.videoLink = this.addedVideoLink
+      this.video.videoDescription = this.descriptionText
       this.sendAddVideoRequest()
       this.resetVideoAndDescription()
       this.$refs.modalRef.closeModal()
