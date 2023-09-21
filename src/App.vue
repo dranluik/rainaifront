@@ -136,7 +136,6 @@ nav a.router-link-exact-active {
   color: #ffffff; /* Text color */
   text-decoration: none; /* Remove underline */
 
-  background-color: hsl(150, 2%, 16%); /* Background color */
 }
 .active-link {
 //border: 2px solid #ffffff; /* Border color */ border-radius: 5px; /* Rounded corners */
