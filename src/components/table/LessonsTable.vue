@@ -24,6 +24,7 @@
 <script>
 import router from "@/router";
 import {LESSON_ADDED, LESSON_DELETED} from "@/assets/script/AlertMessage";
+import {LESSONS_NOT_FOUND} from "@/assets/script/ErrorCode";
 
 export default {
   name: 'lessonsTable',
@@ -68,9 +69,19 @@ export default {
             }
           }
       ).then(response => {
-        this.lessons = response.data
+        if (Array.isArray(response.data) && response.data.length > 0){
+          this.lessons = response.data
+        } else {
+          this.lessons = []
+        }
+
       }).catch(error => {
-        // router.push({name:'errorRoute'})
+        if (error.response.data.errorCode === LESSONS_NOT_FOUND){
+          this.lessons = []
+
+        } else {
+          router.push({name:'errorRoute'})
+        }
       })
     },
 
@@ -95,7 +106,8 @@ export default {
         this.getUserLessons()
         this.handleAddLessonSuccessMessage()
       }).catch(error => {
-        // router.push({name:'errorRoute'})
+
+        router.push({name:'errorRoute'})
       })
     },
 
