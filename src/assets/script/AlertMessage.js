@@ -8,4 +8,6 @@ export const LESSON_ADDED = 'Teema "?" on lisatud'
 export const LESSON_CHANGED = 'Teema "?" on muudetud'
 export const TECHNOLOGY_ADDED = 'Tehnoloogia "?" on lisatud'
 export const LESSON_DELETED = 'Teema "?" on eemaldatud'
+export const LESSON_CONTENT_SAVED = 'Teema sisu on uuendatud'
+
 
