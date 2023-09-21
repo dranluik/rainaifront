@@ -5,10 +5,10 @@
     <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef"/>
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{ contentAsBase64 }}
-    <div class="row justify-content-center">
+    <div class="row mb-5 justify-content-center">
 
       <div class="col col-6">
-        <div class="card text-black bg-light mb-3" style="max-width: 35rem; height: 325px">
+        <div class="card text-black bg-light mb-3" style="max-width: 35rem; height: 330px">
           <img src="../assets/teema3.png" class="card-img-top" width="300" height="200" alt="...">
           <div class="card-body">
             <h5 class="card-title">Teema nimi: {{ this.lessonHeader.lessonName }}</h5>
@@ -22,14 +22,16 @@
       </div>
 
       <div class="col col-6">
-        <div class="card text-black bg-light" style="max-width: 35rem; height: 325px">
+        <div class="card text-black bg-light" style="max-width: 35rem; height: 330px">
           <img src="../assets/meedia.png" class="card-img-top" width="300" height="200" alt="...">
           <div class="card-body">
             <div>
-              <button @click="handleAddImage" type="button" class="btn btn-outline-dark mt-3 card-title">Lisa pilt</button>
+              <button @click="handleAddImage" type="button" class="btn btn-outline-dark mt-3 card-title">
+                <font-awesome-icon :icon="['fas', 'image']" size="2xl" /> Lisa pilt</button>
             </div>
             <div class="col">
-              <button @click="handleAddVideo" type="button" class="btn btn-outline-dark mt-3 card-title">Lisa video</button>
+              <button @click="handleAddVideo" type="button" class="btn btn-outline-dark mt-3 card-title">
+                <font-awesome-icon :icon="['fas', 'video']" size="2xl" /> Lisa video</button>
             </div>
           </div>
         </div>

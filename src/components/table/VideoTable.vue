@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-secondary table-hover">
+  <table class="table table-hover form-control">
       <thead>
     <tr>
       <th scope="col">Video</th>

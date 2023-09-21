@@ -14,7 +14,7 @@
         </div>
       </div>
       <div v-if="lessonContentResponse.editorContent !== ''" class="card bg-light ms-5" style="max-width: 50rem;">
-        <div class="card-header">{{lessonName}}</div>
+        <div class="card-header h1">{{lessonName}}</div>
         <div class="card-body text-dark">
           <p class="card-text lesson-content" v-html="lessonContentResponse.editorContent"></p>
         </div>
@@ -263,6 +263,10 @@ export default {
   height: 86vh; /* Make it cover the entire viewport */
   /* Add other styles as needed */
 }
+
+ .card-header {
+   font-weight: bold;
+ }
 </style>
 
 
