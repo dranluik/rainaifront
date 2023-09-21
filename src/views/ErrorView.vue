@@ -1,6 +1,8 @@
 <template>
 <h1>Sorry...Midagi läks valesti</h1>
-  <font-awesome-icon :icon="['fas', 'link-slash']" size="2xl" />
+  <div>
+    <img src="../assets/Panda.gif" height="400" width="600" alt=""/>
+  </div>
 </template>
 
 <script>

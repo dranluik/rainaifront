@@ -2,8 +2,9 @@
   <EditorButtons :editor="editor"/>
   <EditorButtonsSecondRow :editor="editor"/>
 <!--  <div v-html="contentAsHtml"></div>-->
-  <editor-content :editor="editor" @change="displayHtml"/>
-  <button @click="updateEditorContentRequest">SALVESTA</button>
+  <editor-content :editor="editor"/>
+  <button @click="updateEditorContentRequest" class="btn btn-outline-primary mb-3">SALVESTA</button>
+  <AlertSuccess :alert-message="successMessage"/>
   <!--  <button @click="swapContent">Asenda HTML</button>-->
 </template>
 <script>
@@ -19,6 +20,8 @@ import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
 import Text from '@tiptap/extension-text'
 import EditorButtonsSecondRow from "@/components/buttons/EditorButtonsSecondRow.vue";
+import {LESSON_CONTENT_SAVED} from "@/assets/script/AlertMessage";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
 
 export default {
@@ -27,6 +30,7 @@ export default {
     lessonId: Number
   },
   components: {
+    AlertSuccess,
     EditorButtonsSecondRow,
     EditorButtons,
     EditorContent,
@@ -41,13 +45,12 @@ export default {
         lessonId: 0,
         content: ''
       },
+      successMessage: ''
     }
   },
 
   methods: {
-    displayHtml() {
-      this.contentAsHtml = this.editor.getHTML()
-    },
+
 
 
     handleEditorContent() {
@@ -65,6 +68,7 @@ export default {
 
     handleContentChange() {
       // This method is called when changes occur in the editor's content
+      this.successMessage = ''
       this.contentAsHtml = this.editor.getHTML()
       this.handleEditorContent()
       this.$emit('event-editor-content-changed', this.contentAsHtml)
@@ -73,17 +77,12 @@ export default {
     sendUpdateEditorContentRequest() {
       this.$http.put("/editor/content", this.editorContent
       ).then(response => {
-        const responseBody = response.data
+        this.successMessage = LESSON_CONTENT_SAVED
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
     },
-    // swapContent() {
-    //   const dataFromBackend = '<p>New content from backend.</p>' // Replace this with the actual content from your backend
-    //   if (this.editor) {
-    //     this.editor.commands.setContent(dataFromBackend)
-    //   }
-    // },
+
     getEditorContent() {
       this.$http.get("/editor/content", {
             params: {
