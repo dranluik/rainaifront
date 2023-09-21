@@ -62,9 +62,6 @@ export default {
       router.push({name: 'editorRoute', query: {lessonId: lessonId}})
     },
 
-    // navigateToMyLessonsView(lessonId) {
-    //   router.push({name: 'myLessonsRoute', query: {lessonId: lessonId}})
-    // },
 
     handleLessonChange(lessonId, lessonName){
       this.selectedLessonId = lessonId
