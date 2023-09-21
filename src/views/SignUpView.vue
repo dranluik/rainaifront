@@ -20,7 +20,8 @@
 
 
       <div class="col col-2 text-center">
-      </div>
+
+        <img src="../assets/RainSignUp2.gif" height="190" width="190"/></div>
 
       <div class="col col-3 text-center">
 
