@@ -47,7 +47,7 @@
           <div class="form-check">
             <input v-model="termsAndConditionsCheck" class="form-check-input" type="checkbox" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
+              Olen teadlik, et RainAI abil õppides saan jube kiirelt hästi targaks.
             </label>
           </div>
 
