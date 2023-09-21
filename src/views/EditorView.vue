@@ -38,7 +38,7 @@
         <ImageTable :lesson-id="lessonId" ref="imageTableRef"/>
       </div>
       <div class="col">
-        <VideoTable :lesson-id="lessonId" :video-table="videoTable" ref="videoTableRef"/>
+        <VideoTable :lesson-id="lessonId" ref="videoTableRef"/>
       </div>
     </div>
 
