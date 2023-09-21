@@ -14,7 +14,7 @@
           :class="{'selected-lesson': userLesson.lessonId === selectedLessonId}"
           class="hoverable-link">{{ userLesson.lessonName }}</td>
       <td @click="navigateToEditor(userLesson.lessonId)" v-if="roleName === 'admin'"><font-awesome-icon :icon="['far', 'pen-to-square']" size="lg" class="hoverable-link m-2"/></td>
-      <td v-if="roleName === 'admin'"><font-awesome-icon :icon="['fas', 'trash']" size="lg" class="hoverable-link m-2"/></td>
+      <td @click="deleteLesson(userLesson.lessonId)" v-if="roleName === 'admin'"><font-awesome-icon :icon="['fas', 'trash']" size="lg" class="hoverable-link m-2"/></td>
     </tr>
     </tbody>
   </table>
@@ -70,7 +70,20 @@ export default {
       this.selectedLessonId = lessonId
       this.selectedLessonName = lessonName
       this.$emit('event-lesson-change', lessonId, lessonName)
-    }
+    },
+    deleteLesson(lessonId) {
+      this.$http.delete("/myLessons", {
+            params: {
+              lessonId: lessonId,
+
+            }
+          }
+      ).then(response => {
+        this.getUserLessons()
+      }).catch(error => {
+        router.push({name: 'errorRoute'})
+      })
+    },
 
   },
   beforeMount() {
