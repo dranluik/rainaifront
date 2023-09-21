@@ -25,8 +25,8 @@
       <div class="media-container" v-if="videos && videos.length > 0">
         <div class="media-wrapper" v-for="video in videos" :key=video.videoId>
           <div class="video-embed">
-            <p class="media-caption">{{video.description}}</p>
-          <iframe class="lesson-media" :src="getYouTubeEmbedUrl(video.link)"  frameborder="0"
+            <p class="media-caption">{{ video.videoDescription }}</p>
+          <iframe class="lesson-media" :src="getYouTubeEmbedUrl(video.videoLink)" frameborder="0"
                   allowfullscreen></iframe>
           </div>
 
@@ -80,8 +80,8 @@ export default {
         {
           videoId: 0,
           lessonId: 0,
-          link: '',
-          description: ''
+          videoLink: '',
+          videoDescription: ''
         }
       ],
       translateVideos:[
