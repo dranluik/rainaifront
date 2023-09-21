@@ -7,7 +7,7 @@
     {{ contentAsBase64 }}
     <div class="row mb-5">
 
-      <div class="col col-10">
+      <div class="col col-10 ms-5">
         <div class="card text-black bg-light mb-3" style="max-width: 18rem;">
           <div class="card-body">
             <h5 class="card-title">Teema nimi: {{this.lessonHeader.lessonName}}</h5>
@@ -21,8 +21,8 @@
       </div>
 
       <div class="col mb-3">
-        <button @click="handleAddImage" type="button" class="btn btn-dark">Lisa pilt</button>
-        <button @click="handleAddVideo" type="button" class="btn btn-dark">Lisa video</button>
+        <button @click="handleAddImage" type="button" class="btn btn-dark mt-3">Lisa pilt</button>
+        <button @click="handleAddVideo" type="button" class="btn btn-dark mt-3">Lisa video</button>
       </div>
     </div>
 
