@@ -120,7 +120,7 @@ nav a.router-link-exact-active {
 }
 
 .nav-links {
-  margin-left: 25%;
+  margin-left: 18%;
   margin-top: 2.5%;
 }
 

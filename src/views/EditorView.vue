@@ -5,7 +5,7 @@
     <AddVideoModal :lesson-id="lessonId" @event-update-video-table="updateVideoTable" ref="addVideoModalRef"/>
     <ChangeLessonModal @event-update-lesson-header="getLessonHeader" ref="changeLessonModalRef"/>
     {{ contentAsBase64 }}
-    <div class="row mb-5 justify-content-center">
+    <div class="row justify-content-center">
 
       <div class="col col-6">
         <div class="card text-black bg-light mb-3" style="max-width: 35rem; height: 325px">
@@ -22,14 +22,14 @@
       </div>
 
       <div class="col col-6">
-        <div class="card text-black bg-light mb-3" style="max-width: 35rem; height: 325px">
+        <div class="card text-black bg-light" style="max-width: 35rem; height: 325px">
           <img src="../assets/meedia.png" class="card-img-top" width="300" height="200" alt="...">
           <div class="card-body">
             <div>
-              <button @click="handleAddImage" type="button" class="btn btn-outline-dark mt-3 ">Lisa pilt</button>
+              <button @click="handleAddImage" type="button" class="btn btn-outline-dark mt-3 card-title">Lisa pilt</button>
             </div>
             <div class="col">
-              <button @click="handleAddVideo" type="button" class="btn btn-outline-dark mt-3 ">Lisa video</button>
+              <button @click="handleAddVideo" type="button" class="btn btn-outline-dark mt-3 card-title">Lisa video</button>
             </div>
           </div>
         </div>
@@ -38,13 +38,8 @@
 
 
     <div class="row mb-5">
-      <div class="col mt-5">
-        <div class="card text-black bg-light mb-3" style="max-width: 120rem">
-          <img src="../assets/meedia.png" class="card-img-top" width="2000" height="200" alt="...">
-          <div class="card-body">
+      <div class="col border mt-5 editor-column">
         <WysiwygEditor :lesson-id="lessonId"/>
-      </div>
-      </div>
       </div>
     </div>
 
@@ -151,7 +146,7 @@ export default {
 
 <style scoped>
 .editor-column {
-  background-color: rgba(68, 105, 84, 0.8); /* Replace with your desired background color */
+  //background-color: rgba(68, 105, 84, 0.8); /* Replace with your desired background color */
   /* Add other styling properties as needed */
   .background-container {
     /* Set the background image using URL */

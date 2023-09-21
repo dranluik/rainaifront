@@ -1,11 +1,18 @@
 <template>
-  <EditorButtons :editor="editor"/>
-  <EditorButtonsSecondRow :editor="editor"/>
-<!--  <div v-html="contentAsHtml"></div>-->
-  <editor-content :editor="editor"/>
-  <button @click="updateEditorContentRequest" class="btn btn-outline-primary mb-3">SALVESTA</button>
-  <AlertSuccess :alert-message="successMessage"/>
-  <!--  <button @click="swapContent">Asenda HTML</button>-->
+  <div class="row mb-3">
+    <div class="col mt-3">
+      <div class="card text-black bg-light auto-width-card">
+        <img src="../assets/sisu.png" class="card-img-top" width="300" height="200" alt="...">
+        <div class="card-body">
+          <EditorButtons :editor="editor"/>
+          <EditorButtonsSecondRow :editor="editor"/>
+          <editor-content :editor="editor"/>
+          <button @click="updateEditorContentRequest" class="btn btn-outline-primary mb-3">SALVESTA</button>
+          <AlertSuccess :alert-message="successMessage"/>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import {Editor, EditorContent} from "@tiptap/vue-3";
