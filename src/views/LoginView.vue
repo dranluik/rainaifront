@@ -23,7 +23,7 @@
 
       <div class="row justify-content-center">
         <div class="col col-3">
-          <button @click="login" type="submit" class="mt-5 btn btn-outline-success">Logi sisse</button>
+          <button @click="login" type="submit" class="mt-5 btn btn-outline-primary">Logi sisse</button>
         </div>
       </div>
 

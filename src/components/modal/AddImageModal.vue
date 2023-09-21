@@ -18,7 +18,7 @@
       </template>
       <template #footer>
 
-        <button @click="saveSelectedImage" :disabled="imageRequest.imageData === ''" type="button" class="btn btn-outline-success">Lisa pilt</button>
+        <button @click="saveSelectedImage" :disabled="imageRequest.imageData === ''" type="button" class="btn btn-outline-primary">Lisa pilt</button>
       </template>
       <template #footer-left>
         <AlertSuccess :alert-message="successMessage"/>

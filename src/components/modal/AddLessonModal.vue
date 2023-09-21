@@ -33,7 +33,7 @@
       </template>
       <template #footer>
 
-        <button @click="handleAddLesson" :disabled="addLessonDto.lessonName === '' || addLessonDto.packageTypeId < 2" type="button" class="btn btn-outline-success">Lisa teema</button>
+        <button @click="handleAddLesson" :disabled="addLessonDto.lessonName === '' || addLessonDto.packageTypeId < 2" type="button" class="btn btn-outline-primary">Lisa teema</button>
       </template>
       <template #footer-left>
         <AlertSuccess :alert-message="this.successMessage"/>

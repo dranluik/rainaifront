@@ -18,7 +18,7 @@
         </div>
       </template>
       <template #footer>
-        <button @click="addVideo" type="button" class="btn btn-outline-success">Lisa video</button>
+        <button @click="addVideo" type="button" class="btn btn-outline-primary">Lisa video</button>
       </template>
     </Modal>
   </div>

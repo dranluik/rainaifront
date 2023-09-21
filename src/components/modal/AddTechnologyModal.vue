@@ -18,7 +18,7 @@
     <template #footer>
 
       <button @click="handleAddTechnology" :disabled="addTechnologyRequest.technologyName === '' || addTechnologyRequest.packageTypeId < 2"
-              type="button" class="btn btn-outline-success">Lisa tehnoloogia
+              type="button" class="btn btn-outline-primary">Lisa tehnoloogia
       </button>
     </template>
     <template #footer-left>

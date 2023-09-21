@@ -32,7 +32,7 @@
       </template>
       <template #footer>
 
-        <button @click="handleChangeLesson" :disabled="changeLessonDto.lessonName === '' || changeLessonDto.packageTypeId < 2" type="button" class="btn btn-outline-success">Muuda teemat</button>
+        <button @click="handleChangeLesson" :disabled="changeLessonDto.lessonName === '' || changeLessonDto.packageTypeId < 2" type="button" class="btn btn-outline-primary">Muuda teemat</button>
       </template>
       <template #footer-left>
         <AlertSuccess :alert-message="this.successMessage"/>
