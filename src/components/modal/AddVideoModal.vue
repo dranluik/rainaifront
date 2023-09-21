@@ -44,8 +44,8 @@ export default {
       successMessage: '',
       video: {
         lessonId: 0,
-        link: '',
-        description: ''
+        videoLink: '',
+        videoDescription: ''
       }
     }
   },
