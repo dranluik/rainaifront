@@ -10,7 +10,7 @@
       </template>
 
       <template #footer>
-        <button @click="executeLogOut" type="button" class="btn btn-success">JAH!!!</button>
+        <button @click="executeLogOut" type="button" class="btn btn-outline-primary">JAH!!!</button>
       </template>
 
     </Modal>
