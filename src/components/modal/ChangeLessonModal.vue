@@ -94,7 +94,7 @@ export default {
       }
     },
     changeLesson() {
-      this.$http.put("/mylessons", this.changeLessonDto
+      this.$http.put("/myLessons", this.changeLessonDto
       ).then(response => {
 
         this.handleLessonSuccessfullyAdded()

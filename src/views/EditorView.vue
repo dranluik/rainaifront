@@ -50,7 +50,6 @@
         <WysiwygEditor :lesson-id="lessonId"/>
       </div>
     </div>
-
     <div class="row mb-4">
       <div class="col">
         <ImageTable :lesson-id="lessonId" ref="imageTableRef"/>
@@ -58,6 +57,7 @@
       <div class="col">
         <VideoTable :lesson-id="lessonId" :video-table="videoTable" ref="videoTableRef"/>
       </div>
+
     </div>
     <div class="row mb-4">
       <div class="col">
