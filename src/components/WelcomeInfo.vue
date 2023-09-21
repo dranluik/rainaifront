@@ -21,7 +21,7 @@
       </div>
 
       <div class="col col-4 text-center">
-        empty colllll
+
       </div>
       <div class="col col-12 text-center">
         <!-- Contact information (centered at the bottom) -->
@@ -33,8 +33,6 @@
               <a class="text">rainAI@gmail.com</a>
               <font-awesome-icon :icon="['fasl', 'phone']" size="sm" class="icon"/>
               <a class="text">+372 55 44 565</a>
-              <font-awesome-icon :icon="['fab', 'square-facebook']" size="sm" class="icon" />
-              <a class="text">Facebook</a>
             </li>
           </ul>
         </div>
@@ -62,6 +60,8 @@ export default {
   margin-right: 8px; /* Adjust the margin as needed */
 }
 .contact-info .text {
+  color: inherit;
+  text-decoration: none;
   margin-right: 10px; /* Adjust the margin as needed */
 }
 </style>
