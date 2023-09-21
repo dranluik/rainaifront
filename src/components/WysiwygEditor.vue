@@ -2,7 +2,7 @@
   <EditorButtons :editor="editor"/>
   <EditorButtonsSecondRow :editor="editor"/>
 <!--  <div v-html="contentAsHtml"></div>-->
-  <editor-content :editor="editor" @change="displayHtml"/>
+  <editor-content :editor="editor"/>
   <button @click="updateEditorContentRequest" class="btn btn-outline-primary mb-3">SALVESTA</button>
   <AlertSuccess :alert-message="successMessage"/>
   <!--  <button @click="swapContent">Asenda HTML</button>-->
@@ -50,10 +50,7 @@ export default {
   },
 
   methods: {
-    displayHtml() {
-      this.contentAsHtml = this.editor.getHTML()
-      this.successMessage = ''
-    },
+
 
 
     handleEditorContent() {
@@ -71,6 +68,7 @@ export default {
 
     handleContentChange() {
       // This method is called when changes occur in the editor's content
+      this.successMessage = ''
       this.contentAsHtml = this.editor.getHTML()
       this.handleEditorContent()
       this.$emit('event-editor-content-changed', this.contentAsHtml)
