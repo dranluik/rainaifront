@@ -112,7 +112,7 @@ export default {
       setTimeout(() => {
         this.successMessage = ''
         this.$refs.modalRef.closeModal()
-      }, 3000)
+      }, 2000)
     },
     handleAddTechnology(){
       this.$refs.addTechnologyModalRef.addTechnologyRequest.packageTypeId = this.changeLessonDto.packageTypeId

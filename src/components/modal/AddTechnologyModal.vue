@@ -65,7 +65,7 @@ export default {
         this.$emit('event-update-technology-dropdown',this.addTechnologyRequest.packageTypeId)
         setTimeout(() => {
           this.$refs.modalRef.closeModal()
-        }, 3000)
+        }, 2000)
       }).catch(error => {
 
         this.errorResponse = error.response.data
