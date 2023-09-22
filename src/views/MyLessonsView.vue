@@ -203,11 +203,6 @@ export default {
   margin-left: 40px; /* Add margin to move it to the left */
 }
 
-.content-column {
-  background-color: rgb(217, 247, 67);
-  color: black;
-}
-
 .lesson-content table {
   border-collapse: collapse;
   width: 100%;
@@ -220,7 +215,7 @@ export default {
 }
 
 .lesson-content th {
-  background-color: #46fff2;
+  background-color: #b9b7b7;
 }
 </style>
 
