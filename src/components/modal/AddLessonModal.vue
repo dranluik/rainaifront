@@ -111,7 +111,7 @@ export default {
       this.successMessage = LESSON_ADDED.replace('?', this.addLessonDto.lessonName)
       setTimeout(() => {
         router.push({name:'editorRoute', query:{lessonId : this.addLessonResponse.lessonId}})
-      }, 2000)
+      }, 1000)
     },
     handleAddTechnology(){
       this.$refs.addTechnologyModalRef.addTechnologyRequest.packageTypeId = this.addLessonDto.packageTypeId

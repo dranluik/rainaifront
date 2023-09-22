@@ -147,7 +147,7 @@ export default {
       this.successMessage = USER_ADDED
       setTimeout(() => {
         router.push({name: 'loginRoute'})
-      }, 2000)
+      }, 1000)
     },
     handleErrorResponse(error){
       if (error.response.data.errorCode === USERNAME_UNAVAILABLE){
